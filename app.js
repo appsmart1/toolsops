@@ -1,4 +1,5 @@
 (function() {
+    // Mencegah menu dobel jika di-klik berkali-kali
     if(document.getElementById('menu-injector-dapodik')) {
         document.getElementById('menu-injector-dapodik').remove();
     }
@@ -10,7 +11,7 @@
             background: #ffffff; border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.25);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            z-index: 999999; overflow: hidden;
+            z-index: 9999999; overflow: hidden; /* Z-index diperbesar agar muncul di web mana pun */
             border: 1px solid #e0e0e0;
         }
         .inj-header {
@@ -44,20 +45,24 @@
         }
         .inj-menu-btn .icon-title { display:flex; align-items:center; gap:10px; }
         
-        .inj-action-btn {
-            display: block; width: 100%; padding: 10px; margin-bottom: 10px;
+        /* Tombol Aksi & Link */
+        .inj-action-btn, a.inj-action-btn {
+            box-sizing: border-box; display: block; width: 100%; 
+            padding: 10px; margin-bottom: 10px;
             background: #ffffff; border: 1px solid #ccc; border-radius: 6px;
             cursor: pointer; font-size: 13px; text-align: left; padding-left:15px;
             transition: all 0.2s; color: #444; font-weight: 500;
+            text-decoration: none; /* Khusus tag <a> */
         }
-        .inj-action-btn:hover { 
+        .inj-action-btn:hover, a.inj-action-btn:hover { 
             background: #00acc1; color: white; border-color: #00acc1; 
-            padding-left: 20px;
+            padding-left: 20px; text-decoration: none;
         }
         
         .btn-pip-special:hover { background: #4CAF50; border-color: #4CAF50; color: white; }
         .btn-ruang-special:hover { background: #ff9800; border-color: #ff9800; color: white; }
         .btn-datadik-special:hover { background: #9c27b0; border-color: #9c27b0; color: white; }
+        .btn-link-special:hover { background: #e91e63; border-color: #e91e63; color: white; }
         
         .inj-back-btn {
             background: transparent; border: none; color: #666; cursor: pointer;
@@ -87,15 +92,19 @@
             
             <div id="inj-view-main">
                 <button class="inj-menu-btn" id="btn-view-dapodik">
-                    <div class="icon-title"><span style="font-size:20px">🏫</span> Menu Dapodik</div>
+                    <div class="icon-title"><span style="font-size:20px">🏫</span> Dapodik</div>
                     <span>➔</span>
                 </button>
                 <button class="inj-menu-btn" id="btn-view-pip">
-                    <div class="icon-title"><span style="font-size:20px">🎓</span> Menu PIP</div>
+                    <div class="icon-title"><span style="font-size:20px">🎓</span> PIP</div>
                     <span>➔</span>
                 </button>
                 <button class="inj-menu-btn" id="btn-view-datadik">
-                    <div class="icon-title"><span style="font-size:20px">🗃️</span> Menu DATADIK</div>
+                    <div class="icon-title"><span style="font-size:20px">🗃️</span> DATADIK</div>
+                    <span>➔</span>
+                </button>
+                <button class="inj-menu-btn" id="btn-view-link">
+                    <div class="icon-title"><span style="font-size:20px">🔗</span> LINK Pendidikan</div>
                     <span>➔</span>
                 </button>
             </div>
@@ -126,6 +135,24 @@
                     <button class="inj-action-btn btn-datadik-special" id="btn-qr-datadik">📱 Munculkan QR Datadik</button>
                 </div>
             </div>
+
+            <!-- LINK PENDIDIKAN (BARU) -->
+            <div id="inj-view-link" style="display:none;">
+                <button class="inj-back-btn" id="btn-back-link">🔙 Kembali ke Utama</button>
+                <div style="border-top:1px solid #eee; padding-top:15px;">
+                    <a href="https://sp.datadik.kemendikdasmen.go.id/" target="_blank" class="inj-action-btn btn-link-special">🌐 SP.Datadik</a>
+                    <a href="https://ptk.datadik.kemendikdasmen.go.id/" target="_blank" class="inj-action-btn btn-link-special">🌐 PTK.Datadik</a>
+                    <a href="https://vervalptk.data.kemendikdasmen.go.id/" target="_blank" class="inj-action-btn btn-link-special">🌐 Verval PTK</a>
+                    <a href="https://vervalpd.data.kemendikdasmen.go.id/" target="_blank" class="inj-action-btn btn-link-special">🌐 Verval PD</a>
+                    <a href="https://bosp.kemendikdasmen.go.id/" target="_blank" class="inj-action-btn btn-link-special">🌐 BOSP</a>
+                    <a href="https://pip.kemendikdasmen.go.id/" target="_blank" class="inj-action-btn btn-link-special">🌐 PIP</a>
+                    <a href="https://sdm.data.kemendikdasmen.go.id/" target="_blank" class="inj-action-btn btn-link-special">🌐 SDM.Pusdatin</a>
+                    <a href="https://nisn.data.kemendikdasmen.go.id/" target="_blank" class="inj-action-btn btn-link-special">🌐 Cek NISN</a>
+                    <a href="https://tka.kemendikdasmen.go.id/" target="_blank" class="inj-action-btn btn-link-special">🌐 TKA</a>
+                    <a href="https://revit.kemendikdasmen.go.id/" target="_blank" class="inj-action-btn btn-link-special">🌐 Revit</a>
+                    <a href="https://asndigital.bkn.go.id/" target="_blank" class="inj-action-btn btn-link-special">🌐 ASN Digital</a>
+                </div>
+            </div>
             
             <div class="inj-footer">
                 Developer : <b>Ibnu Khoiri</b><br>
@@ -136,6 +163,9 @@
     `;
     document.body.appendChild(menu);
 
+    // ==========================================
+    // NAVIGASI
+    // ==========================================
     document.getElementById('btn-close-app').onclick = function() { menu.remove(); };
 
     document.getElementById('btn-view-dapodik').onclick = function() {
@@ -150,6 +180,10 @@
         document.getElementById('inj-view-main').style.display = 'none';
         document.getElementById('inj-view-datadik').style.display = 'block';
     };
+    document.getElementById('btn-view-link').onclick = function() {
+        document.getElementById('inj-view-main').style.display = 'none';
+        document.getElementById('inj-view-link').style.display = 'block';
+    };
 
     document.getElementById('btn-back-dapodik').onclick = function() {
         document.getElementById('inj-view-dapodik').style.display = 'none';
@@ -163,23 +197,32 @@
         document.getElementById('inj-view-datadik').style.display = 'none';
         document.getElementById('inj-view-main').style.display = 'block';
     };
+    document.getElementById('btn-back-link').onclick = function() {
+        document.getElementById('inj-view-link').style.display = 'none';
+        document.getElementById('inj-view-main').style.display = 'block';
+    };
 
+    // ==========================================
+    // FUNGSI-FUNGSI TOMBOL
+    // ==========================================
     document.getElementById('btn-val').onclick = function() {
-        var lokasi = window.location.href;
-        var menunya = lokasi.split('#');
-        if (menunya[1] == 'Validasi') {
-            Xond.msg("Sedang Proses", "Proses semua validasi sedang berjalan, Tunggu beberapa saat");
-            document.querySelectorAll("a.x-tab").forEach(el=>el.click());
-        } else {
-            Ext.MessageBox.show({
-                title: "Error", msg: "Gunakan fitur ini pada halaman Validasi", width: 400,
-                buttonText: { yes: "Lanjut ke halaman validasi", no: "Tutup" },
-                fn: function(v) {
-                    if (v == "yes") { Ext.MessageBox.hide(); window.location.href = ('/#Validasi'); } 
-                    else { Ext.MessageBox.hide(); }
-                }
-            });
-        }
+        try {
+            var lokasi = window.location.href;
+            var menunya = lokasi.split('#');
+            if (menunya[1] == 'Validasi') {
+                Xond.msg("Sedang Proses", "Proses semua validasi sedang berjalan, Tunggu beberapa saat");
+                document.querySelectorAll("a.x-tab").forEach(el=>el.click());
+            } else {
+                Ext.MessageBox.show({
+                    title: "Error", msg: "Gunakan fitur ini pada halaman Validasi", width: 400,
+                    buttonText: { yes: "Lanjut ke halaman validasi", no: "Tutup" },
+                    fn: function(v) {
+                        if (v == "yes") { Ext.MessageBox.hide(); window.location.href = ('/#Validasi'); } 
+                        else { Ext.MessageBox.hide(); }
+                    }
+                });
+            }
+        } catch(e) { alert("Perintah ini hanya bisa digunakan di halaman web Dapodik."); }
     };
 
     document.getElementById('btn-tukar').onclick = function() {
@@ -188,52 +231,62 @@
     };
 
     document.getElementById('btn-sel-tabel').onclick = function() {
-        document.querySelectorAll(".x-unselectable").forEach(el => el.classList.replace('x-unselectable','x-selectable'));
-        if(typeof Xond !== 'undefined') Xond.msg("Info", "Select table sudah aktif");
+        try {
+            document.querySelectorAll(".x-unselectable").forEach(el => el.classList.replace('x-unselectable','x-selectable'));
+            if(typeof Xond !== 'undefined') Xond.msg("Info", "Select table sudah aktif");
+        } catch(e) {}
     };
 
     document.getElementById('btn-sel-input').onclick = function() {
-        document.querySelectorAll("input").forEach(el => el.style.pointerEvents = 'all');
-        if(typeof Xond !== 'undefined') Xond.msg("Info", "Select field input sudah aktif");
+        try {
+            document.querySelectorAll("input").forEach(el => el.style.pointerEvents = 'all');
+            if(typeof Xond !== 'undefined') Xond.msg("Info", "Select field input sudah aktif");
+        } catch(e) {}
     };
     document.getElementById('btn-hapus-over').onclick = function() {
-        document.querySelectorAll("input").forEach(el => el.style.pointerEvents = 'all');
-        if(typeof Xond !== 'undefined') Xond.msg("Info", "Select field input sudah aktif (Hapus Overlay)");
+        try {
+            document.querySelectorAll("input").forEach(el => el.style.pointerEvents = 'all');
+            if(typeof Xond !== 'undefined') Xond.msg("Info", "Select field input sudah aktif (Hapus Overlay)");
+        } catch(e) {}
     };
 
     document.getElementById('btn-koreg').onclick = function() {
-        Ext.Ajax.request({
-            url: "getKoreg", method: "GET",
-            success: function(x) {
-                var y = x.responseText;
-                navigator.clipboard.writeText(y.split('<br>')[1]).then(() => {
-                    Xond.msg("Koreg Tersalin", "Silakan salin dengan Ctrl+v");
-                }, (e) => { Xond.msg(e); });
-            }
-        });
+        try {
+            Ext.Ajax.request({
+                url: "getKoreg", method: "GET",
+                success: function(x) {
+                    var y = x.responseText;
+                    navigator.clipboard.writeText(y.split('<br>')[1]).then(() => {
+                        if(typeof Xond !== 'undefined') Xond.msg("Koreg Tersalin", "Silakan salin dengan Ctrl+v");
+                    });
+                }
+            });
+        } catch(e) { alert("Perintah ini hanya bisa digunakan di halaman web Dapodik."); }
     };
 
     document.getElementById('btn-ruang').onclick = function() {
         var pass = prompt("Masukkan Password untuk mengakses Edit Ruang:");
         if (pass === "OPS123") {
-            var spans = document.querySelectorAll('.x-btn-inner');
-            var positions = {
-                'Tambah':'160px', 'Ubah':'259px', 'Simpan':'340px',
-                'Hapus':'435px', 'Kondisi Ruang (2026/2027)':'522px'
-            };
-            spans.forEach(function(span){
-                var text = span.innerText || span.textContent;
-                if(positions[text]){
-                    var btn = span.closest('.x-btn');
-                    if(btn){
-                        btn.style.display = ''; btn.style.right = 'auto';
-                        btn.style.left = positions[text]; btn.style.top = '0px';
-                        btn.style.margin = '0px'; btn.style.userSelect = 'initial';
-                        btn.setAttribute('aria-hidden','false');
+            try {
+                var spans = document.querySelectorAll('.x-btn-inner');
+                var positions = {
+                    'Tambah':'160px', 'Ubah':'259px', 'Simpan':'340px',
+                    'Hapus':'435px', 'Kondisi Ruang (2026/2027)':'522px'
+                };
+                spans.forEach(function(span){
+                    var text = span.innerText || span.textContent;
+                    if(positions[text]){
+                        var btn = span.closest('.x-btn');
+                        if(btn){
+                            btn.style.display = ''; btn.style.right = 'auto';
+                            btn.style.left = positions[text]; btn.style.top = '0px';
+                            btn.style.margin = '0px'; btn.style.userSelect = 'initial';
+                            btn.setAttribute('aria-hidden','false');
+                        }
                     }
-                }
-            });
-            alert("Berhasil! Fitur Edit Ruang diaktifkan.");
+                });
+                alert("Berhasil! Fitur Edit Ruang diaktifkan.");
+            } catch(e) {}
         } else if (pass !== null) {
             alert("Password Salah! Akses ditolak.");
         }
