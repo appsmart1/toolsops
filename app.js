@@ -36,7 +36,7 @@
         /* Gaya Tombol Kategori Utama */
         .inj-menu-btn {
             display: flex; align-items: center; justify-content: space-between;
-            width: 100%; padding: 15px; margin-bottom: 12px;
+            width: 100%; padding: 15px; margin-bottom: 15px;
             background: #f8f9fa; border: 1px solid #ddd; border-radius: 10px;
             cursor: pointer; font-size: 15px; font-weight: 600; color: #333;
             transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
@@ -59,10 +59,11 @@
             padding-left: 20px;
         }
         
-        /* Warna Tombol Spesial */
+        /* Tombol Spesial PIP */
         .btn-pip-special:hover { background: #4CAF50; border-color: #4CAF50; color: white; }
+        
+        /* Tombol Spesial Ruang (Gembok) */
         .btn-ruang-special:hover { background: #ff9800; border-color: #ff9800; color: white; }
-        .btn-datadik-special:hover { background: #9c27b0; border-color: #9c27b0; color: white; }
         
         /* Tombol Kembali */
         .inj-back-btn {
@@ -103,10 +104,6 @@
                     <div class="icon-title"><span style="font-size:20px">🎓</span> Menu PIP</div>
                     <span>➔</span>
                 </button>
-                <button class="inj-menu-btn" id="btn-view-datadik">
-                    <div class="icon-title"><span style="font-size:20px">🗃️</span> Menu DATADIK</div>
-                    <span>➔</span>
-                </button>
             </div>
             
             <!-- DAPODIK VIEW (SUB MENU) -->
@@ -130,14 +127,6 @@
                     <button class="inj-action-btn btn-pip-special" id="btn-pip">💰 Konfirmasi PIP Otomatis</button>
                 </div>
             </div>
-
-            <!-- DATADIK VIEW (SUB MENU) -->
-            <div id="inj-view-datadik" style="display:none;">
-                <button class="inj-back-btn" id="btn-back-datadik">🔙 Kembali ke Utama</button>
-                <div style="border-top:1px solid #eee; padding-top:15px;">
-                    <button class="inj-action-btn btn-datadik-special" id="btn-qr-datadik">📱 Munculkan QR Datadik</button>
-                </div>
-            </div>
             
             <!-- FOOTER DEVELOPER -->
             <div class="inj-footer">
@@ -154,31 +143,23 @@
     // ==========================================
     document.getElementById('btn-close-app').onclick = function() { menu.remove(); };
 
-    // Buka Kategori
     document.getElementById('btn-view-dapodik').onclick = function() {
         document.getElementById('inj-view-main').style.display = 'none';
         document.getElementById('inj-view-dapodik').style.display = 'block';
     };
+    
     document.getElementById('btn-view-pip').onclick = function() {
         document.getElementById('inj-view-main').style.display = 'none';
         document.getElementById('inj-view-pip').style.display = 'block';
     };
-    document.getElementById('btn-view-datadik').onclick = function() {
-        document.getElementById('inj-view-main').style.display = 'none';
-        document.getElementById('inj-view-datadik').style.display = 'block';
-    };
 
-    // Tombol Kembali
     document.getElementById('btn-back-dapodik').onclick = function() {
         document.getElementById('inj-view-dapodik').style.display = 'none';
         document.getElementById('inj-view-main').style.display = 'block';
     };
+
     document.getElementById('btn-back-pip').onclick = function() {
         document.getElementById('inj-view-pip').style.display = 'none';
-        document.getElementById('inj-view-main').style.display = 'block';
-    };
-    document.getElementById('btn-back-datadik').onclick = function() {
-        document.getElementById('inj-view-datadik').style.display = 'none';
         document.getElementById('inj-view-main').style.display = 'block';
     };
 
@@ -242,7 +223,10 @@
 
     // Edit Ruang (DENGAN PASSWORD)
     document.getElementById('btn-ruang').onclick = function() {
+        // Tampilkan pop-up password
         var pass = prompt("Masukkan Password untuk mengakses Edit Ruang:");
+        
+        // Cek apakah password benar
         if (pass === "OPS123") {
             var spans = document.querySelectorAll('.x-btn-inner');
             var positions = {
@@ -263,6 +247,7 @@
             });
             alert("Berhasil! Fitur Edit Ruang diaktifkan.");
         } else if (pass !== null) {
+            // Jika password salah (dan bukan klik cancel)
             alert("Password Salah! Akses ditolak.");
         }
     };
@@ -389,4 +374,4 @@
             prosesBaris();
         }
     };
-
+})();
