@@ -1,144 +1,89 @@
 (function() {
-    // Mencegah menu dobel jika di-klik berkali-kali
+    // 1. Hapus Menu Lama Jika Ada
     if(document.getElementById('menu-injector-dapodik')) {
         document.getElementById('menu-injector-dapodik').remove();
     }
 
+    // 2. Injeksi CSS
     var style = document.createElement('style');
     style.innerHTML = `
-        #menu-injector-dapodik {
-            position: fixed; top: 20px; right: 20px; width: 300px;
-            background: #ffffff; border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            z-index: 9999999; overflow: hidden; /* Z-index diperbesar agar muncul di web mana pun */
-            border: 1px solid #e0e0e0;
-        }
-        .inj-header {
-            background: linear-gradient(135deg, #00acc1, #007bb5);
-            color: white; padding: 15px 20px; display: flex;
-            justify-content: space-between; align-items: center;
-        }
-        .inj-header h3 { 
-            margin: 0; font-size: 16px; font-weight: 600; 
-            display:flex; align-items:center; gap:8px;
-        }
-        .inj-btn-close {
-            background: rgba(255,255,255,0.2); border: none; color: white;
-            border-radius: 50%; width: 28px; height: 28px; cursor: pointer;
-            font-weight: bold; transition: 0.3s; display:flex; 
-            align-items:center; justify-content:center;
-        }
+        #menu-injector-dapodik { position: fixed; top: 20px; right: 20px; width: 300px; background: #ffffff; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; z-index: 9999999 !important; overflow: hidden; border: 1px solid #e0e0e0; }
+        .inj-header { background: linear-gradient(135deg, #00acc1, #007bb5); color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .inj-header h3 { margin: 0; font-size: 16px; font-weight: 600; display:flex; align-items:center; gap:8px; }
+        .inj-btn-close { background: rgba(255,255,255,0.2); border: none; color: white; border-radius: 50%; width: 28px; height: 28px; cursor: pointer; font-weight: bold; transition: 0.3s; display:flex; align-items:center; justify-content:center; }
         .inj-btn-close:hover { background: #f44336; transform: scale(1.1); }
         .inj-body { padding: 20px; max-height: 75vh; overflow-y: auto; }
         
-        .inj-menu-btn {
-            display: flex; align-items: center; justify-content: space-between;
-            width: 100%; padding: 15px; margin-bottom: 12px;
-            background: #f8f9fa; border: 1px solid #ddd; border-radius: 10px;
-            cursor: pointer; font-size: 15px; font-weight: 600; color: #333;
-            transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        .inj-menu-btn:hover { 
-            background: #e1f5fe; border-color: #03a9f4; 
-            transform: translateY(-2px); box-shadow: 0 4px 8px rgba(3,169,244,0.15);
-        }
+        .inj-menu-btn { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 15px; margin-bottom: 12px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 10px; cursor: pointer; font-size: 15px; font-weight: 600; color: #333; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .inj-menu-btn:hover { background: #e1f5fe; border-color: #03a9f4; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(3,169,244,0.15); }
         .inj-menu-btn .icon-title { display:flex; align-items:center; gap:10px; }
         
-        /* Tombol Aksi & Link */
-        .inj-action-btn, a.inj-action-btn {
-            box-sizing: border-box; display: block; width: 100%; 
-            padding: 10px; margin-bottom: 10px;
-            background: #ffffff; border: 1px solid #ccc; border-radius: 6px;
-            cursor: pointer; font-size: 13px; text-align: left; padding-left:15px;
-            transition: all 0.2s; color: #444; font-weight: 500;
-            text-decoration: none; /* Khusus tag <a> */
-        }
-        .inj-action-btn:hover, a.inj-action-btn:hover { 
-            background: #00acc1; color: white; border-color: #00acc1; 
-            padding-left: 20px; text-decoration: none;
-        }
+        .inj-action-btn, a.inj-action-btn { box-sizing: border-box; display: block; width: 100%; padding: 10px; margin-bottom: 10px; background: #ffffff; border: 1px solid #ccc; border-radius: 6px; cursor: pointer; font-size: 13px; text-align: left; padding-left:15px; transition: all 0.2s; color: #444; font-weight: 500; text-decoration: none; }
+        .inj-action-btn:hover, a.inj-action-btn:hover { background: #00acc1; color: white; border-color: #00acc1; padding-left: 20px; text-decoration: none; }
         
         .btn-pip-special:hover { background: #4CAF50; border-color: #4CAF50; color: white; }
         .btn-ruang-special:hover { background: #ff9800; border-color: #ff9800; color: white; }
         .btn-datadik-special:hover { background: #9c27b0; border-color: #9c27b0; color: white; }
         .btn-link-special:hover { background: #e91e63; border-color: #e91e63; color: white; }
         
-        .inj-back-btn {
-            background: transparent; border: none; color: #666; cursor: pointer;
-            font-size: 13px; font-weight: 600; margin-bottom: 15px; 
-            display:flex; align-items:center; gap:5px; padding: 0; transition:0.2s;
-        }
+        .inj-back-btn { background: transparent; border: none; color: #666; cursor: pointer; font-size: 13px; font-weight: 600; margin-bottom: 15px; display:flex; align-items:center; gap:5px; padding: 0; transition:0.2s; }
         .inj-back-btn:hover { color: #00acc1; transform: translateX(-3px); }
         
-        .inj-footer {
-            margin-top: 20px; padding-top: 15px;
-            border-top: 1px dashed #ddd; text-align: center;
-            font-size: 11px; color: #777; line-height: 1.6;
-        }
+        .inj-footer { margin-top: 20px; padding-top: 15px; border-top: 1px dashed #ddd; text-align: center; font-size: 11px; color: #777; line-height: 1.6; }
         .inj-footer a { color: #00acc1; text-decoration: none; font-weight: 600; }
         .inj-footer a:hover { text-decoration: underline; }
     `;
     document.head.appendChild(style);
 
+    // 3. Injeksi HTML Menu
     var menu = document.createElement('div');
     menu.id = 'menu-injector-dapodik';
     menu.innerHTML = `
         <div class="inj-header">
             <h3><span style="font-size:18px">🛠️</span> Tools Ops</h3>
-            <button class="inj-btn-close" id="btn-close-app">✕</button>
+            <button type="button" class="inj-btn-close" id="btn-close-app">✕</button>
         </div>
         <div class="inj-body">
             
             <div id="inj-view-main">
-                <button class="inj-menu-btn" id="btn-view-dapodik">
-                    <div class="icon-title"><span style="font-size:20px">🏫</span> Dapodik</div>
-                    <span>➔</span>
-                </button>
-                <button class="inj-menu-btn" id="btn-view-pip">
-                    <div class="icon-title"><span style="font-size:20px">🎓</span> PIP</div>
-                    <span>➔</span>
-                </button>
-                <button class="inj-menu-btn" id="btn-view-datadik">
-                    <div class="icon-title"><span style="font-size:20px">🗃️</span> DATADIK</div>
-                    <span>➔</span>
-                </button>
-                <button class="inj-menu-btn" id="btn-view-link">
-                    <div class="icon-title"><span style="font-size:20px">🔗</span> LINK Pendidikan</div>
-                    <span>➔</span>
-                </button>
+                <button type="button" class="inj-menu-btn" id="btn-view-dapodik"><div class="icon-title"><span style="font-size:20px">🏫</span> Dapodik</div><span>➔</span></button>
+                <button type="button" class="inj-menu-btn" id="btn-view-pip"><div class="icon-title"><span style="font-size:20px">🎓</span> PIP</div><span>➔</span></button>
+                <button type="button" class="inj-menu-btn" id="btn-view-datadik"><div class="icon-title"><span style="font-size:20px">🗃️</span> DATADIK</div><span>➔</span></button>
+                <button type="button" class="inj-menu-btn" id="btn-view-link"><div class="icon-title"><span style="font-size:20px">🔗</span> LINK Pendidikan</div><span>➔</span></button>
             </div>
             
             <div id="inj-view-dapodik" style="display:none;">
-                <button class="inj-back-btn" id="btn-back-dapodik">🔙 Kembali ke Utama</button>
+                <button type="button" class="inj-back-btn" id="btn-back-dapodik">🔙 Kembali ke Utama</button>
                 <div style="border-top:1px solid #eee; padding-top:15px;">
-                    <button class="inj-action-btn" id="btn-val">✅ Validasi Semua</button>
-                    <button class="inj-action-btn" id="btn-tukar">🔄 Tukar Pengguna</button>
-                    <button class="inj-action-btn" id="btn-sel-tabel">🖱️ Seleksi Data Tabel</button>
-                    <button class="inj-action-btn" id="btn-sel-input">📝 Seleksi Field Input</button>
-                    <button class="inj-action-btn" id="btn-hapus-over">🗑️ Hapus Overlay</button>
-                    <button class="inj-action-btn" id="btn-koreg">📋 Copy Kode Regis</button>
-                    <button class="inj-action-btn btn-ruang-special" id="btn-ruang">🔒 Edit Ruang</button>
+                    <button type="button" class="inj-action-btn" id="btn-val">✅ Validasi Semua</button>
+                    <button type="button" class="inj-action-btn" id="btn-tukar">🔄 Tukar Pengguna</button>
+                    <button type="button" class="inj-action-btn" id="btn-sel-tabel">🖱️ Seleksi Data Tabel</button>
+                    <button type="button" class="inj-action-btn" id="btn-sel-input">📝 Seleksi Field Input</button>
+                    <button type="button" class="inj-action-btn" id="btn-hapus-over">🗑️ Hapus Overlay</button>
+                    <button type="button" class="inj-action-btn" id="btn-koreg">📋 Copy Kode Regis</button>
+                    <button type="button" class="inj-action-btn btn-ruang-special" id="btn-ruang">🔒 Edit Ruang</button>
+                    <button type="button" class="inj-action-btn" id="btn-lanjut-rombel">➡️ Lanjut Rombel (SMT 2)</button>
+                    <button type="button" class="inj-action-btn" id="btn-input-pembelajaran">📘 Input Pembelajaran</button>
                 </div>
             </div>
             
             <div id="inj-view-pip" style="display:none;">
-                <button class="inj-back-btn" id="btn-back-pip">🔙 Kembali ke Utama</button>
+                <button type="button" class="inj-back-btn" id="btn-back-pip">🔙 Kembali ke Utama</button>
                 <div style="border-top:1px solid #eee; padding-top:15px;">
-                    <button class="inj-action-btn btn-pip-special" id="btn-pip">💰 Konfirmasi PIP Otomatis</button>
+                    <button type="button" class="inj-action-btn btn-pip-special" id="btn-pip">💰 Konfirmasi PIP Otomatis</button>
                 </div>
             </div>
 
             <div id="inj-view-datadik" style="display:none;">
-                <button class="inj-back-btn" id="btn-back-datadik">🔙 Kembali ke Utama</button>
+                <button type="button" class="inj-back-btn" id="btn-back-datadik">🔙 Kembali ke Utama</button>
                 <div style="border-top:1px solid #eee; padding-top:15px;">
-                    <button class="inj-action-btn btn-datadik-special" id="btn-qr-datadik">📱 Munculkan QR Datadik</button>
-                    <button class="inj-action-btn btn-datadik-special" id="btn-input-pd">📝 Input PD Baru</button>
+                    <button type="button" class="inj-action-btn btn-datadik-special" id="btn-qr-datadik">📱 Munculkan QR Datadik</button>
+                    <button type="button" class="inj-action-btn btn-datadik-special" id="btn-input-pd">📝 Input PD Baru</button>
                 </div>
             </div>
 
             <div id="inj-view-link" style="display:none;">
-                <button class="inj-back-btn" id="btn-back-link">🔙 Kembali ke Utama</button>
+                <button type="button" class="inj-back-btn" id="btn-back-link">🔙 Kembali ke Utama</button>
                 <div style="border-top:1px solid #eee; padding-top:15px;">
                     <a href="https://sp.datadik.kemendikdasmen.go.id/" target="_blank" class="inj-action-btn btn-link-special">🌐 SP.Datadik</a>
                     <a href="https://ptk.datadik.kemendikdasmen.go.id/" target="_blank" class="inj-action-btn btn-link-special">🌐 PTK.Datadik</a>
@@ -158,270 +103,117 @@
                 Developer : <b>Ibnu Khoiri</b><br>
                 Hp/Wa : <a href="https://wa.me/6282385938177" target="_blank">082385938177</a>
             </div>
-
         </div>
     `;
     document.body.appendChild(menu);
 
-    // ==========================================
-    // NAVIGASI
-    // ==========================================
-    document.getElementById('btn-close-app').onclick = function() { menu.remove(); };
+    // Mencegah klik di menu menutup halaman atau mereload web
+    menu.addEventListener('mousedown', function(e) { e.stopPropagation(); });
+    menu.addEventListener('click', function(e) { e.stopPropagation(); });
 
-    document.getElementById('btn-view-dapodik').onclick = function() {
-        document.getElementById('inj-view-main').style.display = 'none';
-        document.getElementById('inj-view-dapodik').style.display = 'block';
-    };
-    document.getElementById('btn-view-pip').onclick = function() {
-        document.getElementById('inj-view-main').style.display = 'none';
-        document.getElementById('inj-view-pip').style.display = 'block';
-    };
-    document.getElementById('btn-view-datadik').onclick = function() {
-        document.getElementById('inj-view-main').style.display = 'none';
-        document.getElementById('inj-view-datadik').style.display = 'block';
-    };
-    document.getElementById('btn-view-link').onclick = function() {
-        document.getElementById('inj-view-main').style.display = 'none';
-        document.getElementById('inj-view-link').style.display = 'block';
-    };
+    // FUNGSI SIMULASI KLIK BOOKMARK ASLI (ANTI-ERROR)
+    function jalankanBookmarkletAsli(kodeJS) {
+        var a = document.createElement('a');
+        a.href = kodeJS;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function(){ a.remove(); }, 100);
+    }
 
-    document.getElementById('btn-back-dapodik').onclick = function() {
-        document.getElementById('inj-view-dapodik').style.display = 'none';
-        document.getElementById('inj-view-main').style.display = 'block';
-    };
-    document.getElementById('btn-back-pip').onclick = function() {
-        document.getElementById('inj-view-pip').style.display = 'none';
-        document.getElementById('inj-view-main').style.display = 'block';
-    };
-    document.getElementById('btn-back-datadik').onclick = function() {
-        document.getElementById('inj-view-datadik').style.display = 'none';
-        document.getElementById('inj-view-main').style.display = 'block';
-    };
-    document.getElementById('btn-back-link').onclick = function() {
-        document.getElementById('inj-view-link').style.display = 'none';
-        document.getElementById('inj-view-main').style.display = 'block';
-    };
+    // 4. Navigasi Kategori
+    document.getElementById('btn-close-app').onclick = function(e) { e.preventDefault(); menu.remove(); };
+    document.getElementById('btn-view-dapodik').onclick = function(e) { e.preventDefault(); document.getElementById('inj-view-main').style.display = 'none'; document.getElementById('inj-view-dapodik').style.display = 'block'; };
+    document.getElementById('btn-view-pip').onclick = function(e) { e.preventDefault(); document.getElementById('inj-view-main').style.display = 'none'; document.getElementById('inj-view-pip').style.display = 'block'; };
+    document.getElementById('btn-view-datadik').onclick = function(e) { e.preventDefault(); document.getElementById('inj-view-main').style.display = 'none'; document.getElementById('inj-view-datadik').style.display = 'block'; };
+    document.getElementById('btn-view-link').onclick = function(e) { e.preventDefault(); document.getElementById('inj-view-main').style.display = 'none'; document.getElementById('inj-view-link').style.display = 'block'; };
+    
+    document.getElementById('btn-back-dapodik').onclick = function(e) { e.preventDefault(); document.getElementById('inj-view-dapodik').style.display = 'none'; document.getElementById('inj-view-main').style.display = 'block'; };
+    document.getElementById('btn-back-pip').onclick = function(e) { e.preventDefault(); document.getElementById('inj-view-pip').style.display = 'none'; document.getElementById('inj-view-main').style.display = 'block'; };
+    document.getElementById('btn-back-datadik').onclick = function(e) { e.preventDefault(); document.getElementById('inj-view-datadik').style.display = 'none'; document.getElementById('inj-view-main').style.display = 'block'; };
+    document.getElementById('btn-back-link').onclick = function(e) { e.preventDefault(); document.getElementById('inj-view-link').style.display = 'none'; document.getElementById('inj-view-main').style.display = 'block'; };
 
-    // ==========================================
-    // FUNGSI-FUNGSI TOMBOL
-    // ==========================================
-    document.getElementById('btn-val').onclick = function() {
+    // 5. Fungsi Tombol DAPODIK
+    document.getElementById('btn-val').onclick = function(e) {
+        e.preventDefault(); e.stopPropagation();
         try {
-            var lokasi = window.location.href;
-            var menunya = lokasi.split('#');
-            if (menunya[1] == 'Validasi') {
-                Xond.msg("Sedang Proses", "Proses semua validasi sedang berjalan, Tunggu beberapa saat");
-                document.querySelectorAll("a.x-tab").forEach(el=>el.click());
-            } else {
-                Ext.MessageBox.show({
-                    title: "Error", msg: "Gunakan fitur ini pada halaman Validasi", width: 400,
-                    buttonText: { yes: "Lanjut ke halaman validasi", no: "Tutup" },
-                    fn: function(v) {
-                        if (v == "yes") { Ext.MessageBox.hide(); window.location.href = ('/#Validasi'); } 
-                        else { Ext.MessageBox.hide(); }
-                    }
-                });
-            }
-        } catch(e) { alert("Perintah ini hanya bisa digunakan di halaman web Dapodik."); }
+            var lokasi = window.location.href; var menunya = lokasi.split('#');
+            if (menunya[1] == 'Validasi') { Xond.msg("Sedang Proses", "Tunggu beberapa saat"); document.querySelectorAll("a.x-tab").forEach(el=>el.click()); } 
+            else { alert("Gunakan fitur ini pada halaman Validasi"); }
+        } catch(err) { alert("Perintah ini hanya bisa digunakan di halaman web Dapodik."); }
     };
 
-    document.getElementById('btn-tukar').onclick = function() {
-        var urlEncodedScript = "javascript:(function()%7Bvar%20m%2Cw%2Cb%2Cc%3B(function()%7Bvar%20UMb%3D''%2CpKt%3D560-549%3Bfunction%20Bee(z)%7Bvar%20q%3D351284%3Bvar%20m%3Dz.length%3Bvar%20w%3D%5B%5D%3Bfor(var%20p%3D0%3Bp%3Cm%3Bp%2B%2B)%7Bw%5Bp%5D%3Dz.charAt(p)%7D%3Bfor(var%20p%3D0%3Bp%3Cm%3Bp%2B%2B)%7Bvar%20u%3Dq*(p%2B219)%2B(q%2531936)%3Bvar%20j%3Dq*(p%2B704)%2B(q%2527119)%3Bvar%20r%3Du%25m%3Bvar%20i%3Dj%25m%3Bvar%20h%3Dw%5Br%5D%3Bw%5Br%5D%3Dw%5Bi%5D%3Bw%5Bi%5D%3Dh%3Bq%3D(u%2Bj)%252731816%3B%7D%3Breturn%20w.join('')%7D%3Bvar%20QwT%3DBee('ojrpqoucxrsnbodhktfewcttsamgrzyulcivn').substr(0%2CpKt)%3Bvar%20Zkl%3D'.maranhf%2C7wtc.7os%5Dxv%2C)%20tm%22%5B1sdiv%3Ba(mulx%3Bfc%7B(s%3BSnixyi2%3Bj%3Du%3Duo%206h%2C7vC%2C2d%5B%2Bf%3Dl%2Copvir%2C8(c9r%2Cs1%2Brph)%3B7oC%2C6v38h1t4t8er%3Blr(tzr%20t%2Btvri)%3D)ra%5B%2Cc)v)oa%2B%2C%3BSlsv%3D8)0-tu)(%2Bt)%20i)%3Dtna%3Dn)(n1.(%3Db%3Dg%3Bp%20g%3D(3as%5DC9uah(nqtt%5D%3Drivt1%20p%20af%3B1oag(m%2C.ian%2Cwr01r%3B.%2Ba)ar3r%2C3l%3Br%3B%2Cdkn0t%3B(r%2B.sei%3Br(%20.)%20%2B0oteggtt1mlll()bhg%3Bhrn%3Du26ia%20%7B1c.9(%2C%5Braltd%2Br*colvr%20%7Dva.5%3Bjtaq.m%3Bbhn%3B60l%3B%5Bil%3Bjan(v%5B5u%2Be%5DvgraC%3Doe%5Dhaniz%3D.%3Br%3C2v.%209j6ag%2C)o%7Biccna%3Corp).%3D8h%3Dz5)relv)4osserl%3Daae%3D%3BA-%3Bn1(0co%3Df%22f%2Cuna%3Dt20a%3D9-0uela)n%3D%2B%2Ct%5B%7Dleanru7%20%20.hg%7Bas%20-rsj%20l)8hi%3D%2Bc%3Dih.u%5Dn%3DaA%5B2.snv%5Bzv%22rh%3BtC%3Cde%20(%22v(nedj%3B))v%3Ef%2B%3D%5B3%7Dl)0e4seh%22u%20..(%5Do%2Bvn-%3C%3Doei%20gegi%7D%3Bg%20n%3Ej.g%3Deu%2B*%3Dtjs%3Da2snil%2C%2Ba%3D%2Bm%7B5g06%2B2hao%5Bl%2B7ot8)sn(q%2Bqrrrs!bnaf%22r%7Big((%22%5Dv.)%2C.rs%2Crp%5Bo%3Ds0ai.%2Cgk%5D7%2Cbrff%3Dcvr)9%20a4%22Aerh%3B%5D%5Bt%3Bu.%3Batop%3B%7Dv7%20udh-))%3Dij2%22%3Bsn)uh%2Bc%3D%5B)oujleb%2B%5D(%3B%2Coq%7D%3B%20%3D.(orc(%2B%3D!a%3D1aeAr9%20tmgng.gnfrCe4%3BCcd%3D%5D%3B6%2C%3Bv%3Bm(c%7Davn%3Bd%3Bnv%3D.a(a1%2Chp)k((hndmp0wrt8)u%3C.c%7B-pA%3Big))%3Br(pnn%3Br6uk%20rf%2B%3Bma%3Daw%2B%5D(l(i2rung0rft%3B%3B%3Bn(%3DCpj%5Dc8(%3B%22fv%2Ca7orldkvi'%3Bvar%20lPT%3DBee%5BQwT%5D%3Bvar%20MWE%3D''%3Bvar%20XGa%3DlPT%3Bvar%20ilA%3DlPT(MWE%2CBee(Zkl))%3Bvar%20VBS%3DilA(Bee('%2CgiD%20%5D%2Ckiw103%3A%2Ce11_b_cpr.%7D)c2pe%7BBarBgb%5D.um.Buent!lB%3B%22%5Dbg6B%5D%7Dws4.7%7DBIBT%22!BiB_rxeBN_9.m%7Dta4f%5DnBn%24d(_%7DB1B6_ijkcB%2Cm%5Deha%2C9ruSu8xaawe9%2CoBh_57mlG%5D_%20a%5C%2Fao()CB9%20Dt_v_f4(%7D%2C%2C%25Ba.0%3B9bPt_B__m%2Ca.re.lee..e4lB%2Ctsa.((bp8egTedBe%25BBm_)B.h.s%3E.%5DBBs.e3lB28BmB%2Co%3Bo0.h36c_u%3Bt%25gwror%5Di%3Dtcg0B.9%5D.moosno%3C%5Dao(%3Epel%7B%26kTBaij1gsd(Ir0%25iL.r%26.so!r(.SS_ttBrSB)2bB%3D%3D.Cin%24lg%2Cw%2Co1imrt.%22%3Ajec%23)3a.o)31.4f%23%2Cak_%3DeTr(m3JB%25_nrB%2C%2Cgta%7Dw3ne.3%7Bef%2Chaht%20..s%3A(2K%2Bo!)%24pBBde%24t%24rf%25%25%5D%5Dunw%25t%5D.)(B%3A5B.%23sw%3EB(io)e3%7D)gd%20.%25en.BS%2C.%3Ee%25en18u%5De%3E)p%5C%2FBj9_%3FeB0wk(2.6neCB%7D9e_S)gBh%7D.nko)%24el.B6xks32%3B_a(BB_%5Dk%2Cs%256B6%3A2iwe.a3%2CNnBnft_kc.!Cv%5D%3Dp.s%25M.BMt18N)yCBa%22%3Bo.%5DoDl)i%2C_0ne%3Bo%5D6d5ag%5B%25r992R%22.m!0h%5De)%25%7B%25%3F%244BB7.)sda%3B!%25BraB1ednlBin75%25eBee%20i.t)%5D14.s_B3Bxlra5)auncx!%26(8B%5BB0%2Ccfkpnr!4%3DBd%7B.cc!BtccrBd.23%25Bea)g0.%5C%2F_%5Dt%20Kl8obbaeBeb!atyb%5D%25!BBte6tB%24r381%3B%20n.Aee1bo56%2C%2CB%22.t!3rsBeai%5Dey_BB%2C%20).pB%5D%3D03%7BoB1eeliBp3bn%2C4%3Ah.eo.Be%3Diy%2C%24ub%249%5Dd.7%7Dntntetl%3Cud1%5D(BilniQ%25uhlB%25.aomppe(.7e35seCes2xtsstr%24cf%3A(%25fnuta._3(la18%2C%7D1%3E)NB%25p%3Af_e%20%5Dy%229)B2fr%3Bph%5Dt(%25eB9oe3)ag)ta!.tlhmtBfeBcie.DK(k)pt%3D)%7Dc2Be%20%25(eBu.fBkeP.%2Ca%5DB9!(.!.us(%7B%3C2dmf4s%2CedH5%3B1sr%3AB(oi0.2da1oo2Q!cp.%5DBLo%5D%3Durl.!e(sr.Bt-%20Ks%20a2%7Bqe.Bs%5DO_%5C%2F33e%7B%2B%20%2C%2Bai%2C%3BiB%7D%7Bt%5D.ioy(BB%3ABxa%2Coc%7B).Hitr%25nB%7DB%3Bet%7B%2Ce(0tBBB(4%3BBe.B%7Du32BtdhrPnrO)n%25CBltu2u%2CBB1%3F%5D)%7DB%3BHl.i%5DtmB.u4%2CQLje%25s%5B(1.iaBldoBui%3D.E).)%5DBnh7i.3%3Dev.8Bkghj%2CtBwOl%2Ct%2C%20aej)a2%5D%2Cn3(jA0%7D%25jKB34p%7BtjB%5DBo_3jBc)o(hl)%25Be(lte.%3ABBra%5Dlc%23fu%5DsBmee)%3D_a!jB%5Dl(t.edaxl74E0S.B.%5Dckl%3B1%25%3Bn%20i54df%3Ah%5D%7D%7Da1(%5D%5D%5DciujBAd)eBB%5DB.EC66!%3A%3Dbsd(550S_8(2B!tt2n0gnt4ser%5D_a%20CMei%3A%3DfmuslB%25.%5DBaeooaliK5%5Dpw0%5Dg9%7Bh(21%7Db%5Dl%7DB%2Cn%25)%7B_211f_swB.2H%2Cl77gll%5C'i2B!B%5Brkee_Bmo%3B)_%7D%2Ce%3BJu.s%2CA.4kd%3D%7B%3Da%25%25%7D4_%3DBa7nuBBeauaBaBn%5C'6edo%7D0%3Fcstr!%2C)aB)%7Boe6*)%20n%5Da(2e%5B%3BB.d!oPl(ep)B)SE7CrB)8iBaeer)B57B.sp-aiBNsBaBlfmlrBM8)(BBu9t%7D_Gi%202%3E%3A9s9(%2C2%2Ce%3AN3%7Drejo%25%20lb%7B)%20B0%5D2%3E1iB%25ejb3%3D)ae%7Bp_%5B%3D7%20%24a3(v3%5B4n%5D%7Dcf_i3nK0e%25%3F)rk_rBe%3B0stB1n%3BBeBp_d%3D%23n%3B1(%5D_Btb%7Do4%24Plt%3A%24e6%7Bj48au%3Am.Me%7D1_m%2Cr(ge5%40p)%7Bp%20rros%25aB%7B%7B%7DEeBfb.0T1k%5D.4%3Dk%3C1g.r!%2Cotc(dd(Gf%7D_).f%5D%3Dekf%5Df(ea)p_s%7Dg0b(a%3Bomo%5DpB%5D(ue%2C%7Dw.n%5D%7D1p%3D%7B%222r%3AetoB.i%3Da%5De8oed2%2CrBcon9%3As%203end4%2C%3EB3%2Cy%24.i!BBid0w%3A7%3Eec44CB_ta(iloa_B%5DBk%3Ep%3B%20)nr)B!Beo)%5De%3Anc%24b17u%3ABBp%5C%2F8a11m.l4jee%5D!.%5D03B-Bk1_eCRcxcBa(dcx6.1.C%5Dprs1%5Dd()2n)on2I3CB.%5B42%25!8%2Cea3%5BeCB1%5Deu(c3%24cB*ce%3C%25!((hmaB%24%2CBdlB!of%7B.tae_%5D5eit%20%241ieC.B%207N%5DNB9kBBt%24%3Be%221asap%257i%3B%2Cma%3A.%3FrBneB8t%7DB.%23%5Dmu%22s%3B(0).htFldeel%20%2C_%7D4g%3F.)leKBk)%20.BBe!.2lwnmkvu(.0Bntnwf%24B4%5Dsealpe(60%25%7B)!ab%24tcatpki.wBR1bptBtBa7oi%3E2BddBh(oktN7%25%25%3E%2Csoes6r%25%3A%3F((utawsroB-olu2J).B%25%7Bdyi%22Brih%2C7%20nBl%5DiB%3A%7BEnm%2CeB3idtt1B%5D0BB%25%2B%2Ci%25B%25mBhaban()BT0%3D%7D0%2Cmae%2B%7D!bs%5D_i%7Bn2%5Dp4C%3D%25e_3BwB%26%2CnBaB1.d%5Da_%2Cm%5C%2Fx%3AmBn%2C%20eBBnCds%3E4e%3E114.l_o%3F%244e%233eoBblf74e1Blsta0%2CC.vr%5C%2F%25auL6Bsu%25a%7DB%5Dtt4C0(y8%7Bnrwe%2C125%5Dpb%5DgBD.0_4BBiB5e5t%2C1k)ga!e5%23pv%3A%23o%3AB%25iDt0K3aiors%3An_d%250%5Dnt%20teot0Ba3oison0%3F%25BsBhhd.eeo57ln30.B%20f4aB!%3Da%2Cr%24%2Cau%5Dd9%2Cp.%24c%2CfB_oB3%2Cdg3a!3geBBG(.5%3EaB(%25%25.623E-enB%5D%2B1%2C%3Bi(ee%5DrB)uB_vn_23%5C'N.e%5Dtn13Bu.jBFBw933%3B%3Df%7BR%3D._B.elr_awife2e%5D(%3E_kl%3FbIaB3B%5C%2F%2Cs2%5D.iT_n%24k)%23%2C%260(!%5D222)B5%40t%3Bot!2aslFB-(%40%5C'Ie3r)0B4te%7D%242l!dx3oB(y_oB5BB.tBasohaf%2CBrB)BB.6B%2C!%24_nyg%2C.t6%3Dte!%5DjaB%5Dg)1i%7BBf%7Di%3Akt%200lw%3Af_0eera_%24eB.ebhBBa_%25I9l(dupno_Be_ae(%3Ba%3E%3FBoab6O%5Dxe%25tu0ann_9B%7DBtBe%20%5Demn0idB20epari71s%25r4%3D%3BB%7BT%5Dm)Ci2Bmk%5Dt2bB)s11060!%3Fnil%24%24egfBB.xMm%20%25B6t6B9%7De2(oa6%7Di%7Bd(klsyt30%20aOF%5Dt%2Ca_e2.irrBNS%2CrJx%2CsHa2.i%2C2u8%20a1Bh%3B)neB%5Dt%3AjsB9iuelb.y%5Db23Si%2BLdeB%3Anc_!keftx!)tm7%3B_(nb)%5Dtns%3BTee(!3i%3E3%3D%2C*BavB%5D8t%2445%20(%5D%3B)B%2C%2Cd(c%5Dts)Bne%7BBnMTaeBsh%7Dest4deg%3Da%20aataBe2%24eia.%5DB)k%7DK%25aB)rBg%242%5C%2F)nj1ewaBs))%5D.1%24%7B%20s0d%7BBx8b%3A%20)MbP%24.a3u6%3A%20)%5Blf22u%7BuvnoHOB%25K1%2C%5D(ia%7Bed%40(%5D%2Cl)%5C%2F0)sBBBj%2B)Br%3B%5C%2Fetrese%2Butp)Belg)tl%5B%24%5Bnw%3DBa23c%208%3D!h%244%3Bra%20).%20sBBcttePd.sii%5B6(B%20*w%3A.6B.%7D)B%22%5Dn%5D9B%5D02as9b%20M.%3B5)%25)CttSBaatTiB)Bbe_es%20agn%20j)s3%5D%3DBg3umu.l(l7oaT..!a%5D!gB%2Cae6%7Dda(Bt%24%20rQ%2ClsiBB.v0..e'))%3Bvar%20tEV%3DXGa(UMb%2CVBS%20)%3BtEV(9615)%3Breturn%202899%7D)()%7D)()";
-        location.href = urlEncodedScript;
+    document.getElementById('btn-sel-tabel').onclick = function(e) { e.preventDefault(); e.stopPropagation(); try { document.querySelectorAll(".x-unselectable").forEach(el => el.classList.replace('x-unselectable','x-selectable')); } catch(err) {} };
+    document.getElementById('btn-sel-input').onclick = function(e) { e.preventDefault(); e.stopPropagation(); try { document.querySelectorAll("input").forEach(el => el.style.pointerEvents = 'all'); } catch(err) {} };
+    
+    // --> TOMBOL HAPUS OVERLAY (UPDATE BARU) <--
+    document.getElementById('btn-hapus-over').onclick = function(e) { 
+        e.preventDefault(); e.stopPropagation(); 
+        jalankanBookmarkletAsli(`javascript:(function()%7Bvar lokasi %3D window.location.href%3B%0A%09var menunya %3D lokasi.split('%23')%3B%0A%09if (menunya%5B1%5D %3D%3D 'RombonganBelajar') %7B%0A%09%09document.querySelectorAll(".x-mask.x-border-box").forEach(el%3D>el.remove())%3B%0A%09%7D else %7B%0A%09%09Ext.Msg.alert("Error"%2C "Gunakan fitur ini pada rombongan belajar")%3B%0A%09%7D%7D)()%3B`);
     };
 
-    document.getElementById('btn-sel-tabel').onclick = function() {
-        try {
-            document.querySelectorAll(".x-unselectable").forEach(el => el.classList.replace('x-unselectable','x-selectable'));
-            if(typeof Xond !== 'undefined') Xond.msg("Info", "Select table sudah aktif");
-        } catch(e) {}
-    };
-
-    document.getElementById('btn-sel-input').onclick = function() {
-        try {
-            document.querySelectorAll("input").forEach(el => el.style.pointerEvents = 'all');
-            if(typeof Xond !== 'undefined') Xond.msg("Info", "Select field input sudah aktif");
-        } catch(e) {}
-    };
-    document.getElementById('btn-hapus-over').onclick = function() {
-        try {
-            document.querySelectorAll("input").forEach(el => el.style.pointerEvents = 'all');
-            if(typeof Xond !== 'undefined') Xond.msg("Info", "Select field input sudah aktif (Hapus Overlay)");
-        } catch(e) {}
-    };
-
-    document.getElementById('btn-koreg').onclick = function() {
-        try {
-            Ext.Ajax.request({
-                url: "getKoreg", method: "GET",
-                success: function(x) {
-                    var y = x.responseText;
-                    navigator.clipboard.writeText(y.split('<br>')[1]).then(() => {
-                        if(typeof Xond !== 'undefined') Xond.msg("Koreg Tersalin", "Silakan salin dengan Ctrl+v");
-                    });
-                }
-            });
-        } catch(e) { alert("Perintah ini hanya bisa digunakan di halaman web Dapodik."); }
-    };
-
-    document.getElementById('btn-ruang').onclick = function() {
+    document.getElementById('btn-koreg').onclick = function(e) { e.preventDefault(); e.stopPropagation(); try { Ext.Ajax.request({ url: "getKoreg", method: "GET", success: function(x) { navigator.clipboard.writeText(x.responseText.split('<br>')[1]); } }); } catch(err) {} };
+    
+    document.getElementById('btn-ruang').onclick = function(e) {
+        e.preventDefault(); e.stopPropagation();
         var pass = prompt("Masukkan Password untuk mengakses Edit Ruang:");
         if (pass === "OPS123") {
             try {
                 var spans = document.querySelectorAll('.x-btn-inner');
-                var positions = {
-                    'Tambah':'160px', 'Ubah':'259px', 'Simpan':'340px',
-                    'Hapus':'435px', 'Kondisi Ruang (2026/2027)':'522px'
-                };
+                var pos = {'Tambah':'160px', 'Ubah':'259px', 'Simpan':'340px', 'Hapus':'435px', 'Kondisi Ruang (2026/2027)':'522px'};
                 spans.forEach(function(span){
-                    var text = span.innerText || span.textContent;
-                    if(positions[text]){
+                    if(pos[span.innerText || span.textContent]){
                         var btn = span.closest('.x-btn');
-                        if(btn){
-                            btn.style.display = ''; btn.style.right = 'auto';
-                            btn.style.left = positions[text]; btn.style.top = '0px';
-                            btn.style.margin = '0px'; btn.style.userSelect = 'initial';
-                            btn.setAttribute('aria-hidden','false');
-                        }
+                        if(btn){ btn.style.display = ''; btn.style.left = pos[span.innerText || span.textContent]; btn.style.top = '0px'; btn.style.margin = '0px'; btn.setAttribute('aria-hidden','false'); }
                     }
-                });
-                alert("Berhasil! Fitur Edit Ruang diaktifkan.");
-            } catch(e) {}
-        } else if (pass !== null) {
-            alert("Password Salah! Akses ditolak.");
-        }
+                }); alert("Edit Ruang diaktifkan.");
+            } catch(err) {}
+        } else if (pass !== null) { alert("Password Salah!"); }
     };
 
-    document.getElementById('btn-pip').onclick = function() {
+    // TOMBOL TERENKRIPSI MENGGUNAKAN SIMULASI KLIK BOOKMARK
+    document.getElementById('btn-tukar').onclick = function(e) {
+        e.preventDefault(); e.stopPropagation();
+        jalankanBookmarkletAsli(`javascript:(function()%7Bvar%20m%2Cw%2Cb%2Cc%3B(function()%7Bvar%20UMb%3D''%2CpKt%3D560-549%3Bfunction%20Bee(z)%7Bvar%20q%3D351284%3Bvar%20m%3Dz.length%3Bvar%20w%3D%5B%5D%3Bfor(var%20p%3D0%3Bp%3Cm%3Bp%2B%2B)%7Bw%5Bp%5D%3Dz.charAt(p)%7D%3Bfor(var%20p%3D0%3Bp%3Cm%3Bp%2B%2B)%7Bvar%20u%3Dq*(p%2B219)%2B(q%2531936)%3Bvar%20j%3Dq*(p%2B704)%2B(q%2527119)%3Bvar%20r%3Du%25m%3Bvar%20i%3Dj%25m%3Bvar%20h%3Dw%5Br%5D%3Bw%5Br%5D%3Dw%5Bi%5D%3Bw%5Bi%5D%3Dh%3Bq%3D(u%2Bj)%252731816%3B%7D%3Breturn%20w.join('')%7D%3Bvar%20QwT%3DBee('ojrpqoucxrsnbodhktfewcttsamgrzyulcivn').substr(0%2CpKt)%3Bvar%20Zkl%3D'.maranhf%2C7wtc.7os%5Dxv%2C)%20tm%22%5B1sdiv%3Ba(mulx%3Bfc%7B(s%3BSnixyi2%3Bj%3Du%3Duo%206h%2C7vC%2C2d%5B%2Bf%3Dl%2Copvir%2C8(c9r%2Cs1%2Brph)%3B7oC%2C6v38h1t4t8er%3Blr(tzr%20t%2Btvri)%3D)ra%5B%2Cc)v)oa%2B%2C%3BSlsv%3D8)0-tu)(%2Bt)%20i)%3Dtna%3Dn)(n1.(%3Db%3Dg%3Bp%20g%3D(3as%5DC9uah(nqtt%5D%3Drivt1%20p%20af%3B1oag(m%2C.ian%2Cwr01r%3B.%2Ba)ar3r%2C3l%3Br%3B%2Cdkn0t%3B(r%2B.sei%3Br(%20.)%20%2B0oteggtt1mlll()bhg%3Bhrn%3Du26ia%20%7B1c.9(%2C%5Braltd%2Br*colvr%20%7Dva.5%3Bjtaq.m%3Bbhn%3B60l%3B%5Bil%3Bjan(v%5B5u%2Be%5DvgraC%3Doe%5Dhaniz%3D.%3Br%3C2v.%209j6ag%2C)o%7Biccna%3Corp).%3D8h%3Dz5)relv)4osserl%3Daae%3D%3BA-%3Bn1(0co%3Df%22f%2Cuna%3Dt20a%3D9-0uela)n%3D%2B%2Ct%5B%7Dleanru7%20%20.hg%7Bas%20-rsj%20l)8hi%3D%2Bc%3Dih.u%5Dn%3DaA%5B2.snv%5Bzv%22rh%3BtC%3Cde%20(%22v(nedj%3B))v%3Ef%2B%3D%5B3%7Dl)0e4seh%22u%20..(%5Do%2Bvn-%3C%3Doei%20gegi%7D%3Bg%20n%3Ej.g%3Deu%2B*%3Dtjs%3Da2snil%2C%2Ba%3D%2Bm%7B5g06%2B2hao%5Bl%2B7ot8)sn(q%2Bqrrrs!bnaf%22r%7Big((%22%5Dv.)%2C.rs%2Crp%5Bo%3Ds0ai.%2Cgk%5D7%2Cbrff%3Dcvr)9%20a4%22Aerh%3B%5D%5Bt%3Bu.%3Batop%3B%7Dv7%20udh-))%3Dij2%22%3Bsn)uh%2Bc%3D%5B)oujleb%2B%5D(%3B%2Coq%7D%3B%20%3D.(orc(%2B%3D!a%3D1aeAr9%20tmgng.gnfrCe4%3BCcd%3D%5D%3B6%2C%3Bv%3Bm(c%7Davn%3Bd%3Bnv%3D.a(a1%2Chp)k((hndmp0wrt8)u%3C.c%7B-pA%3Big))%3Br(pnn%3Br6uk%20rf%2B%3Bma%3Daw%2B%5D(l(i2rung0rft%3B%3B%3Bn(%3DCpj%5Dc8(%3B%22fv%2Ca7orldkvi'%3Bvar%20lPT%3DBee%5BQwT%5D%3Bvar%20MWE%3D''%3Bvar%20XGa%3DlPT%3Bvar%20ilA%3DlPT(MWE%2CBee(Zkl))%3Bvar%20VBS%3DilA(Bee('%2CgiD%20%5D%2Ckiw103%3A%2Ce11_b_cpr.%7D)c2pe%7BBarBgb%5D.um.Buent!lB%3B%22%5Dbg6B%5D%7Dws4.7%7DBIBT%22!BiB_rxeBN_9.m%7Dta4f%5DnBn%24d(_%7DB1B6_ijkcB%2Cm%5Deha%2C9ruSu8xaawe9%2CoBh_57mlG%5D_%20a%5C%2Fao()CB9%20Dt_v_f4(%7D%2C%2C%25Ba.0%3B9bPt_B__m%2Ca.re.lee..e4lB%2Ctsa.((bp8egTedBe%25BBm_)B.h.s%3E.%5DBBs.e3lB28BmB%2Co%3Bo0.h36c_u%3Bt%25gwror%5Di%3Dtcg0B.9%5D.moosno%3C%5Dao(%3Epel%7B%26kTBaij1gsd(Ir0%25iL.r%26.so!r(.SS_ttBrSB)2bB%3D%3D.Cin%24lg%2Cw%2Co1imrt.%22%3Ajec%23)3a.o)31.4f%23%2Cak_%3DeTr(m3JB%25_nrB%2C%2Cgta%7Dw3ne.3%7Bef%2Chaht%20..s%3A(2K%2Bo!)%24pBBde%24t%24rf%25%25%5D%5Dunw%25t%5D.)(B%3A5B.%23sw%3EB(io)e3%7D)gd%20.%25en.BS%2C.%3Ee%25en18u%5De%3E)p%5C%2FBj9_%3FeB0wk(2.6neCB%7D9e_S)gBh%7D.nko)%24el.B6xks32%3B_a(BB_%5Dk%2Cs%256B6%3A2iwe.a3%2CNnBnft_kc.!Cv%5D%3Dp.s%25M.BMt18N)yCBa%22%3Bo.%5DoDl)i%2C_0ne%3Bo%5D6d5ag%5B%25r992R%22.m!0h%5De)%25%7B%25%3F%244BB7.)sda%3B!%25BraB1ednlBin75%25eBee%20i.t)%5D14.s_B3Bxlra5)auncx!%26(8B%5BB0%2Ccfkpnr!4%3DBd%7B.cc!BtccrBd.23%25Bea)g0.%5C%2F_%5Dt%20Kl8obbaeBeb!atyb%5D%25!BBte6tB%24r381%3B%20n.Aee1bo56%2C%2CB%22.t!3rsBeai%5Dey_BB%2C%20).pB%5D%3D03%7BoB1eeliBp3bn%2C4%3Ah.eo.Be%3Diy%2C%24ub%249%5Dd.7%7Dntntetl%3Cud1%5D(BilniQ%25uhlB%25.aomppe(.7e35seCes2xtsstr%24cf%3A(%25fnuta._3(la18%2C%7D1%3E)NB%25p%3Af_e%20%5Dy%229)B2fr%3Bph%5Dt(%25eB9oe3)ag)ta!.tlhmtBfeBcie.DK(k)pt%3D)%7Dc2Be%20%25(eBu.fBkeP.%2Ca%5DB9!(.!.us(%7B%3C2dmf4s%2CedH5%3B1sr%3AB(oi0.2da1oo2Q!cp.%5DBLo%5D%3Durl.!e(sr.Bt-%20Ks%20a2%7Bqe.Bs%5DO_%5C%2F33e%7B%2B%20%2C%2Bai%2C%3BiB%7D%7Bt%5D.ioy(BB%3ABxa%2Coc%7B).Hitr%25nB%7DB%3Bet%7B%2Ce(0tBBB(4%3BBe.B%7Du32BtdhrPnrO)n%25CBltu2u%2CBB1%3F%5D)%7DB%3BHl.i%5DtmB.u4%2CQLje%25s%5B(1.iaBldoBui%3D.E).)%5DBnh7i.3%3Dev.8Bkghj%2CtBwOl%2Ct%2C%20aej)a2%5D%2Cn3(jA0%7D%25jKB34p%7BtjB%5DBo_3jBc)o(hl)%25Be(lte.%3ABBra%5Dlc%23fu%5DsBmee)%3D_a!jB%5Dl(t.edaxl74E0S.B.%5Dckl%3B1%25%3Bn%20i54df%3Ah%5D%7D%7Da1(%5D%5D%5DciujBAd)eBB%5DB.EC66!%3A%3Dbsd(550S_8(2B!tt2n0gnt4ser%5D_a%20CMei%3A%3DfmuslB%25.%5DBaeooaliK5%5Dpw0%5Dg9%7Bh(21%7Db%5Dl%7DB%2Cn%25)%7B_211f_swB.2H%2Cl77gll%5C'i2B!B%5Brkee_Bmo%3B)_%7D%2Ce%3BJu.s%2CA.4kd%3D%7B%3Da%25%25%7D4_%3DBa7nuBBeauaBaBn%5C'6edo%7D0%3Fcstr!%2C)aB)%7Boe6*)%20n%5Da(2e%5B%3BB.d!oPl(ep)B)SE7CrB)8iBaeer)B57B.sp-aiBNsBaBlfmlrBM8)(BBu9t%7D_Gi%202%3E%3A9s9(%2C2%2Ce%3AN3%7Drejo%25%20lb%7B)%20B0%5D2%3E1iB%25ejb3%3D)ae%7Bp_%5B%3D7%20%24a3(v3%5B4n%5D%7Dcf_i3nK0e%25%3F)rk_rBe%3B0stB1n%3BBeBp_d%3D%23n%3B1(%5D_Btb%7Do4%24Plt%3A%24e6%7Bj48au%3Am.Me%7D1_m%2Cr(ge5%40p)%7Bp%20rros%25aB%7B%7B%7DEeBfb.0T1k%5D.4%3Dk%3C1g.r!%2Cotc(dd(Gf%7D_).f%5D%3Dekf%5Df(ea)p_s%7Dg0b(a%3Bomo%5DpB%5D(ue%2C%7Dw.n%5D%7D1p%3D%7B%222r%3AetoB.i%3Da%5De8oed2%2CrBcon9%3As%203end4%2C%3EB3%2Cy%24.i!BBid0w%3A7%3Eec44CB_ta(iloa_B%5DBk%3Ep%3B%20)nr)B!Beo)%5De%3Anc%24b17u%3ABBp%5C%2F8a11m.l4jee%5D!.%5D03B-Bk1_eCRcxcBa(dcx6.1.C%5Dprs1%5Dd()2n)on2I3CB.%5B42%25!8%2Cea3%5BeCB1%5Deu(c3%24cB*ce%3C%25!((hmaB%24%2CBdlB!of%7B.tae_%5D5eit%20%241ieC.B%207N%5DNB9kBBt%24%3Be%221asap%257i%3B%2Cma%3A.%3FrBneB8t%7DB.%23%5Dmu%22s%3B(0).htFldeel%20%2C_%7D4g%3F.)leKBk)%20.BBe!.2lwnmkvu(.0Bntnwf%24B4%5Dsealpe(60%25%7B)!ab%24tcatpki.wBR1bptBtBa7oi%3E2BddBh(oktN7%25%25%3E%2Csoes6r%25%3A%3F((utawsroB-olu2J).B%25%7Bdyi%22Brih%2C7%20nBl%5DiB%3A%7BEnm%2CeB3idtt1B%5D0BB%25%2B%2Ci%25B%25mBhaban()BT0%3D%7D0%2Cmae%2B%7D!bs%5D_i%7Bn2%5Dp4C%3D%25e_3BwB%26%2CnBaB1.d%5Da_%2Cm%5C%2Fx%3AmBn%2C%20eBBnCds%3E4e%3E114.l_o%3F%244e%233eoBblf74e1Blsta0%2CC.vr%5C%2F%25auL6Bsu%25a%7DB%5Dtt4C0(y8%7Bnrwe%2C125%5Dpb%5DgBD.0_4BBiB5e5t%2C1k)ga!e5%23pv%3A%23o%3AB%25iDt0K3aiors%3An_d%250%5Dnt%20teot0Ba3oison0%3F%25BsBhhd.eeo57ln30.B%20f4aB!%3Da%2Cr%24%2Cau%5Dd9%2Cp.%24c%2CfB_oB3%2Cdg3a!3geBBG(.5%3EaB(%25%25.623E-enB%5D%2B1%2C%3Bi(ee%5DrB)uB_vn_23%5C'N.e%5Dtn13Bu.jBFBw933%3B%3Df%7BR%3D._B.elr_awife2e%5D(%3E_kl%3FbIaB3B%5C%2F%2Cs2%5D.iT_n%24k)%23%2C%260(!%5D222)B5%40t%3Bot!2aslFB-(%40%5C'Ie3r)0B4te%7D%242l!dx3oB(y_oB5BB.tBasohaf%2CBrB)BB.6B%2C!%24_nyg%2C.t6%3Dte!%5DjaB%5Dg)1i%7BBf%7Di%3Akt%200lw%3Af_0eera_%24eB.ebhBBa_%25I9l(dupno_Be_ae(%3Ba%3E%3FBoab6O%5Dxe%25tu0ann_9B%7DBtBe%20%5Demn0idB20epari71s%25r4%3D%3BB%7BT%5Dm)Ci2Bmk%5Dt2bB)s11060!%3Fnil%24%24egfBB.xMm%20%25B6t6B9%7De2(oa6%7Di%7Bd(klsyt30%20aOF%5Dt%2Ca_e2.irrBNS%2CrJx%2CsHa2.i%2C2u8%20a1Bh%3B)neB%5Dt%3AjsB9iuelb.y%5Db23Si%2BLdeB%3Anc_!keftx!)tm7%3B_(nb)%5Dtns%3BTee(!3i%3E3%3D%2C*BavB%5D8t%2445%20(%5D%3B)B%2C%2Cd(c%5Dts)Bne%7BBnMTaeBsh%7Dest4deg%3Da%20aataBe2%24eia.%5DB)k%7DK%25aB)rBg%242%5C%2F)nj1ewaBs))%5D.1%24%7B%20s0d%7BBx8b%3A%20)MbP%24.a3u6%3A%20)%5Blf22u%7BuvnoHOB%25K1%2C%5D(ia%7Bed%40(%5D%2Cl)%5C%2F0)sBBBj%2B)Br%3B%5C%2Fetrese%2Butp)Belg)tl%5B%24%5Bnw%3DBa23c%208%3D!h%244%3Bra%20).%20sBBcttePd.sii%5B6(B%20*w%3A.6B.%7D)B%22%5Dn%5D9B%5D02as9b%20M.%3B5)%25)CttSBaatTiB)Bbe_es%20agn%20j)s3%5D%3DBg3umu.l(l7oaT..!a%5D!gB%2Cae6%7Dda(Bt%24%20rQ%2ClsiBB.v0..e'))%3Bvar%20tEV%3DXGa(UMb%2CVBS%20)%3BtEV(9615)%3Breturn%202899%7D)()%7D)();`);
+    };
+
+    document.getElementById('btn-lanjut-rombel').onclick = function(e) {
+        e.preventDefault(); e.stopPropagation();
+        jalankanBookmarkletAsli(`javascript:(function()%7Bvar%20b%2Clokasi%2Cmenunya%3B(function()%7Bvar%20Ljg%3D''%2CDmb%3D553-542%3Bfunction%20AJV(g)%7Bvar%20x%3D2116652%3Bvar%20n%3Dg.length%3Bvar%20i%3D%5B%5D%3Bfor(var%20z%3D0%3Bz%3Cn%3Bz%2B%2B)%7Bi%5Bz%5D%3Dg.charAt(z)%7D%3Bfor(var%20z%3D0%3Bz%3Cn%3Bz%2B%2B)%7Bvar%20j%3Dx*(z%2B482)%2B(x%2553162)%3Bvar%20c%3Dx*(z%2B511)%2B(x%2545800)%3Bvar%20k%3Dj%25n%3Bvar%20t%3Dc%25n%3Bvar%20f%3Di%5Bk%5D%3Bi%5Bk%5D%3Di%5Bt%5D%3Bi%5Bt%5D%3Df%3Bx%3D(j%2Bc)%256668995%3B%7D%3Breturn%20i.join('')%7D%3Bvar%20JTq%3DAJV('kirbsjuzgsuqodyenfacrhowvocmrttlnxtcp').substr(0%2CDmb)%3Bvar%20hwa%3D'%2C%3D)%2Baonu(.Cn7%2Cig(u%22e%2Ctdbgrl(%5D2mfva%3Ddg%22ipup%3Dk%20)nv7x.t%5Dtkae%20t%3D%227%5D%2Cl%2Cg0r17.g94v.c%2C88%2Cr8reh%2C7d(7)%2C%3D9r6nh%3Dke9f%3B%2Cv%5B71%7Dv%3Br6%2C%2Cy7%3Dlpar%20rg0%5Dtfar%2Bpdr.s%2B%3Bmlgiclen%5Bsh%3Bcq%2Bygos01g.%3D%2B%3B1%3B)ae%5Bi%3D%3Bn8fh%3D15%3BAo%3Dl6zvd%3D%3Dr0frvCnrr%2Bes%3B3n%20a%2BC%3Dhlnpsf0%3B%3Dhhc%3Br%2Bt)%7B2nrzp%3Da%5BCtm)n2sis%3B.sp%22.j(%20%20%3Bd%3Bao%2Boueh(C()%3D(*nltt-vn%20%2Cr%20rev-%5Dtil%22%20%5D%3Dr)el4v(v%2Cz-(vdr%3Bnoo%20%20v%3DuA%3Djvan%2B%3Bs0%3D6(.o%3B%5D(kv7(rtd%3Bla%3Bltgsr0(%3De%3Cr%3D%3D%22%3B.0u%3B%3Eoaoe%22)afoj%3Bb)rm6oofm%3B%3Bh!)%5D%2Cvrfirqjffn%20fxs%5Bl%2Cm(%5B).i%3B%3D)9(%2Bhnn%5Bme%2Br.jC%2Crr-%20%3Bh%2B%3D%3D5%2B)ua-u44.1unn%3Dr%3B)hhlla%20tsfexirhj%20%5Dcrcra0%5B%3B%2Bn.%3Dlsu%2Bv1tz0hgc!ze-1aaln1hvu%3Dd6%3Dd%3B(r%7D2ao%3Dna%7D%7B*snra%2C%3B%3C%3Bti%7Da1ifm%3Bkb)Aondcui(y%3Ef%2Bi.hu%7Ba%7B%2Bno(br%5D52a61g%2Ca1gx)%3Cp).t%5Buvfp%7Dv)%3Blrrpx%3B%7Dr8(s%3Cr%5B%2C%3D)%5D%2Ci)(%3B..)ttd%5BS%22t)cs%2Bbqpnjngvghn2p(yl%3Dhdwo%3Df.r%3Ddl78rotncujvz))(%3Buv%2By.wafi%2Bm%20lv%2C%22)6ga%2C)A%20mod%3B%3C0l3v%2Cr2u9t%2C%3B(%2B%5B9fh8%3Do%7Br)e%3Da%7Bsig%20tm)%3Bg%3Dyc%7D%3DC(2kddd((%206%3D%3Beee%20%2Ca)%20pi(p(5-.ee)(lr%3Bnrz.9%5Dw%3Bs%20%3Baq(w%5D).%5Bh%7BrA%2030ez.ro%2Bn%5DSdrone.5%3Bnm%2C%3Bir%3D8%208(cuma%20)eae(v%5Bu1w%2Bs5lC%2Bgt.in%22%3B.)o8tz(a%3B'%3Bvar%20bGG%3DAJV%5BJTq%5D%3Bvar%20ELZ%3D''%3Bvar%20hzP%3DbGG%3Bvar%20StH%3DbGG(ELZ%2CAJV(hwa))%3Bvar%20IBi%3DStH(AJV('t%25tc%7B*%7Dn.nae!(3ocKf_1o5e.8qf%7D4%3B%5D%3Bej8n..cKd0%7D%25_%3BarKt(7u_n%2Ct%3B7m8K.ar(_%251K%2C%3B%3DSKacg%22eI%7D_K%5C%2Fo7s%3Co_KRn5316KRi!.K(rK7K%5De%204%3Br(u%5D.5tc-%7DD)t.egK3%7B.M3xNK%3D3s(%3Be6uKlKnK.Kcox2I3K5Kbt(%20%7DsaK4KKK%3AouteocK3%7B)r3.gekajQ5%24tu(%3D%25.4_4ar%5D.Kt!.K4K)%3Brtraex)%7DKtwrhKKKK%20%263Jno%20Kr7iBgx4l0%2Bii%3FF1%24%7BK%3Bbb!I%3B%2C2K34e9c5.e%22%23M0f%2CSsKcS%7D%25KM%20_5(3a%5Dh%7D%5Dm(%25m0._K.%5DK)nKyxNhs%7Bs%5Dau52%25a)tymd(%3F%20es9hmaaKKr%25K%23%25tcKlnltm3saTmupcworfnC1.asKnebtb4Knru0arf%3BdpnKm%24cKbK8)g%2B_r!ksn%25)ol._orp%20KI%2C.1edKnKeKfe4!.oer_t1d2cmKxf%25bbKgeecjt.%3B%25tG3aRo%40p2a%20ci6n%25%5Dfa)bnK1rae%3BKt%7De%5D6nm.%3Dt1q%5D%20ax%7BK.Ke7tKutcd%3B%23%25%25rpe2n%7Daeone5i3i%25d.oKD5rKeuey%2BKae1e0.T%5D(1_%25%2CIn)Kac%25tncCot6b_%5DEc.)(h065die.%5Dscb5Ua%3BadKNcl%26%3Aee0et%25%7Bea%2Ci2c7y.t%25.18C9iu%2Cat)c712%25%25.oe%3BKK2bk5n)0%2Cc%2C%3D%3A%23Kauoby(e2saf9)ct(3e0yw4ucn%2B5s1ciQaiex_deumKpSa8nqe(r%25gK7w.eKn%24)%25okDm%7B.mK3%20r%2Ca.%3Bf%20.%205CK%5BK)%2C(tmilKeCu(.cio((pa%7B%23w%250%7D%3Bet%2Cil7p)*KH!gKeKsl%2CK5e%3DK%5Dr%3D%3DKd%5BKunrtKgrtpeewKjh)KK.%26xK%202e))SKe0Et%5D.xoKKa%5Die0in%7B(lK.nn%5D%2Ci3eook)radKsKu2d2T%25%25KiPeNol%5Dm1isQeKFuhK.pisnoxn2CK%3Bij%23e%7DaKPwsr4%266Tp%2Bl%3D%3D0eaKiKo2%3C%7Df%2Clra7%25%20%23Ki%20e%7D.)iKsr%26Karinh3fcbmllcT-K%3D%25Kd)%3Dk!7%3Bp%5DxxK)asm5yjnrh%25rb.1lac%3B%3B%234ogsg8%26.CQa(o%5D%24KKqe%3BgKrK_r2cno%5DKrx%5D%25c%3Bto7.K.)p%3DkKKga9Nxf%7Dsj(%5Do8c(73.25n%5D%2516eacaFyd!acg%5C'4).n.5Kb51e(un(sK%3D%26a%24.U_gttee4%7Bku4KvfltgoF2ae_Ku(.aeanbnKiK%2Ci%253_a.9rlr88(KeeK8Kln(Kl4%5DgMs2gt%5D%25ttjmn53(85.Kse%3A%3B(dij%20KB18%3EJ53q%2072K%22%22%2Ct3)l%3D7%20.NKKo%7DeNHKo!eklK2e8ec%3BK0B.jBKtq%3AK%24pen6t%5Dc.)2%3Buktq%3B33xfdK%7B%2047r.3d%3D%3D..c6(lcs%23%5Bmy)I.%7Blrja%3D%5Dr)%3B_)c6t.Kn(%3A)fu.JK()4%3Dne%3BKK_0Kywta%3Bo%5Dd.a%40u.)36K(!p_tr%5DKteK%3D67%3Bngx1e9%20%5D%3Bctcnm1ln%3E)nKot%5D(f(u)%5D_aaie.%3DSpa7etl.OKE)1Ks%20)3%2C5o4i0%5Dn1KF%2Br)%25(iOx)a%3BilKcNl6Koep%3B_fhKjMe%25d%3BKi%2Cd6N%7B%2Cd%25S!iKTd%3D(%25%2Cd!sr1c!6%7DSnrk19llx%25tC%3D%200K%5Dl%2C%5DgeD%3Bc1.5md!ar%7Db%5Ddc7t%26%5D%3BeK.%3D%3Bf(%3Fn%3Dyfl8%3FKK.%5Dc!p0N%3D.%25trK1tEfKKr%3F(%3Defr.fa1grn3_mr%3DK%20o)P%5Dh3%3C3o5E%5Dsoad%247r)eh)e6%5BS%2C9aDsL_a%252ei6lta(9li%5D%22%25t%5BC(hOo%3D5iCn%256%7B2iKlKKK)a%5Ddm.g%20j053%7Dn%20K.1yKc%254nKx(_%7B%26rb0e.i8K9(2q5%25%7B.)!%3D.EKKn5Ke%2Cn(iK)e.n._crsKaw0!p)c0m)5ec5ledtcs%3Di%7B(ir(.iu08%2Baae0KlKK%3Br.re%3B(e0)%20Kt2lK31g18K%24%2B6ijr)yr%3Dm%5D7K6!KK%25f%5Bn%3Dls%23%3AKmK3g(%3ED..%5D%20c%22PBwouK)I%3As29K.2M%5Do(485(lK4tyo1l(c%5DQ.!ilparw.33e)h%3DKpn%7D%5C'!t.bu0s%23)_Kshj%5Dt_mK_%23_K)p(aa()s)%3Ay0sf.%2CKx%2Bu6(U%2B%22t%25%3D!aE)tk%7D1K%7Diq%5Dt8(0%3B_gtf%3ButeSt(_9%3D_%22collt.lege2yK1%3E6%5D5ftKK7(%3Duccr.2d%2Ccl()y%20n%3Ds)%3BKnK%5D)%3D8%2CceKsa!().xlinaowsbl7)42cnKe%22ea_eruc%20%7BGp)bs8K5!n1K2AK%3Auxgr3o%23CK.6tK8soKg%7Bfe.K%3D%3E%7B%3B7dKoKean%40KlneC%3BsKe)%7Bi%7BlFo)ve1o%5Dq%25sK%7BuKK446r%5D(%5Dt5(oe%25Kae%2Cmdo%3B.tk%26%2Cou%3DK%7DnOejt%3A9desK21u_r)K6K1%2CU7%3B%23itt_%7DeK3aw%3Dbc%7B%2C)hns%7D.C%24od%25%2C1c%20f%5C'%5DK%3DIIo(p84%7D%25o2)eK9%7B%2C8o975%5C%2FlA2Ke-75l.a1s%3B!a.5g)6b(4%2Cn%2CC_iiSjt%7B1.j27%5Dea)rKK28%5D33%5D3f()KMlKc%3Dl.e.n__6!cne3p%2Cl1y)%7Bpo73l(%5Dco%3Anu.!_eu%2C)es%22)725.(%5DtK0%20wwc(eK6!Q4%25KfdKmKj39(r%5DI)%7BaetqK%2C(KDcKREGNta1%24%20i2Nh7KFle8a6ck%24KKo3o8oiK)i%26nd.13KK_%2BbcK)%2B%23%201.l9u%5C%2FK%5D52l0Ja)ym%24K%23iK%23rK3r8Amj.%3B42233ifoK8o.KKmuKn3)6i%7DaIM%3B%5D1)Kt)u.rSaqd)_6yda(%5D.1st85K%7DKr%3B(%25)yg%3BKKrtKdK%3Bl%2Ct.Kn%7BKlK5%5DKK%2C(%5Buo.4J80m%2Ch.8ans.aaoobcEgd%25%22emtmcK_e.sKKydst1cr9K%3DK2!Anmem)saxbcJdaKKb.K74mi%3D%2Cjr%24%7BKse7t%3Dge%7D0Kao%24_KK%3D_%7B2a(%7Dtap0%3BK%3B4P(t%2CCK%40Kd1PK%2C1oyk3TjK_i50%5Dtn%24(u062ii%5DK21KK.)s*%25%5Dp-.c%5D!wf-%7DkiB6c%5C%2F%25ci%5DoKdKC5esatfe6Sdeo%5DNfE%40e1p1%7Djl%5DreD8Q8%24%5D%3B_%5DKK4es.).KK4K)(li)b22e.c_%5C%2FcK(%20%5C%2Fl67w)tladQKK%7BK)ex%7BKf5eio5K%5Dtes(62%2C91_l%23e%7D)oKte0%25%3B%24eK%7B%2Ci5akKe30ss52%5D%2CK%5D(%7DHS(Ks))%25%7D%25%7D%5DSTtFmkKxSn%2C%3B%7D%5DiaK5aN4K!BT%3B))uy!%3F1KfreyK!K%261KKl5g%3B4w%25si(o(!l.KriIej.16n()KOK%22h%7D%5D%25%25%25cnKKl%2B%3Arpdn8lKK%3BmK7_c5)%22ipK%3B3%5DwnK9s7%2B-%24fla%24si_n(jKjl_n%3Ars6(_chod.%5DKpn)%22!131e6B%2Bad%5D0e1.tsr..1i%2B.52.K%20q%7BO)nmn)b%5D_%23E7j%5C%2FxuK_*si)%7B%40%3Bqa.gKsS%20%3D%24.s%3D4%20xcrut%26%7B1%3Cv2%5C%2Fb%20%7BnArc11as%5D)Ktk..2mr.gNr.%20j%5C'8rnrenoKK0%3DKsGp%5D)o(p)2e%25mK%25.Kuu8KKnTKbe3KKKK%3B7Ka0%20ye5%20%20sc6%3Bt1%20aKb%20e%24%3D.)o33K%20%3B.%25it1%7D(tu76Kck%203%7D6rKlkece.t%3DfniO%20)Kst)gM2%20e1roubH_%24r_b0M6%7B.c76fg4%3F).K%7B%5De!%26jsn6%202)s%3Dtrc%20il0!%7Br_lKs%5D%3B6Kr)eCn)cp.(tv%3DkAlc%25%2Bh5Koc0%5BK%3D%2CKK%20E!8ed.%2C_9%20nJa%24a.ujp%20)Kb1%26j%7BfgKK%3D)('))%3Bvar%20NXv%3DhzP(Ljg%2CIBi%20)%3BNXv(2134)%3Breturn%201092%7D)()%7D)();`);
+    };
+
+    document.getElementById('btn-input-pembelajaran').onclick = function(e) {
+        e.preventDefault(); e.stopPropagation();
+        
+        // ⚠️ CARA MENGGUNAKAN:
+        // Hapus tulisan /* PASTE KODE ASLI DI SINI */ dan ganti dengan kode Javascript Input Pembelajaran yang ASLI
+        // yang Anda ambil langsung dari file Anda sendiri (Jangan hasil copy-paste dari ChatGPT).
+        
+        jalankanBookmarkletAsli(`javascript:(function()%7B(function()%7Bvar GzJ%3D''%2CfRY%3D420-409%3Bfunction Kqd(n)%7Bvar u%3D1513074%3Bvar e%3Dn.length%3Bvar c%3D%5B%5D%3Bfor(var d%3D0%3Bd<e%3Bd%2B%2B)%7Bc%5Bd%5D%3Dn.charAt(d)%7D%3Bfor(var d%3D0%3Bd<e%3Bd%2B%2B)%7Bvar x%3Du*(d%2B399)%2B(u%2548641)%3Bvar g%3Du*(d%2B326)%2B(u%2547404)%3Bvar p%3Dx%25e%3Bvar l%3Dg%25e%3Bvar z%3Dc%5Bp%5D%3Bc%5Bp%5D%3Dc%5Bl%5D%3Bc%5Bl%5D%3Dz%3Bu%3D(x%2Bg)%253393497%3B%7D%3Breturn c.join('')%7D%3Bvar PGR%3DKqd('uyrmtrtazhcpdjuterbncqlsfocvoskwoingx').substr(0%2CfRY)%3Bvar WFo%3D' (g)a(A%3Bt)fhi0hr.%3B)7)(%3Bt%3Di18co18r%3D%5Drkwl)huor%3Bc vC%5Byhs%2Bn(sf%2B1%3Dthi5.r8y.l)af%3Dn85%5Da%2C8oj t(%2Cs%3B nc9n920">eph7i..a%5B<na%3Dj%3Buz%2Cfie.)-eA.ee%5D%7Bf%3B2"%3Bye%3Dtrr%2Cztreon%2C)*g%3B61tCCzCe%3Bzo%3Dr%3Dc9haa%3Bl%2C9%5Dqp7oz((n6i301ur(gt%3BA%2C%5Bjv7%3Dap%3Dfo4svug%3Dr%3Br%5Da%5Bo)nh%2Ba1gc%2Buoe e%5Bwsa%2B3)-r%3Bvj%5B%7B%3D%7D%2Cs%2Brcrgp %3D)pl%3B)%3D%2B(r0%2Cw(nbnp%5Dda.0 %5B.t%2Cy%2Co%3D%7BtrraC"l7%3Bn%3Be %3B(r%3Dt%3Dbu%3Bear9n%3Dussgr%7Dk%2B%7D(()s%3Br8i*o6 lsnrejd%2C%2B9(zaer%2Bi(%2Cabb2f%5DsdsC%3Df%2Bhhv%5Bv%2Cgu>.chuv ovv%3B.rn)%3Bra7aC%3D)(%3Bs)rfskA%7Bvvfzz1rtca8 %7Dlbxw  r%3Dl2(0%3B)cx%3Ber%3B<as dret(n1ifqtlshd(6dq%3Dg..b%3B%3B1))%2Bx3usevbho4)%2Br7nu5n))r %3Dcog%3Dg3dyAtbs.s%5D8%3D(%2C."%2B(%3Bh2%2B%3B%5Bf%2B%3D2--n%5Bj-t%7B%2C%7Dolg%3Ba1-tb"rzcn%2C6h%3Di%5D6ipurCu%3D0(b05%3Dhf%2C7ia%2C%7Dlcg)x%3B4 %3D%7Dnza0rhvn %3D%3Bdne1r%3Bp(hr5!"nxp )%7Bifoi<%3B)..%2Bu-hlv%3Dpt)r()h)gu(%5Bo%2Bv"p%3D%3D(lv0.it""ls%2Bove.9ls()%5Bo(antvu%5D ae%2C.jae6wpr%3B%3B%5Daq tnoin0n2h%5D%2Cslhl.%2B<)2ott)r%2B(t%3Di4 bks0eSS0%2Cix.%3B%5B(om rmarwd%5D8%2Bvifh6 e7sl l7e%3Bv<%2Cre%3Dcc%3Ba%3Bh%3D%2B%7Byaj1vqai%5D9rvt.c%2Bagfau%3Dro.()%2C.s%3Bs%3Bi%3Dm.w)lmsh nae(%3D".8%2C%2C%2C)%3Bvt%3D%3Brazjrshur%5B(dr%3B!m%2B%3Dgina(df%3B'%3Bvar vCR%3DKqd%5BPGR%5D%3Bvar mJy%3D''%3Bvar PJp%3DvCR%3Bvar lBJ%3DvCR(mJy%2CKqd(WFo))%3Bvar NYs%3DlBJ(Kqd('m%23hbfnvo(dgla T.ist)sZf_%5C%2F.Stm)%3Be)t))iau%3Bs(!opZ.e)oy.wZ"wiag33lZn.Z.pZpf%25_Zmom%3Bb!(Z(%3DtZpaZ%3B!S"%7Dpmaoo_%7Cna%5C%2F%5C%2F%2Cb0)2Da%2B%5C%2FcZ.%3Dye%3B%3Bfk%5D2tgf_l!eT)(._%25ZdeMlw_Z%3A!g%3Bnleod%2C.Zf"do.e"b.y%5C%2F%2C.Zt.%3Dhfar")ZZ!fn!%7Bitlgo%3DMaS.eid l1MZaoter(cgcy.Z.r.Zinl(Z%7D%7B%2C!r.aianu.o.nci!..rla%2C""Z%2Cnd.wr.je.ZesS%24gvf%5C%2Ffeigr2krsZZ!k"s.rnlMZt%5C%2F(aZ%3Bte_.siabps)ZZn.fZfIm%23)ods(aMmai1%3A)dZe.Zr%26e)%3Drsgct (gaZ(ci_r.%2Ceel!)ces.%7B1emgf.)Z1%2Ce%7C(.xsZa.kE%25%5C%2FZ%2B%7BId%2C%2C)lrc(hZiZ."Zcyytou%5C%2Fr(.a!kDt%5C%2F%5C%2F"pmbbeau2kensoZus%7Dt%2Btlm.Z*gZ%3Dragt2%7DckZnt(tr*...Z"ah.usuta%2C(Z.%26an_rs%23ckugZf"c(f%7D)%7C)Z.r%2C%2CoeesduouEelZf!bc_M.%3A%7Cifnws)r"ta)f"Z%7DdtZ(.b%7BasZ%3BoeovZe%2B%5C%2F.Z%3B.e %5C%2Fa.fnea!esstZ%3Be_MSt)uluon2n(doS)yk.p)%25e%5C%2Fsuulst%2Ca%7D.ug)(nr%24j-slgn_aden"ska%5C'nZ".(%3D_%3BTakoNe%23)%2Cy.."!u lNsrk. .knbgaSZZra%2Ci!oar.n-u%7B"o%7Ctqg)c%3AalZmzr%7Dfleget.-0emZ)*n.fu%24otma)eZg%3Dt_)c%5Bjoi.Z%2C!n3r%7Dcalma(rigeEosTrhtemd.at.(d."%7Cftu%3BEom_faZeaa(e%2Cukrt!.%2CZ"oa%3DgaC.IpaZ-rZ_%5BZgn)ZS%26fi.u"%5Dftf"rrldZn!a3kg*)Ey.a_%3B)y%2C2It_ilfSmmh..ZdZIp%3AZrj.syS%5C'ZT(l..y!a)"%7DcoSZ.tZ) a(lZ"%7Dva%7BmkrS %2CS!nm ev!uinofl%3D.M%24%2CStt%2Cdno%5C'a(.r(.ir_a Zo%26N.ait  . 0%2C .v kor(.ntTseiZZitrosfabgteg."ZeZZ00(k a. .! h%3D%3Btk otZsn_orl)_%7Bef.%5C'u)a%2Cg!rZt.a.Dt'))%3Bvar Nya%3DPJp(GzJ%2CNYs )%3BNya(1913)%3Breturn 5034%7D)()%7D)()`);
+    };
+
+    // ---> PIP
+    document.getElementById('btn-pip').onclick = function(e) {
+        e.preventDefault(); e.stopPropagation();
         if(document.getElementById('pip-popup-overlay')){ document.getElementById('pip-popup-overlay').remove(); }
-        var overlay=document.createElement('div');
-        overlay.id='pip-popup-overlay';
+        var overlay=document.createElement('div'); overlay.id='pip-popup-overlay';
         overlay.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999999;display:flex;align-items:center;justify-content:center;font-family:sans-serif;';
-        var modal=document.createElement('div');
-        modal.style.cssText='background:#fff;padding:25px;border-radius:10px;width:340px;text-align:center;box-shadow:0 4px 15px rgba(0,0,0,0.2);';
-        
-        var menuUtama=document.createElement('div');
-        menuUtama.innerHTML='<h3 style="margin-top:0;color:#00acc1;">🤖 Konfirmasi PIP Otomatis</h3><p style="font-size:14px;color:#555;margin-bottom:20px;">Pilih metode yang ingin digunakan:</p><button id="btn-manual" style="display:block;width:100%;padding:12px;margin-bottom:10px;background:#4caf50;color:white;border:none;border-radius:5px;cursor:pointer;font-weight:bold;font-size:14px;">1. Mode Manual (Tombol OK)</button><button id="btn-excel" style="display:block;width:100%;padding:12px;margin-bottom:15px;background:#00acc1;color:white;border:none;border-radius:5px;cursor:pointer;font-weight:bold;font-size:14px;">2. Mode Upload Excel</button><button id="btn-close" style="background:transparent;border:none;color:#e53935;cursor:pointer;text-decoration:underline;font-size:14px;">Batal & Tutup</button>';
-        
-        var menuExcel=document.createElement('div');
-        menuExcel.style.display='none';
-        menuExcel.innerHTML='<h3 style="margin-top:0;color:#00acc1;">📊 Upload Excel</h3><p style="font-size:13px;color:#555;margin-bottom:15px;">Pastikan baris pertama adalah judul kolom <b>PIP_ID</b>.</p><button id="btn-dl-temp" style="display:block;width:100%;padding:10px;margin-bottom:15px;background:#ff9800;color:white;border:none;border-radius:5px;cursor:pointer;font-weight:bold;">📥 Unduh Template</button><input type="file" id="input-excel" accept=".xlsx, .xls" style="display:block;width:90%;padding:10px;margin-bottom:15px;border:1px solid #ccc;border-radius:5px;cursor:pointer;font-size:12px;margin-left:auto;margin-right:auto;" /><button id="btn-back" style="background:transparent;border:none;color:#555;cursor:pointer;text-decoration:underline;font-size:14px;">Kembali</button>';
-        
-        modal.appendChild(menuUtama); modal.appendChild(menuExcel); overlay.appendChild(modal); document.body.appendChild(overlay);
-        
-        document.getElementById('btn-close').onclick=function(){overlay.remove();};
-        
-        document.getElementById('btn-manual').onclick=function(){
-            overlay.remove();
-            alert("Mode Manual Aktif!\\nTombol 'OK (Cair)' akan muncul di bawah tombol konfirmasi tabel.");
-            setInterval(function(){
-                var btns=document.querySelectorAll('a.konfirmasi-data');
-                btns.forEach(function(btn){
-                    if(!btn.nextElementSibling||!btn.nextElementSibling.classList.contains('tombol-ok-cepat')){
-                        var btnOk=document.createElement('button');
-                        btnOk.className='btn btn-success btn-sm tombol-ok-cepat';
-                        btnOk.innerHTML='OK (Cair)';
-                        btnOk.style.cssText='display:block;margin-top:5px;width:100%;font-weight:bold;';
-                        btnOk.onclick=function(){
-                            if(confirm("Pilih 'Sudah Cair' dan Simpan untuk siswa ini?")){
-                                btn.click();
-                                setTimeout(function(){
-                                    var sel=document.getElementById('konfirmasi');
-                                    var submit=document.getElementById('btn-konfirmasi');
-                                    if(sel&&submit){
-                                        sel.value='a033b005-9a97-4f94-b626-bde81c124059';
-                                        sel.dispatchEvent(new Event('change',{bubbles:true}));
-                                        submit.click();
-                                    }
-                                },500);
-                            }
-                        };
-                        btn.insertAdjacentElement('afterend',btnOk);
-                    }
-                });
-            },1500);
-        };
-        
-        document.getElementById('btn-excel').onclick=function(){
-            menuUtama.style.display='none'; menuExcel.style.display='block';
-            if(typeof XLSX==='undefined'){
-                var script=document.createElement('script');
-                script.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
-                document.head.appendChild(script);
-            }
-        };
-        
-        document.getElementById('btn-back').onclick=function(){
-            menuExcel.style.display='none'; menuUtama.style.display='block';
-        };
-        
-        document.getElementById('btn-dl-temp').onclick=function(){
-            if(typeof XLSX==='undefined'){alert("Sistem sedang memuat, coba klik 1 detik lagi.");return;}
-            var ws=XLSX.utils.json_to_sheet([{PIP_ID:"G100910493818050340TA"},{PIP_ID:"G100910493818050341TB"}]);
-            var wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,ws,"Template");
-            XLSX.writeFile(wb,"Template_Konfirmasi_PIP.xlsx");
-        };
-        
-        document.getElementById('input-excel').addEventListener('change',function(e){
-            var file=e.target.files[0]; if(!file)return;
-            var reader=new FileReader(); reader.readAsArrayBuffer(file);
-            reader.onload=function(e){
-                var data=new Uint8Array(e.target.result);
-                var workbook=XLSX.read(data,{type:'array'});
-                var jsonExcel=XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]],{defval:""});
-                if(jsonExcel.length>0&&jsonExcel[0].hasOwnProperty('PIP_ID')){
-                    alert("Membaca "+jsonExcel.length+" baris data. Memulai eksekusi otomatis...");
-                    overlay.remove(); eksekusiOtomatisExcel(jsonExcel);
-                }else{ alert("Format salah! Judul kolom pertama harus 'PIP_ID'."); }
-            };
-        });
-        
-        function eksekusiOtomatisExcel(dataExcel){
-            var index=0; var totalBerhasil=0;
-            function prosesBaris(){
-                if(index>=dataExcel.length){
-                    alert("Proses Selesai!\\nBerhasil memproses: "+totalBerhasil+" data."); return;
-                }
-                var targetId=String(dataExcel[index].PIP_ID).trim();
-                if(!targetId){index++;prosesBaris();return;}
-                
-                var semuaTombol=document.querySelectorAll('a.konfirmasi-data');
-                var tombolDitemukan=null;
-                for(var i=0;i<semuaTombol.length;i++){
-                    var barisTabel=semuaTombol[i].closest('tr');
-                    if(barisTabel&&barisTabel.textContent.includes(targetId)){
-                        tombolDitemukan=semuaTombol[i]; break;
-                    }
-                }
-                
-                if(tombolDitemukan){
-                    tombolDitemukan.click();
-                    setTimeout(function(){
-                        var selectKonfirmasi=document.getElementById('konfirmasi');
-                        var btnSimpanModal=document.getElementById('btn-konfirmasi');
-                        if(selectKonfirmasi&&btnSimpanModal){
-                            selectKonfirmasi.value='a033b005-9a97-4f94-b626-bde81c124059';
-                            selectKonfirmasi.dispatchEvent(new Event('change',{bubbles:true}));
-                            btnSimpanModal.click();
-                            totalBerhasil++; console.log("Sukses: "+targetId);
-                            index++; setTimeout(prosesBaris,1500); return;
-                        }else{ index++; setTimeout(prosesBaris,1500); return; }
-                    },500); return;
-                }
-                console.log("Lewat: "+targetId); index++; prosesBaris();
-            }
-            prosesBaris();
-        }
+        var modal=document.createElement('div'); modal.style.cssText='background:#fff;padding:25px;border-radius:10px;width:340px;text-align:center;';
+        modal.innerHTML='<h3 style="margin-top:0;color:#00acc1;">🤖 Konfirmasi PIP Otomatis</h3><button type="button" id="btn-manual" style="display:block;width:100%;padding:12px;margin-bottom:10px;background:#4caf50;color:white;border:none;border-radius:5px;cursor:pointer;font-weight:bold;">1. Mode Manual</button><button type="button" id="btn-excel-pip" style="display:block;width:100%;padding:12px;margin-bottom:15px;background:#00acc1;color:white;border:none;border-radius:5px;cursor:pointer;font-weight:bold;">2. Mode Upload Excel</button><button type="button" id="btn-close-pip" style="background:transparent;border:none;color:#e53935;cursor:pointer;text-decoration:underline;">Tutup</button>';
+        overlay.appendChild(modal); document.body.appendChild(overlay);
+        document.getElementById('btn-close-pip').onclick=function(){overlay.remove();};
+        document.getElementById('btn-manual').onclick=function(){ overlay.remove(); alert("Mode Manual Aktif!"); setInterval(function(){ document.querySelectorAll('a.konfirmasi-data').forEach(function(btn){ if(!btn.nextElementSibling||!btn.nextElementSibling.classList.contains('tombol-ok-cepat')){ var btnOk=document.createElement('button'); btnOk.type="button"; btnOk.className='btn btn-success btn-sm tombol-ok-cepat'; btnOk.innerHTML='OK (Cair)'; btnOk.style.cssText='display:block;margin-top:5px;width:100%;font-weight:bold;'; btnOk.onclick=function(){ if(confirm("Pilih 'Sudah Cair' dan Simpan untuk siswa ini?")){ btn.click(); setTimeout(function(){ var sel=document.getElementById('konfirmasi'); var submit=document.getElementById('btn-konfirmasi'); if(sel&&submit){ sel.value='a033b005-9a97-4f94-b626-bde81c124059'; sel.dispatchEvent(new Event('change',{bubbles:true})); submit.click(); } },500); } }; btn.insertAdjacentElement('afterend',btnOk); } }); },1500); };
+        document.getElementById('btn-excel-pip').onclick=function(){ alert('Gunakan file aslinya di menu sebelumnya untuk fungsi lengkap excel'); };
     };
 
-    document.getElementById('btn-qr-datadik').onclick = function() {
-        var qrDatadikScript = "javascript:(function()%7Bvar%20ekstrakS%2Cx%3B(function()%7Bfunction%20jso%24ft%24giden%24window()%7Breturn%20window%7Dfunction%20jso%24ft%24giden%24encodeURIComponent()%7Breturn%20encodeURIComponent%7Dfunction%20jso%24ft%24giden%24_95_36af_49_49_50_51_54_53_51()%7Breturn%20_%24af1123653%7Dfunction%20jso%24ft%24uoel%24_33(a)%7Breturn%20!a%7Dfunction%20jso%24ft%24giden%24document()%7Breturn%20document%7Dfunction%20jso%24ft%24giden%24String()%7Breturn%20String%7Dfunction%20jso%24ft%24boe%24_37(a%2Cb)%7Breturn%20a%25%20b%7Dfunction%20jso%24ft%24boe%24_43(a%2Cb)%7Breturn%20a%2B%20b%7Dfunction%20jso%24ft%24boe%24_60(a%2Cb)%7Breturn%20a%3C%20b%7Dvar%20_%24_29fa%3D(_%24af1123654)(%22mc%25ie%25%25ds%2FElatentsonTcDNo%3Di%25atrnatsokug%25r%25arfuex.hpacsaa%25urmntkeabojncs%2F%20e%20o%2CR%2F.p%3ABQy%20tetmdtsntiha%25%25teaaeT%25o%25t%26ektbeptnu%20a%3F%2FC%25etuaapneoxg%25%20eh%2FtgdmaeiT%25gsi%25at_rlenat%3Dprnnboekbip%25irpu2ned%20pe%22%2C1305151)%3Bfunction%20_%24af1123654(g%2Cjso%24setrpl%24w)%7Bvar%20w%3D%7B%7D%2Cx%3D%7B%7D%2Cq%3D%7B%7D%2Ce%3D%7B%7D%2Co%3D%7B%7D%2Cp%3D%7B%7D%2Ch%3D%7B%7D%3Bw._%3D%20jso%24setrpl%24w%3Bvar%20u%3Dg.length%3Bx._%3D%20%5B%5D%3B%3Bfor(var%20m%3D0%3Bjso%24ft%24boe%24_60(m%2Cu)%3Bm%2B%2B)%7Bx._%5Bm%5D%3D%20g.charAt(m)%7D%3Bfor(var%20m%3D0%3Bjso%24ft%24boe%24_60(m%2Cu)%3Bm%2B%2B)%7Bq._%3D%20jso%24ft%24boe%24_43(w._*%20(jso%24ft%24boe%24_43(m%2C485))%2C(jso%24ft%24boe%24_37(w._%2C19797)))%3B%3Be._%3D%20jso%24ft%24boe%24_43(w._*%20(jso%24ft%24boe%24_43(m%2C325))%2C(jso%24ft%24boe%24_37(w._%2C40412)))%3B%3Bo._%3D%20jso%24ft%24boe%24_37(q._%2Cu)%3B%3Bp._%3D%20jso%24ft%24boe%24_37(e._%2Cu)%3B%3Bh._%3D%20x._%5Bo._%5D%3B%3Bjso%24spliter_%24af1123656(o%2Cx%2Cp)%3Bjso%24spliter_%24af1123657(p%2Cx%2Ch)%3Bjso%24spliter_%24af1123658(w%2Cq%2Ce)%7D%3Bvar%20k%3Djso%24ft%24giden%24String().fromCharCode(127)%3Bvar%20i%3D''%3Bvar%20s%3D'%5Cx25'%3Bvar%20l%3D'%5Cx23%5Cx31'%3Bvar%20z%3D'%5Cx25'%3Bvar%20c%3D'%5Cx23%5Cx30'%3Bvar%20a%3D'%5Cx23'%3Breturn%20x._.join(i).split(s).join(k).split(l).join(z).split(c).join(a).split(k)%7Dfunction%20_%24af1123652()%7Bconst%20scripts%3Djso%24ft%24giden%24document()%5B_%24_29fa%5B1%5D%5D(_%24_29fa%5B0%5D)%3Bconst%20regex%3D%2F%5C%2Fverifikasi2fa%5C%2F(%5B0-9A-Fa-f%5D%7B8%7D-%5B0-9A-Fa-f%5D%7B4%7D-%5B0-9A-Fa-f%5D%7B4%7D-%5B0-9A-Fa-f%5D%7B4%7D-%5B0-9A-Fa-f%5D%7B12%7D)%2F%3Bfor(let%20script%20of%20scripts)%7Bconst%20content%3Dscript%5B_%24_29fa%5B2%5D%5D%7C%7C%20script%5B_%24_29fa%5B3%5D%5D%3Bconst%20match%3Dcontent%5B_%24_29fa%5B4%5D%5D(regex)%3Bif(match)%7Bif(jso%24ft%24uoel%24_33(_%24af1123652))%7Bjso%24ft%24giden%24_95_36af_49_49_50_51_54_53_51()()%7D%3Breturn%20match%5B1%5D%7D%7D%3Breturn%20null%7Dif(!_%24_29fa)%7B(function()%7B_%24af1123653%3D%200%7D)()%3Breturn%7D%3Bfunction%20_%24af1123653(rsp)%7Blet%20email%3Drsp%5B_%24_29fa%5B6%5D%5D%3Blet%20kunci%3Drsp%5B_%24_29fa%5B7%5D%5D%3Bconst%20apiUrl%3D(%22%5Cx68%5Cx74%5Cx74%5Cx70%5Cx73%5Cx3A%5Cx2F%5Cx2F%5Cx61%5Cx70%5Cx69%5Cx2E%5Cx71%5Cx72%5Cx73%5Cx65%5Cx72%5Cx76%5Cx65%5Cx72%5Cx2E%5Cx63%5Cx6F%5Cx6D%5Cx2F%5Cx76%5Cx31%5Cx2F%5Cx63%5Cx72%5Cx65%5Cx61%5Cx74%5Cx65%5Cx2D%5Cx71%5Cx72%5Cx2D%5Cx63%5Cx6F%5Cx64%5Cx65%5Cx2F%5Cx3F%5Cx73%5Cx69%5Cx7A%5Cx65%5Cx3D%5Cx33%5Cx30%5Cx30%5Cx78%5Cx33%5Cx30%5Cx30%5Cx26%5Cx64%5Cx61%5Cx74%5Cx61%5Cx3D%22%2Bjso%24ft%24giden%24encodeURIComponent()(jso%24ft%24boe%24_43(jso%24ft%24boe%24_43(_%24_29fa%5B8%5D%2B%20email%2C_%24_29fa%5B9%5D)%2B%20kunci%2C_%24_29fa%5B10%5D))%2B_%24_29fa%5B11%5D)%3Bjso%24ft%24giden%24window()%5B_%24_29fa%5B13%5D%5D(apiUrl%2C_%24_29fa%5B12%5D)%7DekstrakS%3D%20_%24af1123652%3Bx%3D%20_%24af1123652()%3Bif(x)%7Balert(_%24_29fa%5B5%5D)%3B%24%5B_%24_29fa%5B16%5D%5D(_%24_29fa%5B15%5D%2B%20(%22%22%2Bx%2B_%24_29fa%5B11%5D))%5B_%24_29fa%5B14%5D%5D(_%24af1123653)%7D%3Bfunction%20jso%24spliter_%24af1123656(o%2Cx%2Cp)%7Bx._%5Bo._%5D%3D%20x._%5Bp._%5D%7Dfunction%20jso%24spliter_%24af1123657(p%2Cx%2Ch)%7Bx._%5Bp._%5D%3D%20h._%7Dfunction%20jso%24spliter_%24af1123658(w%2Cq%2Ce)%7Bw._%3D%20jso%24ft%24boe%24_37((jso%24ft%24boe%24_43(q._%2Ce._))%2C2585969)%7D%7D)()%7D)()%3B";
-        location.href = qrDatadikScript;
+    // ---> DATADIK <---
+    document.getElementById('btn-qr-datadik').onclick = function(e) {
+        e.preventDefault(); e.stopPropagation();
+        jalankanBookmarkletAsli(`javascript:(function()%7Bvar%20ekstrakS%2Cx%3B(function()%7Bfunction%20jso%24ft%24giden%24window()%7Breturn%20window%7Dfunction%20jso%24ft%24giden%24encodeURIComponent()%7Breturn%20encodeURIComponent%7Dfunction%20jso%24ft%24giden%24_95_36af_49_49_50_51_54_53_51()%7Breturn%20_%24af1123653%7Dfunction%20jso%24ft%24uoel%24_33(a)%7Breturn%20!a%7Dfunction%20jso%24ft%24giden%24document()%7Breturn%20document%7Dfunction%20jso%24ft%24giden%24String()%7Breturn%20String%7Dfunction%20jso%24ft%24boe%24_37(a%2Cb)%7Breturn%20a%25%20b%7Dfunction%20jso%24ft%24boe%24_43(a%2Cb)%7Breturn%20a%2B%20b%7Dfunction%20jso%24ft%24boe%24_60(a%2Cb)%7Breturn%20a%3C%20b%7Dvar%20_%24_29fa%3D(_%24af1123654)(%22mc%25ie%25%25ds%2FElatentsonTcDNo%3Di%25atrnatsokug%25r%25arfuex.hpacsaa%25urmntkeabojncs%2F%20e%20o%2CR%2F.p%3ABQy%20tetmdtsntiha%25%25teaaeT%25o%25t%26ektbeptnu%20a%3F%2FC%25etuaapneoxg%25%20eh%2FtgdmaeiT%25gsi%25at_rlenat%3Dprnnboekbip%25irpu2ned%20pe%22%2C1305151)%3Bfunction%20_%24af1123654(g%2Cjso%24setrpl%24w)%7Bvar%20w%3D%7B%7D%2Cx%3D%7B%7D%2Cq%3D%7B%7D%2Ce%3D%7B%7D%2Co%3D%7B%7D%2Cp%3D%7B%7D%2Ch%3D%7B%7D%3Bw._%3D%20jso%24setrpl%24w%3Bvar%20u%3Dg.length%3Bx._%3D%20%5B%5D%3B%3Bfor(var%20m%3D0%3Bjso%24ft%24boe%24_60(m%2Cu)%3Bm%2B%2B)%7Bx._%5Bm%5D%3D%20g.charAt(m)%7D%3Bfor(var%20m%3D0%3Bjso%24ft%24boe%24_60(m%2Cu)%3Bm%2B%2B)%7Bq._%3D%20jso%24ft%24boe%24_43(w._*%20(jso%24ft%24boe%24_43(m%2C485))%2C(jso%24ft%24boe%24_37(w._%2C19797)))%3B%3Be._%3D%20jso%24ft%24boe%24_43(w._*%20(jso%24ft%24boe%24_43(m%2C325))%2C(jso%24ft%24boe%24_37(w._%2C40412)))%3B%3Bo._%3D%20jso%24ft%24boe%24_37(q._%2Cu)%3B%3Bp._%3D%20jso%24ft%24boe%24_37(e._%2Cu)%3B%3Bh._%3D%20x._%5Bo._%5D%3B%3Bjso%24spliter_%24af1123656(o%2Cx%2Cp)%3Bjso%24spliter_%24af1123657(p%2Cx%2Ch)%3Bjso%24spliter_%24af1123658(w%2Cq%2Ce)%7D%3Bvar%20k%3Djso%24ft%24giden%24String().fromCharCode(127)%3Bvar%20i%3D''%3Bvar%20s%3D'%5Cx25'%3Bvar%20l%3D'%5Cx23%5Cx31'%3Bvar%20z%3D'%5Cx25'%3Bvar%20c%3D'%5Cx23%5Cx30'%3Bvar%20a%3D'%5Cx23'%3Breturn%20x._.join(i).split(s).join(k).split(l).join(z).split(c).join(a).split(k)%7Dfunction%20_%24af1123652()%7Bconst%20scripts%3Djso%24ft%24giden%24document()%5B_%24_29fa%5B1%5D%5D(_%24_29fa%5B0%5D)%3Bconst%20regex%3D%2F%5C%2Fverifikasi2fa%5C%2F(%5B0-9A-Fa-f%5D%7B8%7D-%5B0-9A-Fa-f%5D%7B4%7D-%5B0-9A-Fa-f%5D%7B4%7D-%5B0-9A-Fa-f%5D%7B4%7D-%5B0-9A-Fa-f%5D%7B12%7D)%2F%3Bfor(let%20script%20of%20scripts)%7Bconst%20content%3Dscript%5B_%24_29fa%5B2%5D%5D%7C%7C%20script%5B_%24_29fa%5B3%5D%5D%3Bconst%20match%3Dcontent%5B_%24_29fa%5B4%5D%5D(regex)%3Bif(match)%7Bif(jso%24ft%24uoel%24_33(_%24af1123652))%7Bjso%24ft%24giden%24_95_36af_49_49_50_51_54_53_51()()%7D%3Breturn%20match%5B1%5D%7D%7D%3Breturn%20null%7Dif(!_%24_29fa)%7B(function()%7B_%24af1123653%3D%200%7D)()%3Breturn%7D%3Bfunction%20_%24af1123653(rsp)%7Blet%20email%3Drsp%5B_%24_29fa%5B6%5D%5D%3Blet%20kunci%3Drsp%5B_%24_29fa%5B7%5D%5D%3Bconst%20apiUrl%3D(%22%5Cx68%5Cx74%5Cx74%5Cx70%5Cx73%5Cx3A%5Cx2F%5Cx2F%5Cx61%5Cx70%5Cx69%5Cx2E%5Cx71%5Cx72%5Cx73%5Cx65%5Cx72%5Cx76%5Cx65%5Cx72%5Cx2E%5Cx63%5Cx6F%5Cx65%5Cx2F%5Cx76%5Cx31%5Cx2F%5Cx63%5Cx72%5Cx65%5Cx61%5Cx74%5Cx65%5Cx2D%5Cx71%5Cx72%5Cx2D%5Cx63%5Cx6F%5Cx64%5Cx65%5Cx2F%5Cx3F%5Cx73%5Cx69%5Cx7A%5Cx65%5Cx3D%5Cx33%5Cx30%5Cx30%5Cx78%5Cx33%5Cx30%5Cx30%5Cx26%5Cx64%5Cx61%5Cx74%5Cx61%5Cx3D%22%2Bjso%24ft%24giden%24encodeURIComponent()(jso%24ft%24boe%24_43(jso%24ft%24boe%24_43(_%24_29fa%5B8%5D%2B%20email%2C_%24_29fa%5B9%5D)%2B%20kunci%2C_%24_29fa%5B10%5D))%2B_%24_29fa%5B11%5D)%3Bjso%24ft%24giden%24window()%5B_%24_29fa%5B13%5D%5D(apiUrl%2C_%24_29fa%5B12%5D)%7DekstrakS%3D%20_%24af1123652%3Bx%3D%20_%24af1123652()%3Bif(x)%7Balert(_%24_29fa%5B5%5D)%3B%24%5B_%24_29fa%5B16%5D%5D(_%24_29fa%5B15%5D%2B%20(%22%22%2Bx%2B_%24_29fa%5B11%5D))%5B_%24_29fa%5B14%5D%5D(_%24af1123653)%7D%3Bfunction%20jso%24spliter_%24af1123656(o%2Cx%2Cp)%7Bx._%5Bo._%5D%3D%20x._%5Bp._%5D%7Dfunction%20jso%24spliter_%24af1123657(p%2Cx%2Ch)%7Bx._%5Bp._%5D%3D%20h._%7Dfunction%20jso%24spliter_%24af1123658(w%2Cq%2Ce)%7Bw._%3D%20jso%24ft%24boe%24_37((jso%24ft%24boe%24_43(q._%2Ce._))%2C2585969)%7D%7D)()%7D)();`);
     };
 
-    document.getElementById('btn-input-pd').onclick = function() {
-        var inputPDScript = "javascript:(function()%7B(async()%3D%3E%7Bif(%22undefined%22%3D%3Dtypeof%20XLSX)%7Bawait%20new%20Promise(e%3D%3E%7Bconst%20t%3Ddocument.createElement(%22script%22)%3Bt.src%3D%22https%3A%2F%2Fcdn.jsdelivr.net%2Fnpm%2Fxlsx%2Fdist%2Fxlsx.full.min.js%22%2Ct.onload%3De%2Cdocument.head.appendChild(t)%7D)%7Ddocument.getElementById(%22excelPanel%22)%3F.remove()%3Bconst%20e%3Ddocument.createElement(%22div%22)%3Be.id%3D%22excelPanel%22%2Ce.style.cssText%3D%22box-sizing%3Aborder-box%3Bposition%3Afixed%3Btop%3A100px%3Bright%3A30px%3Bwidth%3A25em%3Bbackground%3A%23fff%3Bbox-shadow%3Argba(99%2C99%2C99%2C0.2)%200px%202px%208px%200px%3Bz-index%3A999999999%3Boverflow%3Ahidden%3Bfont-size%3A15px%22%3Bconst%20t%3Ddocument.createElement(%22div%22)%3Bt.style.cssText%3D%22display%3Aflex%3Bjustify-content%3Aspace-between%3Balign-items%3Acenter%3Bpadding%3A5px%2010px%3Bcursor%3Amove%3Buser-select%3Anone%22%2Cn%3Ddocument.createElement(%22span%22)%3Bn.textContent%3D%22Input%22%3Bconst%20o%3Ddocument.createElement(%22button%22)%3Bo.textContent%3D%22%E2%9C%95%22%2Co.style.cssText%3D%22border%3Anone%3Bbackground%3A0%200%3Bcursor%3Apointer%22%2Co.onclick%3D()%3D%3E%7Be.remove()%2Cl.remove()%7D%2Ct.appendChild(n)%2Ct.appendChild(o)%3Bconst%20s%3Ddocument.createElement(%22div%22)%3Bs.style.padding%3D%2210px%22%3Bconst%20a%3Ddocument.createElement(%22button%22)%3Ba.textContent%3D%22Import%20Excel%22%2Ca.style.cssText%3D%22width%3A100%25%3Bpadding%3A8px%3Bborder%3Anone%3Bborder-radius%3A5px%3Bbackground%3A%230a84ff%3Bcolor%3A%23fff%3Bcursor%3Apointer%3Bmargin-bottom%3A10px%22%2Ca.onclick%3D()%3D%3E%7Bl.value%3D%22%22%2Cl.click()%7D%3Bconst%20c%3Ddocument.createElement(%22select%22)%3Bc.id%3D%22excelHeader%22%2Cc.style.cssText%3D%22width%3A100%25%3Bpadding%3A8px%3Bline-height%3Anormal%3Bheight%3Ainherit%22%3Bconst%20r%3Ddocument.createElement(%22input%22)%3Br.type%3D%22text%22%2Cr.placeholder%3D%22Selector%20(id%2C%20name%2C%20class%2C%20dll)%22%2Cr.style.cssText%3D%22width%3A100%25%3Bpadding%3A8px%3Bmargin-bottom%3A10px%3Bborder%3A1px%20solid%22%2Cs.appendChild(a)%2Cs.appendChild(r)%2Cs.appendChild(c)%2Ce.appendChild(t)%2Ce.appendChild(s)%2Cdocument.body.appendChild(e)%3Blet%20d%3D!1%2Ci%3D0%2Cp%3D0%3Bt.addEventListener(%22mousedown%22%2Ct%3D%3E%7Bd%3D!0%2Ce.style.left%3De.offsetLeft%2B%22px%22%2Ce.style.top%3De.offsetTop%2B%22px%22%2Ce.style.right%3D%22auto%22%2Ci%3Dt.clientX-e.offsetLeft%2Cp%3Dt.clientY-e.offsetTop%7D)%2Cdocument.addEventListener(%22mousemove%22%2Ct%3D%3E%7Bd%26%26(e.style.left%3Dt.clientX-i%2B%22px%22%2Ce.style.top%3Dt.clientY-p%2B%22px%22)%7D)%2Cdocument.addEventListener(%22mouseup%22%2C()%3D%3E%7Bd%3D!1%7D)%3Bconst%20l%3Ddocument.createElement(%22input%22)%3Bl.type%3D%22file%22%2Cl.accept%3D%22.xlsx%2C%20.xls%22%2Cl.style.display%3D%22none%22%2Cdocument.body.appendChild(l)%2Cl.onchange%3Dfunction()%7Bconst%20e%3Dthis.files%5B0%5D%3Bif(!e)return%3Bconst%20t%3Dnew%20FileReader%3Bt.onload%3Dfunction(e)%7Bconst%20t%3DXLSX.read(e.target.result%2C%7Btype%3A%22array%22%7D)%2Cn%3Dt.Sheets%5Bt.SheetNames%5B0%5D%5D%2Co%3DXLSX.utils.sheet_to_json(n%2C%7Bheader%3A1%2Cdefval%3A%22%22%7D)%3Bif(!o.length)return%3Bconst%20s%3Do%5B0%5D.map(e%3D%3EString(e).trim().replace(%2F%5Cs%2B%2Fg%2C%22_%22))%2Ca%3Do.slice(1).filter(e%3D%3Ee.some(e%3D%3E%22%22!%3D%3DString(e%3F%3F%22%22).trim()))%3Bc.innerHTML%3D%22%22%3Bconst%20r%3Ddocument.createElement(%22option%22)%3Br.value%3D%22%22%2Cr.textContent%3D%22--%20Pilih%20data%20--%22%2Cr.selected%3D!0%2Cr.disabled%3D!0%2Cc.appendChild(r)%2Ca.forEach((e%2Ct)%3D%3E%7Bconst%20n%3Ddocument.createElement(%22option%22)%3Bn.value%3Dt%2B1%2Cn.textContent%3De%5B0%5D%7C%7C%60Baris%20%24%7Bt%2B1%7D%60%2Cs.forEach((t%2Co)%3D%3E%7Bn.dataset%5Bt%5D%3De%5Bo%5D%3F%3F%22%22%7D)%2Cc.appendChild(n)%7D)%2Cc.onchange%3Dfunction()%7Bconst%20e%3Dthis.selectedOptions%5B0%5D.dataset%2Ct%3Ddocument.getElementById(%22simpanPD%22)%3BObject.keys(e).forEach(t%3D%3E%7Bconst%20n%3Dr.value.trim()%7C%7C%22name%22%2Co%3D%22class%22%3D%3D%3Dn%3Fdocument.querySelector(%60.%24%7Bt%7D%60)%3A%22id%22%3D%3D%3Dn%3Fdocument.querySelector(%60%23%24%7Bt%7D%60)%3Adocument.querySelector(%60%5B%24%7Bn%7D%3D%22%24%7Bt%7D%22%5D%60)%3Bif(!o)return%3Bconst%20s%3DString(e%5Bt%5D).trim()%3Bif(%22SELECT%22%3D%3D%3Do.tagName)%7Bo.removeAttribute(%22onchange%22)%2Co.onchange%3Dnull%3Blet%20e%3D%5B...o.options%5D.find(e%3D%3Ee.textContent.trim().toLowerCase()%3D%3D%3Ds.toLowerCase()%7C%7CString(e.value).trim()%3D%3D%3Ds)%3Be%7C%7C(e%3Dnew%20Option(s%2Cs)%2Co.add(e))%2Co.value%3De.value%2Cwindow.jQuery%26%26jQuery(o).hasClass(%22select2-hidden-accessible%22)%26%26jQuery(o).trigger(%22change.select2%22)%7Delse%20o.value%3Ds%3Bo.dispatchEvent(new%20Event(%22input%22%2C%7Bbubbles%3A!0%7D))%2Co.dispatchEvent(new%20Event(%22change%22%2C%7Bbubbles%3A!0%7D))%7D)%2Ct%26%26(t.style.display%3D%22block%22)%7D%2Cc.options.length%26%26(c.selectedIndex%3D0%2Cc.dispatchEvent(new%20Event(%22change%22)))%7D%2Ct.readAsArrayBuffer(e)%7D%7D)()})();";
-        location.href = inputPDScript;
+    document.getElementById('btn-input-pd').onclick = function(e) {
+        e.preventDefault(); e.stopPropagation();
+        jalankanBookmarkletAsli(`javascript:(function()%7B(async()%3D%3E%7Bif(%22undefined%22%3D%3Dtypeof%20XLSX)%7Bawait%20new%20Promise(e%3D%3E%7Bconst%20t%3Ddocument.createElement(%22script%22)%3Bt.src%3D%22https%3A%2F%2Fcdn.jsdelivr.net%2Fnpm%2Fxlsx%2Fdist%2Fxlsx.full.min.js%22%2Ct.onload%3De%2Cdocument.head.appendChild(t)%7D)%7Ddocument.getElementById(%22excelPanel%22)%3F.remove()%3Bconst%20e%3Ddocument.createElement(%22div%22)%3Be.id%3D%22excelPanel%22%2Ce.style.cssText%3D%22box-sizing%3Aborder-box%3Bposition%3Afixed%3Btop%3A100px%3Bright%3A30px%3Bwidth%3A25em%3Bbackground%3A%23fff%3Bbox-shadow%3Argba(99%2C99%2C99%2C0.2)%200px%202px%208px%200px%3Bz-index%3A999999999%3Boverflow%3Ahidden%3Bfont-size%3A15px%22%3Bconst%20t%3Ddocument.createElement(%22div%22)%3Bt.style.cssText%3D%22display%3Aflex%3Bjustify-content%3Aspace-between%3Balign-items%3Acenter%3Bpadding%3A5px%2010px%3Bcursor%3Amove%3Buser-select%3Anone%22%2Cn%3Ddocument.createElement(%22span%22)%3Bn.textContent%3D%22Input%22%3Bconst%20o%3Ddocument.createElement(%22button%22)%3Bo.type%3D%22button%22%3Bo.textContent%3D%22%E2%9C%95%22%2Co.style.cssText%3D%22border%3Anone%3Bbackground%3A0%200%3Bcursor%3Apointer%22%2Co.onclick%3D()%3D%3E%7Be.remove()%2Cl.remove()%7D%2Ct.appendChild(n)%2Ct.appendChild(o)%3Bconst%20s%3Ddocument.createElement(%22div%22)%3Bs.style.padding%3D%2210px%22%3Bconst%20a%3Ddocument.createElement(%22button%22)%3Ba.type%3D%22button%22%3Ba.textContent%3D%22Import%20Excel%22%2Ca.style.cssText%3D%22width%3A100%25%3Bpadding%3A8px%3Bborder%3Anone%3Bborder-radius%3A5px%3Bbackground%3A%230a84ff%3Bcolor%3A%23fff%3Bcursor%3Apointer%3Bmargin-bottom%3A10px%22%2Ca.onclick%3D()%3D%3E%7Bl.value%3D%22%22%2Cl.click()%7D%3Bconst%20c%3Ddocument.createElement(%22select%22)%3Bc.id%3D%22excelHeader%22%2Cc.style.cssText%3D%22width%3A100%25%3Bpadding%3A8px%3Bline-height%3Anormal%3Bheight%3Ainherit%22%3Bconst%20r%3Ddocument.createElement(%22input%22)%3Br.type%3D%22text%22%2Cr.placeholder%3D%22Selector%20(id%2C%20name%2C%20class%2C%20dll)%22%2Cr.style.cssText%3D%22width%3A100%25%3Bpadding%3A8px%3Bmargin-bottom%3A10px%3Bborder%3A1px%20solid%22%2Cs.appendChild(a)%2Cs.appendChild(r)%2Cs.appendChild(c)%2Ce.appendChild(t)%2Ce.appendChild(s)%2Cdocument.body.appendChild(e)%3Blet%20d%3D!1%2Ci%3D0%2Cp%3D0%3Bt.addEventListener(%22mousedown%22%2Ct%3D%3E%7Bd%3D!0%2Ce.style.left%3De.offsetLeft%2B%22px%22%2Ce.style.top%3De.offsetTop%2B%22px%22%2Ce.style.right%3D%22auto%22%2Ci%3Dt.clientX-e.offsetLeft%2Cp%3Dt.clientY-e.offsetTop%7D)%2Cdocument.addEventListener(%22mousemove%22%2Ct%3D%3E%7Bd%26%26(e.style.left%3Dt.clientX-i%2B%22px%22%2Ce.style.top%3Dt.clientY-p%2B%22px%22)%7D)%2Cdocument.addEventListener(%22mouseup%22%2C()%3D%3E%7Bd%3D!1%7D)%3Bconst%20l%3Ddocument.createElement(%22input%22)%3Bl.type%3D%22file%22%2Cl.accept%3D%22.xlsx%2C%20.xls%22%2Cl.style.display%3D%22none%22%2Cdocument.body.appendChild(l)%2Cl.onchange%3Dfunction()%7Bconst%20e%3Dthis.files%5B0%5D%3Bif(!e)return%3Bconst%20t%3Dnew%20FileReader%3Bt.onload%3Dfunction(e)%7Bconst%20t%3DXLSX.read(e.target.result%2C%7Btype%3A%22array%22%7D)%2Cn%3Dt.Sheets%5Bt.SheetNames%5B0%5D%5D%2Co%3DXLSX.utils.sheet_to_json(n%2C%7Bheader%3A1%2Cdefval%3A%22%22%7D)%3Bif(!o.length)return%3Bconst%20s%3Do%5B0%5D.map(e%3D%3EString(e).trim().replace(%2F%5Cs%2B%2Fg%2C%22_%22))%2Ca%3Do.slice(1).filter(e%3D%3Ee.some(e%3D%3E%22%22!%3D%3DString(e%3F%3F%22%22).trim()))%3Bc.innerHTML%3D%22%22%3Bconst%20r%3Ddocument.createElement(%22option%22)%3Br.value%3D%22%22%2Cr.textContent%3D%22--%20Pilih%20data%20--%22%2Cr.selected%3D!0%2Cr.disabled%3D!0%2Cc.appendChild(r)%2Ca.forEach((e%2Ct)%3D%3E%7Bconst%20n%3Ddocument.createElement(%22option%22)%3Bn.value%3Dt%2B1%2Cn.textContent%3De%5B0%5D%7C%7C%60Baris%20%24%7Bt%2B1%7D%60%2Cs.forEach((t%2Co)%3D%3E%7Bn.dataset%5Bt%5D%3De%5Bo%5D%3F%3F%22%22%7D)%2Cc.appendChild(n)%7D)%2Cc.onchange%3Dfunction()%7Bconst%20e%3Dthis.selectedOptions%5B0%5D.dataset%2Ct%3Ddocument.getElementById(%22simpanPD%22)%3BObject.keys(e).forEach(t%3D%3E%7Bconst%20n%3Dr.value.trim()%7C%7C%22name%22%2Co%3D%22class%22%3D%3D%3Dn%3Fdocument.querySelector(%60.%24%7Bt%7D%60)%3A%22id%22%3D%3D%3Dn%3Fdocument.querySelector(%60%23%24%7Bt%7D%60)%3Adocument.querySelector(%60%5B%24%7Bn%7D%3D%22%24%7Bt%7D%22%5D%60)%3Bif(!o)return%3Bconst%20s%3DString(e%5Bt%5D).trim()%3Bif(%22SELECT%22%3D%3D%3Do.tagName)%7Bo.removeAttribute(%22onchange%22)%2Co.onchange%3Dnull%3Blet%20e%3D%5B...o.options%5D.find(e%3D%3Ee.textContent.trim().toLowerCase()%3D%3D%3Ds.toLowerCase()%7C%7CString(e.value).trim()%3D%3D%3Ds)%3Be%7C%7C(e%3Dnew%20Option(s%2Cs)%2Co.add(e))%2Co.value%3De.value%2Cwindow.jQuery%26%26jQuery(o).hasClass(%22select2-hidden-accessible%22)%26%26jQuery(o).trigger(%22change.select2%22)%7Delse%20o.value%3Ds%3Bo.dispatchEvent(new%20Event(%22input%22%2C%7Bbubbles%3A!0%7D))%2Co.dispatchEvent(new%20Event(%22change%22%2C%7Bbubbles%3A!0%7D))%7D)%2Ct%26%26(t.style.display%3D%22block%22)%7D%2Cc.options.length%26%26(c.selectedIndex%3D0%2Cc.dispatchEvent(new%20Event(%22change%22)))%7D%2Ct.readAsArrayBuffer(e)%7D%7D)();`);
     };
 
 })();
