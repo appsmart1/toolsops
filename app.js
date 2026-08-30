@@ -157,7 +157,7 @@
     document.getElementById('btn-ruang').onclick = function(e) {
         e.preventDefault(); e.stopPropagation();
         var pass = prompt("Masukkan Password untuk mengakses Edit Ruang:");
-        if (pass === "OPS123") {
+        if (pass === "IBNU123") {
             try {
                 var spans = document.querySelectorAll('.x-btn-inner');
                 var pos = {'Tambah':'160px', 'Ubah':'259px', 'Simpan':'340px', 'Hapus':'435px', 'Kondisi Ruang (2026/2027)':'522px'};
