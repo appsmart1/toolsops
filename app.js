@@ -64,6 +64,7 @@
                     <button type="button" class="inj-action-btn btn-ruang-special" id="btn-ruang">🔒 Edit Ruang</button>
                     <button type="button" class="inj-action-btn" id="btn-tambah-bangunan">🏗️ Tambah Bangunan</button>
                     <button type="button" class="inj-action-btn" id="btn-pindah-rombel">🔄 Pindah Rombel</button>
+                    <button type="button" class="inj-action-btn" id="btn-ubah-jenis-pendaftaran">📝 Ubah Jenis Pendaftaran</button>
                     <button type="button" class="inj-action-btn" id="btn-lanjut-rombel">➡️ Lanjut Rombel (SMT 2)</button>
                     <button type="button" class="inj-action-btn" id="btn-input-pembelajaran">📘 Input Pembelajaran</button>
                 </div>
@@ -516,6 +517,265 @@
                 };
             };
         })();
+    };
+
+    // ==========================================
+    // UBAH JENIS PENDAFTARAN (ANGGOTA ROMBEL AKTIF)
+    // Berbeda dari Pindah Rombel: hanya jenis_pendaftaran_id
+    // yang berubah; rombongan_belajar_id dipertahankan.
+    // ==========================================
+    document.getElementById('btn-ubah-jenis-pendaftaran').onclick = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (!window.Ext || !Ext.Ajax || typeof Ext.getCmp !== 'function') {
+            alert('Buka aplikasi Dapodik terlebih dahulu. Komponen Ext JS tidak ditemukan.');
+            return;
+        }
+
+        // Gunakan kelas yang sudah tersedia pada halaman Rombongan Belajar.
+        const gridElement = document.querySelector('[id^="rombonganbelajargrid-"]');
+        const gridRombel = Ext.getCmp('rombonganbelajargrid-1015') ||
+            (gridElement ? Ext.getCmp(gridElement.id) : null);
+        if (!gridRombel || !gridRombel.getStore) {
+            alert("Buka menu 'Rombongan Belajar' terlebih dahulu, kemudian jalankan fitur ini.");
+            return;
+        }
+        const storeRombel = gridRombel.getStore();
+        if (!storeRombel || storeRombel.getCount() === 0) {
+            alert('Daftar rombel masih kosong atau belum selesai dimuat.');
+            return;
+        }
+
+        const OLD = document.getElementById('modal-ubah-jenis-pro');
+        if (OLD) OLD.remove();
+
+        const popup = document.createElement('div');
+        popup.id = 'modal-ubah-jenis-pro';
+        popup.style.cssText = 'position:fixed;inset:0;z-index:2147483646;background:rgba(15,23,42,.65);display:flex;align-items:center;justify-content:center;padding:14px;box-sizing:border-box;font-family:Segoe UI,Tahoma,Arial,sans-serif';
+        popup.innerHTML = `
+            <div role="dialog" aria-modal="true" aria-labelledby="ujp-title" style="background:#fff;width:500px;max-width:100%;max-height:92vh;overflow-y:auto;padding:25px;border-radius:12px;box-shadow:0 15px 50px #0005;color:#1e293b;box-sizing:border-box">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;border-bottom:2px solid #0ea5e9;padding-bottom:12px;margin-bottom:14px">
+                    <h2 id="ujp-title" style="font-size:18px;font-weight:700;margin:0;color:#0f172a">📝 Ubah Jenis Pendaftaran</h2>
+                    <button type="button" id="ujp-tutup-x" aria-label="Tutup" style="border:0;background:#eef2f7;color:#334155;border-radius:7px;padding:6px 10px;cursor:pointer">✕</button>
+                </div>
+                <p style="font-size:12px;line-height:1.5;color:#64748b;margin:0 0 14px">
+                    Hanya untuk <b>siswa yang sudah terdaftar dalam rombel</b>. Fitur ini tidak memindahkan siswa ke kelas lain.
+                </p>
+                <div id="ujp-notif" role="status" aria-live="polite" style="display:none;border-radius:6px;padding:10px 12px;font-size:12px;line-height:1.5;margin-bottom:12px;white-space:pre-wrap"></div>
+                <label for="ujp-rombel" style="display:block;font-size:13px;font-weight:700;margin:12px 0 6px">1. Pilih Rombel</label>
+                <select id="ujp-rombel" style="width:100%;box-sizing:border-box;background:#fff;border:1px solid #cbd5e1;border-radius:7px;padding:10px;color:#0f172a"><option value="">-- Pilih Rombel --</option></select>
+                <label for="ujp-siswa" style="display:block;font-size:13px;font-weight:700;margin:14px 0 6px">2. Pilih Siswa yang Sudah Masuk Rombel</label>
+                <select id="ujp-siswa" disabled style="width:100%;box-sizing:border-box;background:#f8fafc;border:1px solid #cbd5e1;border-radius:7px;padding:10px;color:#0f172a"><option value="">-- Pilih Rombel Terlebih Dahulu --</option></select>
+                <div id="ujp-lama" style="font-size:12px;color:#475569;margin:10px 0;padding:10px;background:#f1f5f9;border-radius:7px">Jenis pendaftaran saat ini: -</div>
+                <label for="ujp-baru" style="display:block;font-size:13px;font-weight:700;margin:14px 0 6px">3. Jenis Pendaftaran Baru</label>
+                <select id="ujp-baru" disabled style="width:100%;box-sizing:border-box;background:#f8fafc;border:1px solid #cbd5e1;border-radius:7px;padding:10px;color:#0f172a">
+                    <option value="">-- Pilih Jenis Pendaftaran --</option>
+                    <option value="4">Naik Kelas</option>
+                    <option value="1">Siswa Baru</option>
+                    <option value="2">Pindahan</option>
+                    <option value="3">Kembali Bersekolah</option>
+                </select>
+                <div style="display:flex;gap:9px;margin-top:24px">
+                    <button type="button" id="ujp-batal" style="flex:1;background:#f1f5f9;color:#475569;border:1px solid #cbd5e1;border-radius:7px;padding:11px;cursor:pointer;font-weight:600">Batal</button>
+                    <button type="button" id="ujp-simpan" disabled style="flex:1;background:#059669;color:#fff;border:0;border-radius:7px;padding:11px;cursor:pointer;font-weight:700">Simpan Perubahan</button>
+                </div>
+            </div>`;
+        document.body.appendChild(popup);
+        popup.addEventListener('mousedown', function(evt) { evt.stopPropagation(); });
+        popup.addEventListener('click', function(evt) { evt.stopPropagation(); });
+
+        const byId = id => popup.querySelector('#' + id);
+        const rombel = byId('ujp-rombel');
+        const siswa = byId('ujp-siswa');
+        const baru = byId('ujp-baru');
+        const btnSimpan = byId('ujp-simpan');
+        const names = { '1': 'Siswa Baru', '2': 'Pindahan', '3': 'Kembali Bersekolah', '4': 'Naik Kelas' };
+        let dataSiswa = [];
+        let aktif = null;
+        let sedangMenyimpan = false;
+        let nomorPermintaan = 0;
+
+        function info(pesan, error) {
+            const notif = byId('ujp-notif');
+            notif.style.display = 'block';
+            notif.style.background = error ? '#fef2f2' : '#eff6ff';
+            notif.style.border = '1px solid ' + (error ? '#fecaca' : '#bfdbfe');
+            notif.style.color = error ? '#991b1b' : '#1d4ed8';
+            notif.textContent = pesan;
+        }
+        function labelSiswa(s) {
+            return String(s.peserta_didik_id_str || s.nama || s.nama_peserta_didik || s.nama_siswa || 'Tanpa Nama');
+        }
+        function idAnggota(s) {
+            return String(s.anggota_rombel_id || s.id || '');
+        }
+        function jenisSekarang(s) {
+            const id = s.jenis_pendaftaran_id;
+            return names[String(id)] || s.jenis_pendaftaran_id_str || s.jenis_pendaftaran || ('ID: ' + String(id ?? 'tidak diketahui'));
+        }
+        function resetSiswa(teks) {
+            dataSiswa = [];
+            aktif = null;
+            siswa.replaceChildren(new Option(teks, ''));
+            siswa.disabled = true;
+            baru.value = '';
+            baru.disabled = true;
+            byId('ujp-lama').textContent = 'Jenis pendaftaran saat ini: -';
+            btnSimpan.disabled = true;
+        }
+        function isiSiswa(data, pilihanId) {
+            dataSiswa = data.filter(s => !!idAnggota(s));
+            siswa.replaceChildren(new Option('-- Pilih Nama Siswa --', ''));
+            dataSiswa.forEach(s => {
+                const label = labelSiswa(s) + (s.nisn ? ' — ' + String(s.nisn) : '');
+                siswa.add(new Option(label, idAnggota(s)));
+            });
+            siswa.disabled = dataSiswa.length === 0;
+            if (!dataSiswa.length) {
+                resetSiswa('(Tidak ada anggota rombel yang ditemukan)');
+                info('Rombel ini tidak memuat anggota yang dapat dipilih.', true);
+                return;
+            }
+            if (pilihanId && dataSiswa.some(s => idAnggota(s) === String(pilihanId))) siswa.value = String(pilihanId);
+            pilihSiswa();
+        }
+        function daftarDariRespon(response) {
+            const json = Ext.decode(response.responseText);
+            if (Array.isArray(json)) return json;
+            if (json && json.success === false) throw new Error(json.message || 'Server menolak membaca daftar siswa.');
+            const rows = json && (json.rows || json.data);
+            if (!Array.isArray(rows)) throw new Error('Format daftar siswa dari server tidak dikenali.');
+            return rows;
+        }
+        function muatSiswa(pilihanId, jenisVerifikasi) {
+            const rombelId = String(rombel.value);
+            const token = ++nomorPermintaan;
+            if (!rombelId) { resetSiswa('-- Pilih Rombel Terlebih Dahulu --'); return; }
+            if (jenisVerifikasi === undefined) resetSiswa('⏳ Memuat siswa yang sudah masuk rombel...');
+            info(jenisVerifikasi === undefined ? 'Mengambil data anggota rombel dari Dapodik...' : 'Mengecek ulang hasil simpan ke server...', false);
+            Ext.Ajax.request({
+                url: '/rest/AnggotaRombel?rombongan_belajar_id=' + encodeURIComponent(rombelId) + '&page=1&start=0&limit=150',
+                method: 'GET',
+                disableCaching: true,
+                success: function(response) {
+                    if (token !== nomorPermintaan || !popup.isConnected) return;
+                    try {
+                        let list = daftarDariRespon(response);
+                        // Cegah memilih data anggota dari rombel lain jika field rombel dikirim server.
+                        list = list.filter(s => !s.rombongan_belajar_id || String(s.rombongan_belajar_id) === rombelId);
+                        isiSiswa(list, pilihanId);
+                        if (jenisVerifikasi !== undefined) {
+                            const periksa = list.find(s => idAnggota(s) === String(pilihanId));
+                            if (periksa && String(periksa.jenis_pendaftaran_id) === String(jenisVerifikasi)) {
+                                info('✓ TERVERIFIKASI: Jenis pendaftaran berhasil diperbarui di data anggota rombel.', false);
+                                try { storeRombel.reload(); } catch (_) {}
+                            } else {
+                                info('Permintaan simpan telah dikirim, tetapi hasil perubahan belum terverifikasi. Segarkan halaman dan periksa kembali jenis pendaftaran sebelum mengulang.', true);
+                            }
+                        } else {
+                            info('Pilih nama siswa yang sudah terdaftar lalu tentukan jenis pendaftaran barunya.', false);
+                        }
+                    } catch (error) {
+                        if (jenisVerifikasi === undefined) resetSiswa('(Tidak dapat membaca daftar siswa)');
+                        info('Gagal membaca respons server: ' + error.message, true);
+                    }
+                },
+                failure: function(response) {
+                    if (token !== nomorPermintaan || !popup.isConnected) return;
+                    if (jenisVerifikasi === undefined) resetSiswa('(Gagal memuat daftar siswa)');
+                    info(jenisVerifikasi === undefined
+                        ? 'Gagal mengambil daftar anggota rombel (HTTP ' + response.status + ').'
+                        : 'Permintaan simpan dikirim, tetapi verifikasi ulang gagal (HTTP ' + response.status + '). Periksa lagi setelah memuat ulang halaman.', true);
+                }
+            });
+        }
+        function pilihSiswa() {
+            aktif = dataSiswa.find(s => idAnggota(s) === String(siswa.value)) || null;
+            byId('ujp-lama').textContent = 'Jenis pendaftaran saat ini: ' + (aktif ? jenisSekarang(aktif) : '-');
+            const lama = aktif ? String(aktif.jenis_pendaftaran_id ?? '') : '';
+            baru.value = Object.hasOwn(names, lama) ? lama : '';
+            baru.disabled = !aktif;
+            btnSimpan.disabled = !aktif || sedangMenyimpan;
+        }
+
+        storeRombel.each(function(rec) {
+            const id = rec.getId();
+            const nama = rec.get('nama');
+            if (id !== undefined && id !== null && nama) rombel.add(new Option(String(nama), String(id)));
+        });
+        rombel.onchange = function() {
+            if (sedangMenyimpan) return;
+            muatSiswa();
+        };
+        siswa.onchange = pilihSiswa;
+        const tutup = function() {
+            if (sedangMenyimpan) return info('Penyimpanan sedang diproses. Tunggu respons server sebelum menutup formulir.', true);
+            popup.remove();
+        };
+        byId('ujp-batal').onclick = tutup;
+        byId('ujp-tutup-x').onclick = tutup;
+        btnSimpan.onclick = function() {
+            if (sedangMenyimpan || !aktif || !rombel.value || !baru.value) {
+                info('Lengkapi pilihan rombel, nama siswa, dan jenis pendaftaran.', true);
+                return;
+            }
+            const identifier = idAnggota(aktif);
+            const target = String(baru.value);
+            const lama = String(aktif.jenis_pendaftaran_id ?? '');
+            if (!identifier) return info('ID anggota rombel tidak tersedia; perubahan dibatalkan.', true);
+            if (lama === target) return info('Jenis pendaftaran sudah sama. Tidak ada perubahan yang perlu disimpan.', true);
+            if (aktif.rombongan_belajar_id && String(aktif.rombongan_belajar_id) !== String(rombel.value)) {
+                return info('Rombel pada data siswa tidak sama dengan rombel yang dipilih. Perubahan dibatalkan.', true);
+            }
+            const nama = labelSiswa(aktif);
+            if (!window.confirm('Ubah Jenis Pendaftaran siswa yang sudah ada di rombel?\n\nSiswa: ' + nama + '\nRombel: ' + rombel.options[rombel.selectedIndex].text + '\nDari: ' + jenisSekarang(aktif) + '\nMenjadi: ' + names[target] + '\n\nRombel siswa TIDAK akan dipindahkan.')) return;
+
+            // Payload mengikuti pola UPDATE AnggotaRombel yang sudah ada pada fitur Pindah Rombel.
+            // Pastikan hanya jenis_pendaftaran_id yang berubah.
+            const payload = Object.assign({}, aktif, { jenis_pendaftaran_id: Number(target) });
+            sedangMenyimpan = true;
+            btnSimpan.disabled = true;
+            rombel.disabled = siswa.disabled = baru.disabled = true;
+            btnSimpan.textContent = '⏳ Menyimpan...';
+            info('Mengirim pembaruan jenis pendaftaran...', false);
+
+            function selesai() {
+                sedangMenyimpan = false;
+                rombel.disabled = false;
+                btnSimpan.textContent = 'Simpan Perubahan';
+                // Dropdown siswa dan jenis akan diaktifkan lagi setelah daftar dimuat ulang.
+            }
+            Ext.Ajax.request({
+                url: '/rest/AnggotaRombel/' + encodeURIComponent(identifier),
+                method: 'PUT',
+                jsonData: payload,
+                success: function(response) {
+                    if (!popup.isConnected) return;
+                    let hasil = {};
+                    try { hasil = Ext.decode(response.responseText || '{}') || {}; } catch (_) { /* respons sukses bisa kosong */ }
+                    selesai();
+                    if (hasil.success === false) {
+                        siswa.disabled = false;
+                        pilihSiswa();
+                        return info('Perubahan ditolak oleh server: ' + (hasil.message || 'Alasan tidak tersedia.'), true);
+                    }
+                    muatSiswa(identifier, target);
+                },
+                failure: function(response) {
+                    if (!popup.isConnected) return;
+                    selesai();
+                    siswa.disabled = false;
+                    pilihSiswa();
+                    let pesan = 'Perubahan gagal disimpan (HTTP ' + response.status + ').';
+                    try {
+                        const body = Ext.decode(response.responseText);
+                        if (body && body.message) pesan += ' ' + body.message;
+                    } catch (_) {}
+                    info(pesan, true);
+                }
+            });
+        };
     };
 
     // Tombol Lanjut Rombel
