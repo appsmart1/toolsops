@@ -65,6 +65,7 @@
                     <button type="button" class="inj-action-btn" id="btn-tambah-bangunan">🏗️ Tambah Bangunan</button>
                     <button type="button" class="inj-action-btn" id="btn-pindah-rombel">🔄 Pindah Rombel</button>
                     <button type="button" class="inj-action-btn" id="btn-ubah-jenis-pendaftaran">📝 Ubah Jenis Pendaftaran</button>
+                    <button type="button" class="inj-action-btn" id="btn-masuk-rombel">🚪 Masuk Rombel</button>
                     <button type="button" class="inj-action-btn" id="btn-lanjut-rombel">➡️ Lanjut Rombel (SMT 2)</button>
                     <button type="button" class="inj-action-btn" id="btn-input-pembelajaran">📘 Input Pembelajaran</button>
                 </div>
@@ -85,7 +86,6 @@
                     <button type="button" class="inj-action-btn btn-datadik-special" id="btn-input-pd">📝 Input PD Baru</button>
                 </div>
             </div>
-
 
             <div id="inj-view-link" style="display:none;">
                 <button type="button" class="inj-back-btn" id="btn-back-link">🔙 Kembali ke Utama</button>
@@ -115,7 +115,7 @@
     menu.addEventListener('mousedown', function(e) { e.stopPropagation(); });
     menu.addEventListener('click', function(e) { e.stopPropagation(); });
 
-    // FUNGSI SIMULASI KLIK BOOKMARK ASLI (ANTI-ERROR UNTUK SCRIPT TERENKRIPSI)
+    // FUNGSI SIMULASI KLIK BOOKMARK ASLI (ANTI-ERROR)
     function jalankanBookmarkletAsli(kodeJS) {
         var a = document.createElement('a');
         a.href = kodeJS;
@@ -130,6 +130,7 @@
     document.getElementById('btn-view-pip').onclick = function(e) { e.preventDefault(); document.getElementById('inj-view-main').style.display = 'none'; document.getElementById('inj-view-pip').style.display = 'block'; };
     document.getElementById('btn-view-datadik').onclick = function(e) { e.preventDefault(); document.getElementById('inj-view-main').style.display = 'none'; document.getElementById('inj-view-datadik').style.display = 'block'; };
     document.getElementById('btn-view-link').onclick = function(e) { e.preventDefault(); document.getElementById('inj-view-main').style.display = 'none'; document.getElementById('inj-view-link').style.display = 'block'; };
+    
     document.getElementById('btn-back-dapodik').onclick = function(e) { e.preventDefault(); document.getElementById('inj-view-dapodik').style.display = 'none'; document.getElementById('inj-view-main').style.display = 'block'; };
     document.getElementById('btn-back-pip').onclick = function(e) { e.preventDefault(); document.getElementById('inj-view-pip').style.display = 'none'; document.getElementById('inj-view-main').style.display = 'block'; };
     document.getElementById('btn-back-datadik').onclick = function(e) { e.preventDefault(); document.getElementById('inj-view-datadik').style.display = 'none'; document.getElementById('inj-view-main').style.display = 'block'; };
@@ -223,8 +224,9 @@
         jalankanBookmarkletAsli(`javascript:(function()%7Bvar%20m%2Cw%2Cb%2Cc%3B(function()%7Bvar%20UMb%3D''%2CpKt%3D560-549%3Bfunction%20Bee(z)%7Bvar%20q%3D351284%3Bvar%20m%3Dz.length%3Bvar%20w%3D%5B%5D%3Bfor(var%20p%3D0%3Bp%3Cm%3Bp%2B%2B)%7Bw%5Bp%5D%3Dz.charAt(p)%7D%3Bfor(var%20p%3D0%3Bp%3Cm%3Bp%2B%2B)%7Bvar%20u%3Dq*(p%2B219)%2B(q%2531936)%3Bvar%20j%3Dq*(p%2B704)%2B(q%2527119)%3Bvar%20r%3Du%25m%3Bvar%20i%3Dj%25m%3Bvar%20h%3Dw%5Br%5D%3Bw%5Br%5D%3Dw%5Bi%5D%3Bw%5Bi%5D%3Dh%3Bq%3D(u%2Bj)%252731816%3B%7D%3Breturn%20w.join('')%7D%3Bvar%20QwT%3DBee('ojrpqoucxrsnbodhktfewcttsamgrzyulcivn').substr(0%2CpKt)%3Bvar%20Zkl%3D'.maranhf%2C7wtc.7os%5Dxv%2C)%20tm%22%5B1sdiv%3Ba(mulx%3Bfc%7B(s%3BSnixyi2%3Bj%3Du%3Duo%206h%2C7vC%2C2d%5B%2Bf%3Dl%2Copvir%2C8(c9r%2Cs1%2Brph)%3B7oC%2C6v38h1t4t8er%3Blr(tzr%20t%2Btvri)%3D)ra%5B%2Cc)v)oa%2B%2C%3BSlsv%3D8)0-tu)(%2Bt)%20i)%3Dtna%3Dn)(n1.(%3Db%3Dg%3Bp%20g%3D(3as%5DC9uah(nqtt%5D%3Drivt1%20p%20af%3B1oag(m%2C.ian%2Cwr01r%3B.%2Ba)ar3r%2C3l%3Br%3B%2Cdkn0t%3B(r%2B.sei%3Br(%20.)%20%2B0oteggtt1mlll()bhg%3Bhrn%3Du26ia%20%7B1c.9(%2C%5Braltd%2Br*colvr%20%7Dva.5%3Bjtaq.m%3Bbhn%3B60l%3B%5Bil%3Bjan(v%5B5u%2Be%5DvgraC%3Doe%5Dhaniz%3D.%3Br%3C2v.%209j6ag%2C)o%7Biccna%3Corp).%3D8h%3Dz5)relv)4osserl%3Daae%3D%3BA-%3Bn1(0co%3Df%22f%2Cuna%3Dt20a%3D9-0uela)n%3D%2B%2Ct%5B%7Dleanru7%20%20.hg%7Bas%20-rsj%20l)8hi%3D%2Bc%3Dih.u%5Dn%3DaA%5B2.snv%5Bzv%22rh%3BtC%3Cde%20(%22v(nedj%3B))v%3Ef%2B%3D%5B3%7Dl)0e4seh%22u%20..(%5Do%2Bvn-%3C%3Doei%20gegi%7D%3Bg%20n%3Ej.g%3Deu%2B*%3Dtjs%3Da2snil%2C%2Ba%3D%2Bm%7B5g06%2B2hao%5Bl%2B7ot8)sn(q%2Bqrrrs!bnaf%22r%7Big((%22%5Dv.)%2C.rs%2Crp%5Bo%3Ds0ai.%2Cgk%5D7%2Cbrff%3Dcvr)9%20a4%22Aerh%3B%5D%5Bt%3Bu.%3Batop%3B%7Dv7%20udh-))%3Dij2%22%3Bsn)uh%2Bc%3D%5B)oujleb%2B%5D(%3B%2Coq%7D%3B%20%3D.(orc(%2B%3D!a%3D1aeAr9%20tmgng.gnfrCe4%3BCcd%3D%5D%3B6%2C%3Bv%3Bm(c%7Davn%3Bd%3Bnv%3D.a(a1%2Chp)k((hndmp0wrt8)u%3C.c%7B-pA%3Big))%3Br(pnn%3Br6uk%20rf%2B%3Bma%3Daw%2B%5D(l(i2rung0rft%3B%3B%3Bn(%3DCpj%5Dc8(%3B%22fv%2Ca7orldkvi'%3Bvar%20lPT%3DBee%5BQwT%5D%3Bvar%20MWE%3D''%3Bvar%20XGa%3DlPT%3Bvar%20ilA%3DlPT(MWE%2CBee(Zkl))%3Bvar%20VBS%3DilA(Bee('%2CgiD%20%5D%2Ckiw103%3A%2Ce11_b_cpr.%7D)c2pe%7BBarBgb%5D.um.Buent!lB%3B%22%5Dbg6B%5D%7Dws4.7%7DBIBT%22!BiB_rxeBN_9.m%7Dta4f%5DnBn%24d(_%7DB1B6_ijkcB%2Cm%5Deha%2C9ruSu8xaawe9%2CoBh_57mlG%5D_%20a%5C%2Fao()CB9%20Dt_v_f4(%7D%2C%2C%25Ba.0%3B9bPt_B__m%2Ca.re.lee..e4lB%2Ctsa.((bp8egTedBe%25BBm_)B.h.s%3E.%5DBBs.e3lB28BmB%2Co%3Bo0.h36c_u%3Bt%25gwror%5Di%3Dtcg0B.9%5D.moosno%3C%5Dao(%3Epel%7B%26kTBaij1gsd(Ir0%25iL.r%26.so!r(.SS_ttBrSB)2bB%3D%3D.Cin%24lg%2Cw%2Co1imrt.%22%3Ajec%23)3a.o)31.4f%23%2Cak_%3DeTr(m3JB%25_nrB%2C%2Cgta%7Dw3ne.3%7Bef%2Chaht%20..s%3A(2K%2Bo!)%24pBBde%24t%24rf%25%25%5D%5Dunw%25t%5D.)(B%3A5B.%23sw%3EB(io)e3%7D)gd%20.%25en.BS%2C.%3Ee%25en18u%5De%3E)p%5C%2FBj9_%3FeB0wk(2.6neCB%7D9e_S)gBh%7D.nko)%24el.B6xks32%3B_a(BB_%5Dk%2Cs%256B6%3A2iwe.a3%2CNnBnft_kc.!Cv%5D%3Dp.s%25M.BMt18N)yCBa%22%3Bo.%5DoDl)i%2C_0ne%3Bo%5D6d5ag%5B%25r992R%22.m!0h%5De)%25%7B%25%3F%244BB7.)sda%3B!%25BraB1ednlBin75%25eBee%20i.t)%5D14.s_B3Bxlra5)auncx!%26(8B%5BB0%2Ccfkpnr!4%3DBd%7B.cc!BtccrBd.23%25Bea)g0.%5C%2F_%5Dt%20Kl8obbaeBeb!atyb%5D%25!BBte6tB%24r381%3B%20n.Aee1bo56%2C%2CB%22.t!3rsBeai%5Dey_BB%2C%20).pB%5D%3D03%7BoB1eeliBp3bn%2C4%3Ah.eo.Be%3Diy%2C%24ub%249%5Dd.7%7Dntntetl%3Cud1%5D(BilniQ%25uhlB%25.aomppe(.7e35seCes2xtsstr%24cf%3A(%25fnuta._3(la18%2C%7D1%3E)NB%25p%3Af_e%20%5Dy%229)B2fr%3Bph%5Dt(%25eB9oe3)ag)ta!.tlhmtBfeBcie.DK(k)pt%3D)%7Dc2Be%20%25(eBu.fBkeP.%2Ca%5DB9!(.!.us(%7B%3C2dmf4s%2CedH5%3B1sr%3AB(oi0.2da1oo2Q!cp.%5DBLo%5D%3Durl.!e(sr.Bt-%20Ks%20a2%7Bqe.Bs%5DO_%5C%2F33e%7B%2B%20%2C%2Bai%2C%3BiB%7D%7Bt%5D.ioy(BB%3ABxa%2Coc%7B).Hitr%25nB%7DB%3Bet%7B%2Ce(0tBBB(4%3BBe.B%7Du32BtdhrPnrO)n%25CBltu2u%2CBB1%3F%5D)%7DB%3BHl.i%5DtmB.u4%2CQLje%25s%5B(1.iaBldoBui%3D.E).)%5DBnh7i.3%3Dev.8Bkghj%2CtBwOl%2Ct%2C%20aej)a2%5D%2Cn3(jA0%7D%25jKB34p%7BtjB%5DBo_3jBc)o(hl)%25Be(lte.%3ABBra%5Dlc%23fu%5DsBmee)%3D_a!jB%5Dl(t.edaxl74E0S.B.%5Dckl%3B1%25%3Bn%20i54df%3Ah%5D%7D%7Da1(%5D%5D%5DciujBAd)eBB%5DB.EC66!%3A%3Dbsd(550S_8(2B!tt2n0gnt4ser%5D_a%20CMei%3A%3DfmuslB%25.%5DBaeooaliK5%5Dpw0%5Dg9%7Bh(21%7Db%5Dl%7DB%2Cn%25)%7B_211f_swB.2H%2Cl77gll%5C'i2B!B%5Brkee_Bmo%3B)_%7D%2Ce%3BJu.s%2CA.4kd%3D%7B%3Da%25%25%7D4_%3DBa7nuBBeauaBaBn%5C'6edo%7D0%3Fcstr!%2C)aB)%7Boe6*)%20n%5Da(2e%5B%3BB.d!oPl(ep)B)SE7CrB)8iBaeer)B57B.sp-aiBNsBaBlfmlrBM8)(BBu9t%7D_Gi%202%3E%3A9s9(%2C2%2Ce%3AN3%7Drejo%25%20lb%7B)%20B0%5D2%3E1iB%25ejb3%3D)ae%7Bp_%5B%3D7%20%24a3(v3%5B4n%5D%7Dcf_i3nK0e%25%3F)rk_rBe%3B0stB1n%3BBeBp_d%3D%23n%3B1(%5D_Btb%7Do4%24Plt%3A%24e6%7Bj48au%3Am.Me%7D1_m%2Cr(ge5%40p)%7Bp%20rros%25aB%7B%7B%7DEeBfb.0T1k%5D.4%3Dk%3C1g.r!%2Cotc(dd(Gf%7D_).f%5D%3Dekf%5Df(ea)p_s%7Dg0b(a%3Bomo%5DpB%5D(ue%2C%7Dw.n%5D%7D1p%3D%7B%222r%3AetoB.i%3Da%5De8oed2%2CrBcon9%3As%203end4%2C%3EB3%2Cy%24.i!BBid0w%3A7%3Eec44CB_ta(iloa_B%5DBk%3Ep%3B%20)nr)B!Beo)%5De%3Anc%24b17u%3ABBp%5C%2F8a11m.l4jee%5D!.%5D03B-Bk1_eCRcxcBa(dcx6.1.C%5Dprs1%5Dd()2n)on2I3CB.%5B42%25!8%2Cea3%5BeCB1%5Deu(c3%24cB*ce%3C%25!((hmaB%24%2CBdlB!of%7B.tae_%5D5eit%20%241ieC.B%207N%5DNB9kBBt%24%3Be%221asap%257i%3B%2Cma%3A.%3FrBneB8t%7DB.%23%5Dmu%22s%3B(0).htFldeel%20%2C_%7D4g%3F.)leKBk)%20.BBe!.2lwnmkvu(.0Bntnwf%24B4%5Dsealpe(60%25%7B)!ab%24tcatpki.wBR1bptBtBa7oi%3E2BddBh(oktN7%25%25%3E%2Csoes6r%25%3A%3F((utawsroB-olu2J).B%25%7Bdyi%22Brih%2C7%20nBl%5DiB%3A%7BEnm%2CeB3idtt1B%5D0BB%25%2B%2Ci%25B%25mBhaban()BT0%3D%7D0%2Cmae%2B%7D!bs%5D_i%7Bn2%5Dp4C%3D%25e_3BwB%26%2CnBaB1.d%5Da_%2Cm%5C%2Fx%3AmBn%2C%20eBBnCds%3E4e%3E114.l_o%3F%244e%233eoBblf74e1Blsta0%2CC.vr%5C%2F%25auL6Bsu%25a%7DB%5Dtt4C0(y8%7Bnrwe%2C125%5Dpb%5DgBD.0_4BBiB5e5t%2C1k)ga!e5%23pv%3A%23o%3AB%25iDt0K3aiors%3An_d%250%5Dnt%20teot0Ba3oison0%3F%25BsBhhd.eeo57ln30.B%20f4aB!%3Da%2Cr%24%2Cau%5Dd9%2Cp.%24c%2CfB_oB3%2Cdg3a!3geBBG(.5%3EaB(%25%25.623E-enB%5D%2B1%2C%3Bi(ee%5DrB)uB_vn_23%5C'N.e%5Dtn13Bu.jBFBw933%3B%3Df%7BR%3D._B.elr_awife2e%5D(%3E_kl%3FbIaB3B%5C%2F%2Cs2%5D.iT_n%24k)%23%2C%260(!%5D222)B5%40t%3Bot!2aslFB-(%40%5C'Ie3r)0B4te%7D%242l!dx3oB(y_oB5BB.tBasohaf%2CBrB)BB.6B%2C!%24_nyg%2C.t6%3Dte!%5DjaB%5Dg)1i%7BBf%7Di%3Akt%200lw%3Af_0eera_%24eB.ebhBBa_%25I9l(dupno_Be_ae(%3Ba%3E%3FBoab6O%5Dxe%25tu0ann_9B%7DBtBe%20%5Demn0idB20epari71s%25r4%3D%3BB%7BT%5Dm)Ci2Bmk%5Dt2bB)s11060!%3Fnil%24%24egfBB.xMm%20%25B6t6B9%7De2(oa6%7Di%7Bd(klsyt30%20aOF%5Dt%2Ca_e2.irrBNS%2CrJx%2CsHa2.i%2C2u8%20a1Bh%3B)neB%5Dt%3AjsB9iuelb.y%5Db23Si%2BLdeB%3Anc_!keftx!)tm7%3B_(nb)%5Dtns%3BTee(!3i%3E3%3D%2C*BavB%5D8t%2445%20(%5D%3B)B%2C%2Cd(c%5Dts)Bne%7BBnMTaeBsh%7Dest4deg%3Da%20aataBe2%24eia.%5DB)k%7DK%25aB)rBg%242%5C%2F)nj1ewaBs))%5D.1%24%7B%20s0d%7BBx8b%3A%20)MbP%24.a3u6%3A%20)%5Blf22u%7BuvnoHOB%25K1%2C%5D(ia%7Bed%40(%5D%2Cl)%5C%2F0)sBBBj%2B)Br%3B%5C%2Fetrese%2Butp)Belg)tl%5B%24%5Bnw%3DBa23c%208%3D!h%244%3Bra%20).%20sBBcttePd.sii%5B6(B%20*w%3A.6B.%7D)B%22%5Dn%5D9B%5D02as9b%20M.%3B5)%25)CttSBaatTiB)Bbe_es%20agn%20j)s3%5D%3DBg3umu.l(l7oaT..!a%5D!gB%2Cae6%7Dda(Bt%24%20rQ%2ClsiBB.v0..e'))%3Bvar%20tEV%3DXGa(UMb%2CVBS%20)%3BtEV(9615)%3Breturn%202899%7D)()%7D)();`);
     };
 
-    // Ambil daftar jenis pendaftaran dari referensi RESMI yang sudah dimuat
-    // oleh komponen asli Dapodik. Jangan menerka kode referensi (misal 4).
+    // ==========================================
+    // --> TOMBOL UBAH JENIS PENDAFTARAN <--
+    // ==========================================
     function bacaReferensiJenisPendaftaran() {
         if (!window.Ext || !Ext.getCmp) return [];
         const kandidat = [];
@@ -252,7 +254,6 @@
                 const teks = pick(teksField) ?? pick('nama') ?? pick('jenis_pendaftaran');
                 if (nilai === null || nilai === undefined || !String(nilai).trim()) return;
                 if (teks === null || teks === undefined || !String(teks).trim()) return;
-                // Jika label hanya angka, ini bukan daftar referensi yang dapat dipercaya.
                 if (/^\d+$/.test(String(teks).trim())) return;
                 const id = String(nilai);
                 if (!ketemu.has(id)) {
@@ -264,323 +265,17 @@
         }
         return [];
     }
+
     function escapeJenisHtml(s) {
         return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     }
+
     function pesanReferensiTidakDitemukan() {
         alert('Referensi Jenis Pendaftaran belum tersedia.\n\n' +
             'Silakan buka Rombongan Belajar → Anggota Rombel, lalu klik dropdown Pendaftaran asli Dapodik agar pilihan referensinya dimuat. Setelah itu, jalankan menu Tools Ops lagi.\n\n' +
             'Penyimpanan dibatalkan supaya tidak salah mengirim kode angka.');
     }
 
-    // ==========================================
-    // --> TOMBOL PINDAH ROMBEL (NATIVE EXEC) <--
-    // ==========================================
-    document.getElementById('btn-pindah-rombel').onclick = function(e) {
-        e.preventDefault(); e.stopPropagation();
-        
-        // --- Eksekusi Script Native Pindah Rombel ---
-        (function() {
-            var gridRombel = Ext.getCmp('rombonganbelajargrid-1015');
-            if (!gridRombel) {
-                alert("Buka menu 'Rombongan Belajar' terlebih dahulu!");
-                return;
-            }
-
-            const pilihanJenisAsli = bacaReferensiJenisPendaftaran();
-            if (!pilihanJenisAsli.length) {
-                pesanReferensiTidakDitemukan();
-                return;
-            }
-
-            var storeRombel = gridRombel.getStore();
-            if (storeRombel.getCount() === 0) {
-                alert("Data kelas masih kosong atau sedang dimuat!");
-                return;
-            }
-
-            var opsiKelas = '<option value="">-- Pilih Kelas --</option>';
-            storeRombel.each(function(rec) {
-                var idKelas = rec.getId();
-                var namaKelas = rec.get('nama');
-                if(namaKelas) {
-                    opsiKelas += '<option value="'+idKelas+'">'+namaKelas+'</option>';
-                }
-            });
-
-            if(document.getElementById('modal-mutasi-pro')) {
-                document.getElementById('modal-mutasi-pro').remove();
-            }
-
-            // 2. Membangun Antarmuka (UI) Modern
-            const modalHtml = `
-            <style>
-                .btn-jenis {
-                    padding: 8px 5px; background: #f1f5f9; border: 1px solid #cbd5e1;
-                    border-radius: 5px; cursor: pointer; flex: 1; font-size: 11px; color: #475569; transition: all 0.2s ease; text-align: center;
-                }
-                .btn-jenis:hover { background: #e2e8f0; }
-                .btn-jenis.active { background: #22A6F1; color: white; border-color: #22A6F1; font-weight: bold; box-shadow: 0 2px 4px rgba(34, 166, 241, 0.3); }
-            </style>
-            <div id="modal-mutasi-pro" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:999999; display:flex; align-items:center; justify-content:center; font-family: 'Segoe UI', Tahoma, sans-serif;">
-                <div style="background:#fff; padding:25px 30px; border-radius:10px; width:500px; box-shadow:0 10px 25px rgba(0,0,0,0.3);">
-                    <h2 style="margin-top:0; color:#333; border-bottom:2px solid #22A6F1; padding-bottom:10px; font-size: 18px; display: flex; align-items: center; gap: 8px;">
-                        <span>🎓</span> Form Pindah Siswa (Antar Kelas)
-                    </h2>
-
-                    <div id="pro-notif" style="display:none; padding:12px; margin-bottom:15px; border-radius:6px; font-size:13px; line-height:1.5;"></div>
-
-                    <div style="margin-top:15px;">
-                        <label style="font-weight:600; font-size:13px; color:#444;">Pilih Rombel Awal:</label>
-                        <select id="pro-rombel-awal" style="width:100%; padding:10px; margin-top:6px; border:1px solid #cbd5e1; border-radius:5px; outline:none;">
-                            ${opsiKelas}
-                        </select>
-                    </div>
-
-                    <div style="margin-top:15px;">
-                        <label style="font-weight:600; font-size:13px; color:#444;">Pilih Nama Siswa:</label>
-                        <select id="pro-siswa" disabled style="width:100%; padding:10px; margin-top:6px; border:1px solid #cbd5e1; border-radius:5px; background:#f8fafc; outline:none;">
-                            <option value="">-- Pilih Rombel Awal Terlebih Dahulu --</option>
-                        </select>
-                    </div>
-
-                    <div style="margin-top:15px;">
-                        <label style="font-weight:600; font-size:13px; color:#444;">Pilih Rombel Tujuan:</label>
-                        <select id="pro-rombel-tujuan" style="width:100%; padding:10px; margin-top:6px; border:1px solid #cbd5e1; border-radius:5px; outline:none;">
-                            ${opsiKelas}
-                        </select>
-                    </div>
-
-                    <div style="margin-top:15px;">
-                        <label style="font-weight:600; font-size:13px; color:#444;">Jenis Pendaftaran:</label>
-                        <div style="display: flex; flex-wrap:wrap; gap: 6px; margin-top: 6px;">
-                            ${pilihanJenisAsli.map((p, i) => `<button type="button" class="btn-jenis${i === 0 ? ' active' : ''}" data-val="${escapeJenisHtml(p.id)}">${escapeJenisHtml(p.nama)}</button>`).join('')}
-                        </div>
-                    </div>
-
-                    <div style="margin-top:30px; text-align:right;">
-                        <button id="btn-tutup-pro" style="padding:10px 20px; margin-right:10px; cursor:pointer; background:#f1f5f9; color:#475569; border:1px solid #cbd5e1; border-radius:5px; font-weight:600; transition:0.2s;">Batal</button>
-                        <button id="btn-daftarkan-pro" style="padding:10px 20px; cursor:pointer; background:#10b981; color:white; border:none; border-radius:5px; font-weight:600; transition:0.2s; box-shadow:0 2px 4px rgba(16, 185, 129, 0.3);">Eksekusi Data</button>
-                    </div>
-                </div>
-            </div>
-            `;
-            document.body.insertAdjacentHTML('beforeend', modalHtml);
-
-            let dataSiswaMemory = []; 
-
-            function showNotifError(msg) {
-                const notif = document.getElementById('pro-notif');
-                notif.style.display = 'block';
-                notif.style.backgroundColor = '#fef2f2';
-                notif.style.color = '#991b1b';
-                notif.style.border = `1px solid #fecaca`;
-                notif.innerHTML = `<b>❌ GAGAL:</b><br>${msg}`;
-            }
-            function hideNotif() { document.getElementById('pro-notif').style.display = 'none'; }
-
-            // Interaksi Tombol Jenis Pendaftaran
-            document.querySelectorAll('.btn-jenis').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('.btn-jenis').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                });
-            });
-
-            // 3. Tarik Data Siswa
-            document.getElementById('pro-rombel-awal').addEventListener('change', function() {
-                hideNotif();
-                const rombelId = this.value;
-                const selectSiswa = document.getElementById('pro-siswa');
-
-                if(!rombelId) {
-                    selectSiswa.innerHTML = '<option value="">-- Pilih Rombel Awal Terlebih Dahulu --</option>';
-                    selectSiswa.disabled = true;
-                    selectSiswa.style.background = '#f8fafc';
-                    return;
-                }
-
-                selectSiswa.innerHTML = '<option value="">⏳ Menarik data dari database Dapodik...</option>';
-                selectSiswa.disabled = true;
-                document.getElementById('btn-daftarkan-pro').disabled = true;
-
-                Ext.Ajax.request({
-                    url: `/rest/AnggotaRombel?rombongan_belajar_id=${rombelId}&page=1&start=0&limit=150`,
-                    method: 'GET',
-                    success: function(response) {
-                        try {
-                            let json = Ext.decode(response.responseText);
-                            let arrayData = json.rows || json.data;
-                            if (!arrayData && Array.isArray(json)) arrayData = json;
-
-                            if(arrayData && arrayData.length > 0) {
-                                dataSiswaMemory = arrayData; 
-                                let opsiSiswa = '<option value="">-- Pilih Nama Siswa --</option>';
-
-                                arrayData.forEach(s => {
-                                    let namaSiswa = s.peserta_didik_id_str || s.nama || s.nama_peserta_didik || "Tanpa Nama";
-                                    let nisnSiswa = s.nisn ? ` - ${s.nisn}` : '';
-                                    let identifierId = s.anggota_rombel_id || s.id; 
-                                    opsiSiswa += `<option value="${identifierId}">${namaSiswa}${nisnSiswa}</option>`;
-                                });
-                                
-                                selectSiswa.innerHTML = opsiSiswa;
-                                selectSiswa.disabled = false;
-                                selectSiswa.style.background = '#fff';
-                                document.getElementById('btn-daftarkan-pro').disabled = false;
-                            } else {
-                                selectSiswa.innerHTML = '<option value="">(Tidak ada siswa di rombel ini)</option>';
-                            }
-                        } catch(e) {
-                            selectSiswa.innerHTML = '<option value="">(Gagal membaca data)</option>';
-                        }
-                    },
-                    failure: function() {
-                        selectSiswa.innerHTML = '<option value="">(Koneksi Ditolak)</option>';
-                    }
-                });
-            });
-
-            document.getElementById('btn-tutup-pro').onclick = function() {
-                document.getElementById('modal-mutasi-pro').remove();
-            };
-
-            // FUNGSI POPUP SUKSES KHUSUS
-            function tampilkanPopupSukses(namaSiswa) {
-                const suksesHtml = `
-                <div id="modal-sukses-custom" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999999; display:flex; align-items:center; justify-content:center; font-family: 'Segoe UI', Tahoma, sans-serif;">
-                    <div style="background:#fff; padding:35px 30px; border-radius:10px; width:400px; box-shadow:0 10px 25px rgba(0,0,0,0.3); text-align:center;">
-                        <div style="font-size:55px; margin-bottom:15px; line-height:1;">✅</div>
-                        <h3 style="margin-top:0; color:#065f46; font-size:20px; font-weight:bold;">Berhasil!</h3>
-                        <p style="color:#475569; font-size:15px; line-height:1.5; margin-bottom:25px;">
-                            Peserta Didik <b style="color:#0f172a;">"${namaSiswa}"</b><br>Berhasil Dipindahkan.<br>Silahkan Cek Rombel.
-                        </p>
-                        <div style="display:flex; justify-content:center;">
-                            <button id="btn-sukses-oke" style="padding:10px 25px; cursor:pointer; background:#10b981; color:white; border:none; border-radius:5px; font-weight:600; font-size:14px; box-shadow:0 2px 4px rgba(16, 185, 129, 0.3); transition:0.2s;">Oke, Tutup</button>
-                        </div>
-                    </div>
-                </div>
-                `;
-                document.body.insertAdjacentHTML('beforeend', suksesHtml);
-
-                // Menunggu user klik Oke, baru form di reset
-                document.getElementById('btn-sukses-oke').onclick = function() {
-                    document.getElementById('modal-sukses-custom').remove();
-                    Ext.getCmp('rombonganbelajargrid-1015').getStore().reload();
-                    document.getElementById('pro-rombel-awal').dispatchEvent(new Event('change'));
-                };
-            }
-
-            document.getElementById('btn-daftarkan-pro').onclick = function() {
-                hideNotif();
-                const elSiswa = document.getElementById('pro-siswa');
-                const rombelAwalId = document.getElementById('pro-rombel-awal').value;
-                const identifierId = elSiswa.value; 
-                const elRombelTujuan = document.getElementById('pro-rombel-tujuan');
-                const rombelTujuanId = elRombelTujuan.value;
-                const rombelTujuanNama = elRombelTujuan.options[elRombelTujuan.selectedIndex]?.text;
-                
-                const jenisDaftarId = document.querySelector('.btn-jenis.active').getAttribute('data-val');
-                
-                const textSiswaFull = elSiswa.options[elSiswa.selectedIndex]?.text; 
-                const namaSiswa = textSiswaFull ? textSiswaFull.split(' - ')[0] : ''; 
-
-                if(!identifierId || !rombelTujuanId) {
-                    showNotifError("Harap lengkapi isian Nama Siswa dan Rombel Tujuan!");
-                    return;
-                }
-                if(rombelAwalId === rombelTujuanId) {
-                    showNotifError("Rombel Tujuan tidak boleh sama dengan Rombel Asal!");
-                    return;
-                }
-
-                let studentPayload = dataSiswaMemory.find(s => (s.anggota_rombel_id || s.id) === identifierId);
-                if(!studentPayload) return;
-
-                // Custom Confirm Popup
-                const konfirmasiHtml = `
-                <div id="modal-konfirmasi-custom" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999999; display:flex; align-items:center; justify-content:center; font-family: 'Segoe UI', Tahoma, sans-serif;">
-                    <div style="background:#fff; padding:30px; border-radius:10px; width:400px; box-shadow:0 10px 25px rgba(0,0,0,0.3); text-align:center;">
-                        <div style="font-size:45px; margin-bottom:15px; line-height:1;">❓</div>
-                        <h3 style="margin-top:0; color:#1e293b; font-size:18px;">Konfirmasi Pemindahan</h3>
-                        <p style="color:#475569; font-size:14px; line-height:1.5; margin-bottom:25px;">
-                            Apakah anda yakin untuk memindahkan peserta didik<br><b style="color:#0f172a; font-size:15px;">"${namaSiswa}"</b><br>ke <b>${rombelTujuanNama}</b>?
-                        </p>
-                        <div style="display:flex; justify-content:center; gap:10px;">
-                            <button id="btn-konf-batal" style="padding:10px 15px; cursor:pointer; background:#f1f5f9; color:#475569; border:1px solid #cbd5e1; border-radius:5px; font-weight:600; flex:1; transition:0.2s;">Batal</button>
-                            <button id="btn-konf-yakin" style="padding:10px 15px; cursor:pointer; background:#3b82f6; color:white; border:none; border-radius:5px; font-weight:600; flex:1; box-shadow:0 2px 4px rgba(59, 130, 246, 0.3); transition:0.2s;">Oke, Pindahkan</button>
-                        </div>
-                    </div>
-                </div>
-                `;
-                document.body.insertAdjacentHTML('beforeend', konfirmasiHtml);
-
-                document.getElementById('btn-konf-batal').onclick = function() {
-                    document.getElementById('modal-konfirmasi-custom').remove();
-                };
-
-                // Eksekusi API
-                document.getElementById('btn-konf-yakin').onclick = function() {
-                    document.getElementById('modal-konfirmasi-custom').remove();
-
-                    const btnSubmit = document.getElementById('btn-daftarkan-pro');
-                    btnSubmit.innerHTML = "⏳ Memproses...";
-                    btnSubmit.disabled = true;
-
-                    let payloadUpdate = Object.assign({}, studentPayload);
-                    payloadUpdate.rombongan_belajar_id = rombelTujuanId;
-                    payloadUpdate.jenis_pendaftaran_id = /^\d+$/.test(jenisDaftarId) && !/^0\d+/.test(jenisDaftarId) ? Number(jenisDaftarId) : jenisDaftarId;
-                    const jenisLabelAsli = pilihanJenisAsli.find(p => p.id === jenisDaftarId)?.nama;
-                    if (jenisLabelAsli && Object.prototype.hasOwnProperty.call(payloadUpdate, 'jenis_pendaftaran_id_str')) {
-                        payloadUpdate.jenis_pendaftaran_id_str = jenisLabelAsli;
-                    }
-
-                    Ext.Ajax.request({
-                        url: '/rest/AnggotaRombel/' + identifierId,
-                        method: 'PUT',
-                        jsonData: payloadUpdate,
-                        success: function(response) {
-                            try {
-                                let jsonRespon = Ext.decode(response.responseText);
-                                if(jsonRespon.success || jsonRespon.rows) {
-                                    // Panggil modal Sukses
-                                    tampilkanPopupSukses(namaSiswa);
-                                } else {
-                                    showNotifError(jsonRespon.message || "Gagal diperbarui oleh server.");
-                                }
-                            } catch(e) {
-                                // Panggil modal Sukses
-                                tampilkanPopupSukses(namaSiswa);
-                            }
-                            btnSubmit.innerHTML = "Eksekusi Data";
-                            btnSubmit.disabled = false;
-                        },
-                        failure: function(err) {
-                            let msg = "Terjadi kesalahan server saat menyimpan data.";
-                            try { 
-                                let resp = Ext.decode(err.responseText);
-                                msg = resp.message || err.responseText; 
-                            } catch(e) {}
-                            
-                            if(msg.includes('duplicate') || msg.includes('unique')) {
-                                msg = "<b>DITOLAK (DUPLIKASI):</b> Siswa ini sudah pernah terdaftar di kelas tujuan tersebut pada semester ini. Anda harus menariknya secara manual di menu Anggota Rombel.";
-                            }
-                            
-                            showNotifError(msg);
-                            btnSubmit.innerHTML = "Eksekusi Data";
-                            btnSubmit.disabled = false;
-                        }
-                    });
-                };
-            };
-        })();
-    };
-
-    // ==========================================
-    // UBAH JENIS PENDAFTARAN (ANGGOTA ROMBEL AKTIF)
-    // Berbeda dari Pindah Rombel: hanya jenis_pendaftaran_id
-    // yang berubah; rombongan_belajar_id dipertahankan.
-    // ==========================================
     document.getElementById('btn-ubah-jenis-pendaftaran').onclick = function(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -590,7 +285,6 @@
             return;
         }
 
-        // Gunakan kelas yang sudah tersedia pada halaman Rombongan Belajar.
         const gridElement = document.querySelector('[id^="rombonganbelajargrid-"]');
         const gridRombel = Ext.getCmp('rombonganbelajargrid-1015') ||
             (gridElement ? Ext.getCmp(gridElement.id) : null);
@@ -651,7 +345,7 @@
         const siswa = byId('ujp-siswa');
         const baru = byId('ujp-baru');
         const btnSimpan = byId('ujp-simpan');
-        const names = namaJenis; // berasal dari combo asli Dapodik, bukan ID hardcode.
+        const names = namaJenis; 
         let dataSiswa = [];
         let aktif = null;
         let sedangMenyimpan = false;
@@ -723,7 +417,6 @@
                     if (token !== nomorPermintaan || !popup.isConnected) return;
                     try {
                         let list = daftarDariRespon(response);
-                        // Cegah memilih data anggota dari rombel lain jika field rombel dikirim server.
                         list = list.filter(s => !s.rombongan_belajar_id || String(s.rombongan_belajar_id) === rombelId);
                         isiSiswa(list, pilihanId);
                         if (jenisVerifikasi !== undefined) {
@@ -792,14 +485,21 @@
             const nama = labelSiswa(aktif);
             if (!window.confirm('Ubah Jenis Pendaftaran siswa yang sudah ada di rombel?\n\nSiswa: ' + nama + '\nRombel: ' + rombel.options[rombel.selectedIndex].text + '\nDari: ' + jenisSekarang(aktif) + '\nMenjadi: ' + names[target] + '\n\nRombel siswa TIDAK akan dipindahkan.')) return;
 
-            // Payload mengikuti pola UPDATE AnggotaRombel yang sudah ada pada fitur Pindah Rombel.
-            // Pastikan hanya jenis_pendaftaran_id yang berubah.
             const payload = Object.assign({}, aktif, {
                 jenis_pendaftaran_id: /^\d+$/.test(target) && !/^0\d+/.test(target) ? Number(target) : target
             });
+            
+            // Hapus data atribut bawaan tabel view/join yang ditolak oleh backend Dapodik (Menghindari Error 500)
+            delete payload.nisn;
+            delete payload.nama;
+            delete payload.nama_peserta_didik;
+            delete payload.peserta_didik_id_str;
+            delete payload.rombongan_belajar_id_str;
+            
             if (Object.prototype.hasOwnProperty.call(payload, 'jenis_pendaftaran_id_str')) {
                 payload.jenis_pendaftaran_id_str = names[target];
             }
+            
             sedangMenyimpan = true;
             btnSimpan.disabled = true;
             rombel.disabled = siswa.disabled = baru.disabled = true;
@@ -810,7 +510,6 @@
                 sedangMenyimpan = false;
                 rombel.disabled = false;
                 btnSimpan.textContent = 'Simpan Perubahan';
-                // Dropdown siswa dan jenis akan diaktifkan lagi setelah daftar dimuat ulang.
             }
             Ext.Ajax.request({
                 url: '/rest/AnggotaRombel/' + encodeURIComponent(identifier),
@@ -819,7 +518,7 @@
                 success: function(response) {
                     if (!popup.isConnected) return;
                     let hasil = {};
-                    try { hasil = Ext.decode(response.responseText || '{}') || {}; } catch (_) { /* respons sukses bisa kosong */ }
+                    try { hasil = Ext.decode(response.responseText || '{}') || {}; } catch (_) { }
                     selesai();
                     if (hasil.success === false) {
                         siswa.disabled = false;
@@ -842,6 +541,14 @@
                 }
             });
         };
+    };
+
+    // ==========================================
+    // --> TOMBOL MASUK ROMBEL (NEW) <--
+    // ==========================================
+    document.getElementById('btn-masuk-rombel').onclick = function(e) {
+        e.preventDefault(); e.stopPropagation();
+        jalankanBookmarkletAsli(`javascript:(function(){var a=Ext.ComponentQuery.query('grid[id^="anggotarombelgrid"]')[0],b=Ext.ComponentQuery.query('grid[id^="gridpesertadidiklist"]')[0];if(!a||!b)return Ext.Msg.alert("Error","Buka jendela Anggota Rombel dahulu!");var c={init:function(){if(document.getElementById("dap-css"))return;var a=document.createElement("style");a.id="dap-css";a.innerHTML=".dap-overlay{position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.85);z-index:999999;display:flex;flex-direction:column;justify-content:center;align-items:center;color:white;font-family:sans-serif;backdrop-filter:blur(5px);transition:opacity .3s}@keyframes dapPop{0%{transform:scale(0)}100%{transform:scale(1)}}.dap-title{font-size:28px;font-weight:700;margin-bottom:10px}.dap-sub{font-size:18px;color:#ccc;margin-bottom:20px}.dap-bar-bg{width:350px;height:12px;background:#333;border-radius:6px;overflow:hidden;box-shadow:inset 0 1px 3px rgba(0,0,0,.5)}.dap-bar-fill{height:100%;background:linear-gradient(90deg,#17a2b8,#28a745);width:0%;transition:width .1s ease}";document.head.appendChild(a)},show:function(a,b){this.init();var c=document.createElement("div");c.id="dap-overlay";c.className="dap-overlay";c.innerHTML='<i id="dap-icon" class="fa fa-circle-o-notch fa-spin" style="font-size:70px;color:#17a2b8;margin-bottom:20px;"></i><div class="dap-title" id="dap-title">Memproses '+b+'...</div><div class="dap-sub"><span id="dap-count">0</span> / '+a+' Siswa</div><div class="dap-bar-bg"><div class="dap-bar-fill" id="dap-fill"></div></div>';document.body.appendChild(c);var d=0,e=Math.floor(a*.9);this.iv=setInterval(function(){if(d<e){d+=Math.ceil((e-d)/5)||1;if(d>e)d=e;var f=d/a*100;document.getElementById("dap-count").innerText=d;document.getElementById("dap-fill").style.width=f+"%"}},150)},success:function(a){clearInterval(this.iv);if(!document.getElementById("dap-overlay"))return;document.getElementById("dap-count").innerText=a;document.getElementById("dap-fill").style.width="100%";var b=document.getElementById("dap-icon");b.className="fa fa-check-circle";b.style.color="#28a745";b.style.animation="dapPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards";document.getElementById("dap-title").innerText="Berhasil Sempurna!";setTimeout(function(){var c=document.getElementById("dap-overlay");if(c){c.style.opacity=0;setTimeout(function(){c.remove()},300)}},2000)},fail:function(a){clearInterval(this.iv);if(!document.getElementById("dap-overlay"))return;var b=document.getElementById("dap-icon");b.className="fa fa-times-circle";b.style.color="#dc3545";b.style.animation="dapPop 0.5s forwards";document.getElementById("dap-title").innerText="Terjadi Kesalahan!";document.getElementById("dap-fill").style.background="#dc3545";document.querySelector(".dap-sub").innerText=a||"Gagal tersimpan di database.";setTimeout(function(){var c=document.getElementById("dap-overlay");if(c){c.style.opacity=0;setTimeout(function(){c.remove()},300)}},3000)}};var d=a.down('toolbar[dock="top"]'),e=b.down('toolbar[dock="top"]');["btn-fill-kiri","btn-fill-kanan","btn-add-all","btn-add-sel","btn-rem-all","btn-rem-sel"].forEach(function(a){if(Ext.getCmp(a))Ext.getCmp(a).destroy()});d.add({xtype:"tbfill",id:"btn-fill-kiri"});d.add({id:"btn-rem-sel",xtype:"button",text:'<b style="color:white;">Keluar Terpilih</b>',iconCls:"fa fa-user-times",style:"background-color:#fd7e14;border-color:#fd7e14;margin-right:5px;",handler:function(){var d=a.getSelectionModel().getSelection();if(d.length===0)return Ext.Msg.alert("Info","Pilih siswa di tabel kiri!");var e=a.getStore();Ext.Msg.confirm("Konfirmasi","Keluarkan "+d.length+" siswa?",function(a){if(a==="yes"){c.show(d.length,"Pengeluaran");e.remove(d);e.sync({success:function(){c.success(d.length);b.getStore().load()},failure:function(){c.fail();e.load()}})}})}});d.add({id:"btn-rem-all",xtype:"button",text:'<b style="color:white;">Keluar Semua</b>',iconCls:"fa fa-trash",style:"background-color:#dc3545;border-color:#dc3545;",handler:function(){var d=a.getStore(),e=d.getCount();if(e===0)return Ext.Msg.alert("Info","Rombel kosong.");Ext.Msg.confirm("Konfirmasi","Keluarkan SEMUA siswa ("+e+")?",function(a){if(a==="yes"){c.show(e,"Pengeluaran Massal");d.removeAll();d.sync({success:function(){c.success(e);b.getStore().load()},failure:function(){c.fail();d.load()}})}})}});e.add({xtype:"tbfill",id:"btn-fill-kanan"});e.add({id:"btn-add-sel",xtype:"button",text:'<b style="color:white;">Masuk Terpilih</b>',iconCls:"fa fa-user-plus",style:"background-color:#17a2b8;border-color:#17a2b8;margin-right:5px;",handler:function(){var d=b.getSelectionModel().getSelection();if(d.length===0)return Ext.Msg.alert("Info","Pilih siswa di tabel kanan!");var e=a.getStore(),f=e.getProxy(),g=f.extraParams?f.extraParams.rombongan_belajar_id:e.getCount()>0?e.first().get("rombongan_belajar_id"):null;if(!g)return Ext.Msg.alert("Gagal","ID Rombel tidak terbaca.");var h=Ext.ComponentQuery.query('combobox[id^="jenispendaftarancombo"]')[0],i=h?h.getValue():1;c.show(d.length,"Pemasukan");var j=[];Ext.each(d,function(a){j.push({rombongan_belajar_id:g,peserta_didik_id:a.get("peserta_didik_id"),jenis_pendaftaran_id:i})});e.add(j);e.sync({success:function(){c.success(d.length);b.getStore().load()},failure:function(){c.fail();b.getStore().load()}})}});e.add({id:"btn-add-all",xtype:"button",text:'<b style="color:white;">Masuk Semua</b>',iconCls:"fa fa-users",style:"background-color:#28a745;border-color:#28a745;",handler:function(){var d=b.getStore(),e=a.getStore(),f=e.getProxy(),g=f.extraParams?f.extraParams.rombongan_belajar_id:e.getCount()>0?e.first().get("rombongan_belajar_id"):null;if(!g)return Ext.Msg.alert("Gagal","ID Rombel tidak terbaca.");var h=Ext.ComponentQuery.query('combobox[id^="jenispendaftarancombo"]')[0],i=h?h.getValue():1,j=d.pageSize;Ext.Msg.wait("Menarik data dari server...","Persiapan");d.pageSize=9999;d.load({page:1,start:0,limit:9999,callback:function(a,f,h){Ext.Msg.hide();if(!h){d.pageSize=j;return Ext.Msg.alert("Error","Gagal memuat data.")}if(a.length===0){d.pageSize=j;return Ext.Msg.alert("Info","Tidak ada siswa.")}c.show(a.length,"Pemasukan Massal");var k=[];Ext.each(a,function(a){k.push({rombongan_belajar_id:g,peserta_didik_id:a.get("peserta_didik_id"),jenis_pendaftaran_id:i})});e.add(k);e.sync({success:function(){c.success(a.length);d.pageSize=j;d.load()},failure:function(){c.fail();d.pageSize=j;d.load()}})}})}})})();`);
     };
 
     // Tombol Lanjut Rombel
